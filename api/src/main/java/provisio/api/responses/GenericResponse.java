@@ -1,30 +1,33 @@
 package provisio.api.responses;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@NoArgsConstructor
+@Getter
+@Setter
+@AllArgsConstructor
 @ResponseBody
 public class GenericResponse {
 
-    @Setter
     private boolean success;
-    private final StringBuffer message = new StringBuffer();
-
-    public GenericResponse(boolean success, String stringBody){
-        this.success = success;
-        message.append(stringBody);
-    }
-
-    public void appendMessage(String newMessage){
-        message.append(newMessage);
-    }
+    private String message;
 
     @Override
     public String toString() {
-        return "{\"success\":" + success + "," +
-                "\"message\":\"" + message + "\"}";
+//        return "{\"success\":" + success + "," +
+//                "\"message\":\"" + message + "\"}";
+
+        try {
+            return new ObjectMapper().writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 }

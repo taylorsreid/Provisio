@@ -1,5 +1,7 @@
 package provisio.api.responses;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.Setter;
@@ -7,8 +9,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Getter
 @Setter
-@ResponseBody
 @AllArgsConstructor
+@ResponseBody
 public class RegisterResponse {
 
     private boolean success;
@@ -18,11 +20,18 @@ public class RegisterResponse {
 
     @Override
     public String toString() {
-        return "{\"success\":" + success + "," +
-                "\"availableEmail\":" + availableEmail + "," +
-                "\"validEmail\":" + validEmail + "," +
-                "\"validPassword\":" + validPassword + "," +
-                "}";
+//        return "{\"success\":" + success + "," +
+//                "\"availableEmail\":" + availableEmail + "," +
+//                "\"validEmail\":" + validEmail + "," +
+//                "\"validPassword\":" + validPassword + "," +
+//                "}";
+
+        try {
+            return new ObjectMapper().writeValueAsString(this);
+        } catch (JsonProcessingException e) {
+            throw new RuntimeException(e);
+        }
+
     }
 
 }
