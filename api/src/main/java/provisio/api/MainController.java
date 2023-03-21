@@ -1,11 +1,12 @@
 package provisio.api;
 
-import org.springframework.http.HttpHeaders;
+import org.springframework.http.*;
+import provisio.api.responses.GenericResponse;
 import provisio.api.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.net.URI;
 
 @RestController
 public class MainController {
@@ -16,8 +17,8 @@ public class MainController {
     private LoginService loginService;
     @Autowired
     private AuthorizationService authorizationService;
-    @Autowired
-    private ReservationService reservationService;
+//    @Autowired
+//    private ReservationService reservationService;
 
     @PostMapping(path = "/api/register", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<String> register(
@@ -25,7 +26,7 @@ public class MainController {
             @RequestParam String password,
             @RequestParam String firstName,
             @RequestParam String lastName
-            ){
+    ){
         return registerService.register(email, password, firstName, lastName);
     }
 
@@ -39,14 +40,18 @@ public class MainController {
 
     @PostMapping(path = "/api/reservation", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<String> createShifts(
-            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader,
-            @RequestBody List<ReservationService> shiftRequestList)
-    {
+            @RequestHeader(HttpHeaders.AUTHORIZATION) String authorizationHeader
+//            @RequestBody List<ReservationService> shiftRequestList
+    ){
         if(authorizationService.verifyAuthorizationHeader(authorizationHeader)){
-            return reservationService.createShifts(authorizationService.getUserIdFromAuthorizationHeader(authorizationHeader), shiftRequestList);
+//            return reservationService.createShifts(authorizationService.getUserIdFromAuthorizationHeader(authorizationHeader), shiftRequestList);
+            return null;
         }
         else{
-            return new ResponseEntity<>(new GenericResponse(false, "BAD TOKEN").toString(), HttpStatus.UNAUTHORIZED);
+//            return new ResponseEntity<>(new GenericResponse(false, "BAD TOKEN").toString(), HttpStatus.UNAUTHORIZED);
+            HttpHeaders httpHeaders = new HttpHeaders();
+            httpHeaders.setLocation(URI.create("http://localhost/login.html"));
+            return new ResponseEntity<>("Redirecting you to the login page...", httpHeaders, 302);
         }
     }
 
