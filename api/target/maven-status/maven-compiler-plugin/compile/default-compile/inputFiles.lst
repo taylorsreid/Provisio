@@ -1,0 +1,8 @@
+/home/taylor/APIs/provisio-api/src/main/java/provisio/api/ApiApplication.java
+/home/taylor/APIs/provisio-api/src/main/java/provisio/api/db/ConnectionManager.java
+/home/taylor/APIs/provisio-api/src/main/java/provisio/api/authentication/AuthorizationService.java
+/home/taylor/APIs/provisio-api/src/main/java/provisio/api/authentication/LoginService.java
+/home/taylor/APIs/provisio-api/src/main/java/provisio/api/responses/RegisterResponse.java
+/home/taylor/APIs/provisio-api/src/main/java/provisio/api/responses/GenericResponse.java
+/home/taylor/APIs/provisio-api/src/main/java/provisio/api/MainController.java
+/home/taylor/APIs/provisio-api/src/main/java/provisio/api/authentication/RegisterService.java

@@ -1,0 +1,6 @@
+provisio/api/authentication/LoginService.class
+provisio/api/authentication/RegisterService.class
+provisio/api/MainController.class
+provisio/api/responses/RegisterResponse.class
+provisio/api/responses/GenericResponse.class
+provisio/api/db/ConnectionManager.class
