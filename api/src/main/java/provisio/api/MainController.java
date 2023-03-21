@@ -1,10 +1,15 @@
 package provisio.api;
 
 import org.springframework.http.*;
+import provisio.api.models.requests.LoginRequest;
+import provisio.api.models.requests.RegisterRequest;
+import provisio.api.models.requests.ReservationGetRequest;
+import provisio.api.models.requests.ReservationPostRequest;
 import provisio.api.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin
 @RestController
 public class MainController {
 
@@ -15,36 +20,38 @@ public class MainController {
     @Autowired
     private ReservationService reservationService;
 
-    @PostMapping(path = "/api/register", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<String> register(
-            @RequestParam String email,
-            @RequestParam String password,
-            @RequestParam String firstName,
-            @RequestParam String lastName
-    ){
-        return registerService.register(email, password, firstName, lastName);
+    @CrossOrigin
+    @PostMapping(path = "/api/register", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest){
+        System.out.println("Register request from " + registerRequest.getFirstName() + " " + registerRequest.getLastName());
+        return registerService.register(registerRequest);
     }
 
-    @PostMapping(path = "/api/login", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<String> login(
-            @RequestParam String email,
-            @RequestParam String password
-    ){
-        return loginService.login(email, password);
+    @CrossOrigin
+    @PostMapping(path = "/api/login", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<String> login(@RequestBody LoginRequest loginRequest){
+        System.out.println("Login attempt from " + loginRequest.getEmail());
+        return loginService.login(loginRequest);
     }
 
-    @PostMapping(path = "/api/reservation", produces = MediaType.APPLICATION_JSON_VALUE)
+    @CrossOrigin
+    @PostMapping(path = "/api/reservation", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<String> createReservation(
-            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorizationHeader
+            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorizationHeader,
+            @RequestBody ReservationPostRequest reservationPostRequest
     ){
-        return reservationService.post(authorizationHeader);
+        System.out.println("Reservation made: " + reservationPostRequest.toString());
+        return reservationService.post(authorizationHeader, reservationPostRequest);
     }
 
+    @CrossOrigin
     @GetMapping(path = "/api/reservation", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<String> getReservation(
-            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorizationHeader
+            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorizationHeader,
+            @RequestBody ReservationGetRequest reservationGetRequest
     ){
-        return reservationService.get(authorizationHeader);
+        System.out.println("Reservation retrieved: " + reservationGetRequest.toString());
+        return reservationService.get(authorizationHeader, reservationGetRequest);
     }
 
 //    @GetMapping(path = "/shift", consumes = MediaType.ALL_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)

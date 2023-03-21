@@ -4,9 +4,35 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login</title>
+
+    <script src="scripts.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+
 </head>
 <body>
-    <div>this is the login page</div>
+
+    <div w3-include-html="header.html"></div>
+    <script>w3.includeHTML();</script>
+
+    <h1>Login</h1>
+
+    <label for="email">Email:</label>
+    <input type="text" id="email" name="email">
+
+    <br>
+
+    <label for="password">Password:</label>
+    <input type="password" id="password" name="password" minlength="8" required>
+
+    <div>This is a school project, please don't use actual passwords.</div>
+
+    <br>
+    
+    <input type="submit" value="Sign in" onclick="login()">
+
+    <div w3-include-html="footer.html"></div>
+    <script>w3.includeHTML();</script>
+
 </body>
 </html>

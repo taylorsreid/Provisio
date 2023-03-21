@@ -4,9 +4,34 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Provisio</title>
+
+    <script src="scripts.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+
 </head>
 <body>
-    <div>hello world</div>
+
+    <div w3-include-html="header.html"></div>
+    <script>w3.includeHTML();</script>
+    
+    <div id="main">
+        <script>
+            if(sessionStorage.getItem("loggedIn") === "true"){
+                document.write(`Welcome ${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`); //buggy, don't touch because nothing else works
+            }
+            else{
+                document.write("Welcome");
+            }
+        </script>
+
+        <a href="login.html">Login</a>
+        <a href="logout.html">Logout</a>
+
+    </div>
+
+    <div w3-include-html="footer.html"></div>
+    <script>w3.includeHTML();</script>
+
 </body>
 </html>
