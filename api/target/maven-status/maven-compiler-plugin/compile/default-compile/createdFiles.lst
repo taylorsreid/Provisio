@@ -1,9 +1,14 @@
-provisio/api/services/LoginService.class
 provisio/api/services/RegisterService.class
+provisio/api/models/requests/LoginRequest.class
 provisio/api/MainController.class
-provisio/api/responses/RegisterResponse.class
+provisio/api/models/requests/ReservationGetRequest.class
 provisio/api/ApiApplication.class
+provisio/api/models/requests/RegisterRequest.class
+provisio/api/services/LoginService.class
+provisio/api/models/responses/LoginResponse.class
+provisio/api/models/responses/GenericResponse.class
 provisio/api/services/ReservationService.class
-provisio/api/responses/GenericResponse.class
+provisio/api/models/requests/ReservationPostRequest.class
+provisio/api/models/responses/RegisterResponse.class
 provisio/api/db/ConnectionManager.class
 provisio/api/services/AuthorizationService.class

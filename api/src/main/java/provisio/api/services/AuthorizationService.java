@@ -22,17 +22,17 @@ public class AuthorizationService {
 
     /**
      * Generates a token for the passed UUID of the user.  Does NOT perform verification or validation.
-     * @param userId the UUID of the user to get a token for
+     * @param customerId the UUID of the user to get a token for
      * @return a new JWT for the passed user argument
      * @throws JWTCreationException if the token can't be created
      */
-    public String getTokenForUserId(String userId) throws JWTCreationException{
+    public String getTokenForCustomerId(String customerId) throws JWTCreationException{
 
         final int SECONDS_TO_ADD = 7200; //7200 seconds is two hours
 
         return JWT.create()
                 .withIssuer(ISSUER)
-                .withSubject(userId)
+                .withSubject(customerId)
                 .withIssuedAt(Instant.now())
                 .withExpiresAt(Instant.now().plusSeconds(SECONDS_TO_ADD))
                 .sign(algorithm);
@@ -62,7 +62,7 @@ public class AuthorizationService {
      * @param authorizationHeader the authorization header passed.
      * @return the UUID contained in the token as a string.
      */
-    public String getUserIdFromAuthorizationHeader(String authorizationHeader){
+    public String getCustomerIdFromAuthorizationHeader(String authorizationHeader){
         return verifier.verify(authorizationHeader.substring(7)).getSubject();
     }
 
