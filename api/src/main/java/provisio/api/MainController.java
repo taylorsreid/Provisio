@@ -23,14 +23,12 @@ public class MainController {
     @CrossOrigin
     @PostMapping(path = "/api/register", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest){
-        System.out.println("Register request from " + registerRequest.getFirstName() + " " + registerRequest.getLastName());
         return registerService.register(registerRequest);
     }
 
     @CrossOrigin
     @PostMapping(path = "/api/login", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<String> login(@RequestBody LoginRequest loginRequest){
-        System.out.println("Login attempt from " + loginRequest.getEmail());
         return loginService.login(loginRequest);
     }
 
@@ -40,7 +38,6 @@ public class MainController {
             @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorizationHeader,
             @RequestBody ReservationPostRequest reservationPostRequest
     ){
-        System.out.println("Reservation made: " + reservationPostRequest.toString());
         return reservationService.post(authorizationHeader, reservationPostRequest);
     }
 
@@ -50,7 +47,6 @@ public class MainController {
             @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorizationHeader,
             @RequestBody ReservationGetRequest reservationGetRequest
     ){
-        System.out.println("Reservation retrieved: " + reservationGetRequest.toString());
         return reservationService.get(authorizationHeader, reservationGetRequest);
     }
 

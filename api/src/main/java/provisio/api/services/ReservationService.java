@@ -40,6 +40,8 @@ public class ReservationService {
                 ps.setInt(9, reservationPostRequest.getGuests());
                 ps.executeUpdate();
 
+                System.out.println("Customer " + authorizationService.getCustomerIdFromAuthorizationHeader(authorizationHeader) + " has made a reservation.");
+
                 return new ResponseEntity<>(new GenericResponse(true, "Your reservation is booked!").toString(), HttpStatus.OK);
 
             }
@@ -57,6 +59,8 @@ public class ReservationService {
 
         //verify token
         if(authorizationHeader != null && authorizationService.verifyAuthorizationHeader(authorizationHeader)){
+
+
             return null;
         }
         else{

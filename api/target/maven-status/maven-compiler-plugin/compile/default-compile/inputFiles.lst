@@ -11,3 +11,4 @@
 /var/www/html/Provisio/api/src/main/java/provisio/api/models/requests/ReservationPostRequest.java
 /var/www/html/Provisio/api/src/main/java/provisio/api/models/requests/ReservationGetRequest.java
 /var/www/html/Provisio/api/src/main/java/provisio/api/services/LoginService.java
+/var/www/html/Provisio/api/src/main/java/provisio/api/models/responses/LoginResponse.java
