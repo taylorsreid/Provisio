@@ -1,9 +1,12 @@
 package provisio.api.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import provisio.api.MainController;
 import provisio.api.db.ConnectionManager;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import provisio.api.models.requests.LoginRequest;
 import provisio.api.models.requests.RegisterRequest;
 import provisio.api.models.responses.RegisterResponse;
 import java.sql.Connection;
@@ -14,6 +17,9 @@ import java.util.regex.Pattern;
 
 @Service
 public class RegisterService {
+
+    @Autowired
+    LoginService loginService;
 
     public ResponseEntity<String> register(RegisterRequest registerRequest) {
 
@@ -66,9 +72,10 @@ public class RegisterService {
                 ps.setString(4, hashedPassword);
                 ps.execute();
 
-                //will only return when all 3 booleans are true and account has been created
-                return ResponseEntity.ok(new RegisterResponse(true, true, true, true).toString());
+                System.out.println(registerRequest.getFirstName() + " " + registerRequest.getLastName() + " has created an account.");
 
+                //returns a login response with token if the account creation was successful
+                return loginService.login(new LoginRequest(registerRequest.getEmail(), registerRequest.getPassword()));
             }
             catch (Exception ex){
                 ex.printStackTrace();
@@ -77,7 +84,7 @@ public class RegisterService {
 
         }
         else {
-            //set failure message and return reasons why
+            //if account creation was unsuccessful, the reasons why are returned as JSON
             return ResponseEntity.badRequest().body(new RegisterResponse(false, availableEmail, validEmail, validPassword).toString());
         }
 

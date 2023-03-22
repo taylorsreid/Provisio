@@ -53,6 +53,7 @@ public class LoginService {
             //create token for authorized user
             String token = authorizationService.getTokenForCustomerId(customerId);
 
+            System.out.println(firstName + " " + lastName + " has logged in.");
 
             //return positive response along with JWT bearer token
             return new ResponseEntity<>(new LoginResponse(true, token, customerId, loginRequest.getEmail(), firstName, lastName).toString(), HttpStatus.OK);

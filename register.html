@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provisio</title>
+
+    <script type="module" src="main.js"></script>
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+
+</head>
+<body>
+
+    <!-- insert header -->
+    <div w3-include-html="header.html"></div>
+    <script>w3.includeHTML();</script>
+    
+    <div id="main">
+        <!-- <script>
+            if(sessionStorage.getItem("loggedIn") === "true"){
+                document.write(`
+                    You are already logged in as ${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}
+                `);
+            }
+            else{
+                document.write("Welcome");
+            }
+        </script> -->
+
+        <label for="email">Email:</label>
+        <input type="text" id="email" name="email">
+
+        <label for="firstName">First name:</label>
+        <input type="text" id="firstName" name="firstName">
+
+        <label for="lastName">Last name:</label>
+        <input type="text" id="lastName" name="lastName">
+
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password">
+
+    </div>
+
+    <!-- insert footer -->
+    <div w3-include-html="footer.html"></div>
+    <script>w3.includeHTML();</script>
+
+</body>
+</html>
