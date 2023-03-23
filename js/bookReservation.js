@@ -49,7 +49,7 @@ function updatePoints(){
     }
 }
 
-document.getElementById("submitButton").addEventListener("click", function(){
+$('#form').submit(function(){
 
     sessionStorage.setItem("checkInLocalDate", $("#checkIn").val());
     sessionStorage.setItem("checkOutLocalDate", $("#checkOut").val());
@@ -58,9 +58,8 @@ document.getElementById("submitButton").addEventListener("click", function(){
     sessionStorage.setItem("breakfast", document.getElementById("breakfast").value);
     sessionStorage.setItem("parking", document.getElementById("parking").value);
     sessionStorage.setItem("guests", document.getElementById("guests").value);
-
-    console.log($('#checkIn').datepicker('getDate'));
-    console.log($('#checkOut').datepicker('getDate'));
     window.location.href = "./confirmReservation.html";
+
+    return false; // return false to prevent typical submit behavior
 
 });
