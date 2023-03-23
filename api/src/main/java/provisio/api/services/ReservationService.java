@@ -16,7 +16,7 @@ import java.util.UUID;
 @Service
 public class ReservationService {
 
-    final String unauthorizedMessage = "You must be logged in to do that!";
+    final String unauthorizedMessage = "BAD TOKEN";
 
     @Autowired
     private AuthorizationService authorizationService;
@@ -28,11 +28,14 @@ public class ReservationService {
 
             try{
 
+                //generate random UUID as reservation ID
                 String reservationId = UUID.randomUUID().toString();
 
                 Connection conn = ConnectionManager.getConnection();
                 PreparedStatement ps = conn.prepareStatement("INSERT INTO `reservations` (`customer_id`, `reservation_id`, `check_in`, `check_out`, `room_size`, `wifi`, `breakfast`, `parking`, `guests`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
-                ps.setString(1, new AuthorizationService().getCustomerIdFromAuthorizationHeader(authorizationHeader));
+
+                //the customer ID is stored in the JWT so that it can't be forged
+                ps.setString(1, authorizationService.getCustomerIdFromAuthorizationHeader(authorizationHeader));
                 ps.setString(2, reservationId);
                 ps.setString(3, reservationPostRequest.getCheckIn());
                 ps.setString(4, reservationPostRequest.getCheckOut());
@@ -57,6 +60,7 @@ public class ReservationService {
 
         }
         else{
+            System.out.println("Authorization header: " + authorizationHeader);
             return new ResponseEntity<>(new GenericResponse(false, unauthorizedMessage).toString(), HttpStatus.UNAUTHORIZED);
         }
 
