@@ -7,18 +7,36 @@
     <title>Provisio</title>
 
     <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script type="module" src="./js/bookReservation.js"></script>
 
+    <!-- jQuery code, don't move to separate file, won't work -->
+    <!-- credit to https://jqueryui.com/datepicker/ -->
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
-        $( function() {
-            $( "#checkIn" ).datepicker();
-        } );
+        $(function() {
+            $(".date").datepicker({
+                onSelect: function(dateText) {
+                    // console.log(dateText);
+                    updatePoints();
+                }
+            });
+        });
 
-        $( function() {
-            $( "#checkOut" ).datepicker();
-        } );
+        function updatePoints(){
+            let checkIn = $("#checkIn").datepicker("getDate");
+            let checkOut = $("#checkOut").datepicker("getDate");
+
+            // console.log(checkIn);
+            // console.log(checkOut);
+
+            let deltaTime = checkOut.getTime() - checkIn.getTime();
+            let deltaDays = deltaTime / (1000 * 3600 * 24);
+
+            document.getElementById("formMessage").innerHTML = `You will earn ${deltaDays * 150} points for this trip.`;
+
+        }
     </script>
 
 </head>
@@ -29,11 +47,45 @@
     <script>w3.includeHTML();</script>
     
     <div id="root">
-        <div>Check in: <input type="text" id="checkIn"></div>
-        <div>Check out: <input type="text" id="checkOut"></div>
+        
+        <div id="form">
+            <label for="checkIn">Check in:</label>
+            <input type="text" id="checkIn" class="date">
 
-        <input type="submit" value="Book" id="loginSubmitButton">
-        <script type="module" src="./js/login.js"></script>
+            <label for="checkOut">Check out:</label>
+            <input type="text" id="checkOut" class="date">
+
+            <fieldset>
+                <label for="doubleFullBeds">Double Full Beds</label>
+                <input type="radio" id="doubleFullBeds" name="bedType" value="Double Full Beds">
+                <br>
+                <label for="singleQueenBed">Single Queen Bed</label>
+                <input type="radio" id="singleQueenBed" name="bedType" value="Single Queen Bed">
+                <br>
+                <label for="doubleQueenBeds">Double Queen Beds</label>
+                <input type="radio" id="doubleQueenBeds" name="bedType" value="Double Queen Beds">
+                <br>
+                <label for="singleKingBed">Single King Bed</label>
+                <input type="radio" id="singleKingBed" name="bedType" value="Single Kind Bed">
+            </fieldset>
+
+            <fieldset>
+                <label for="wifi">WiFi</label>
+                <input type="checkbox" id="wifi" name="wifi" value="true">
+                <br>
+                <label for="breakfast">Breakfast</label>
+                <input type="checkbox" id="breakfast" name="breakfast" value="true">
+                <br>
+                <label for="parking">Parking</label>
+                <input type="checkbox" id="parking" name="parking" value="true">
+            </fieldset>
+
+            <div id="formMessage"></div>
+
+            <input type="submit" value="Book" id="submitButton">
+
+        </div>
+        
     </div>
 
     <!-- insert footer -->

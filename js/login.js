@@ -1,33 +1,21 @@
 import apiLocation from "./apiLocation.js";
 import Cookies from 'https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/+esm';
 
+//assign easy to use variables
+let form = document.getElementById("form");
+let submitButton = document.getElementById("submitButton");
+let formMessage = document.getElementById("formMessage");
+
+//if user is already logged in then replace login form with message. Cookies returns string.
 if(Cookies.get("loggedIn") === "true"){
-    document.getElementById("root").innerHTML = (`
+    form.innerHTML = (`
         You are already logged in as ${Cookies.get("firstName")} ${Cookies.get("lastName")}
     `);
 }
-else{
-    document.getElementById("root").innerHTML = (`
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email">
 
-        <br>
+submitButton.addEventListener("click", function(){
 
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" minlength="8" required>
-
-        <br>
-        
-        <input type="submit" value="Login" id="loginSubmitButton">
-        
-        <br>
-
-        <div id="message"></div>
-    `);
-}
-
-document.getElementById("loginSubmitButton").addEventListener("click", function(){
-
+    //assign easy to use variables, must be assigned after click event otherwise they're blank
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
 
@@ -54,7 +42,7 @@ document.getElementById("loginSubmitButton").addEventListener("click", function(
             Cookies.set('jwt', json.jwt) //save JWT to a cookie because it's the most secure way
         }
         else {
-            document.getElementById("message").innerHTML = json.message;
+            formMessage.innerHTML = json.message;
         }
     })
 });

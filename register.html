@@ -7,6 +7,7 @@
     <title>Provisio</title>
 
     <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script type="module" src="./js/register.js"></script>
 
 </head>
 <body>
@@ -19,38 +20,31 @@
     
     <div id="root">
 
-        <script>
-            if(sessionStorage.getItem("loggedIn") === "true"){
-                document.write(`You are currently logged in as ${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")} <br><br>`);
-            }
-        </script>
+        <!-- will be replaced with a message if the user is already logged in -->
+        <div id="form">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email">
+            
+            <br>
 
-        <label for="email">Email:</label>
-        <input type="text" id="email" name="email" required>
+            <label for="firstName">First name:</label>
+            <input type="text" id="firstName" name="firstName">
+            
+            <br>
+
+            <label for="lastName">Last name:</label>
+            <input type="text" id="lastName" name="lastName">
+            
+            <br>
+
+            <label for="password">Password:</label>
+            <input type="password" id="password" name="password">
+
+            <br>
+            <input type="submit" value="Register" id="submitButton">
+            <div id="formMessage"></div>
+        </div>
         
-        <br>
-
-        <label for="firstName">First name:</label>
-        <input type="text" id="firstName" name="firstName" required>
-        
-        <br>
-
-        <label for="lastName">Last name:</label>
-        <input type="text" id="lastName" name="lastName" required>
-        
-        <br>
-
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required>
-
-        <br>
-        <input type="submit" value="Register" id="registerSubmitButton">
-
-        <!-- script to submit form to API -->
-        <script type="module" src="./js/register.js"></script>
-
-        <div id="message"></div>
-
     </div>
 
     <!-- insert footer -->
