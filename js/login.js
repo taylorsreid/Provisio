@@ -12,9 +12,7 @@ if(Cookies.get("loggedIn") === "true"){
         You are already logged in as ${Cookies.get("firstName")} ${Cookies.get("lastName")}
     `);
 }
-
 submitButton.addEventListener("click", function(){
-
     //assign easy to use variables, must be assigned after click event otherwise they're blank
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
@@ -32,17 +30,19 @@ submitButton.addEventListener("click", function(){
     .then(resp => resp.json())
     .then(json => {
         if (json.success == true) {
-            //save commonly accessed items to session storage to avoid repeated database calls
-            Cookies.set("loggedIn", true);
-            Cookies.set("customerId", json.customerId);
-            Cookies.set("email", email); //not sent back by the API since the user has already entered it
-            Cookies.set("firstName", json.firstName);
-            Cookies.set("lastName", json.lastName);
+            //save commonly accessed items to a cookie to avoid repeated database calls
+            Cookies.set("loggedIn", true, {expires : 1});
+            Cookies.set("customerId", json.customerId, {expires : 1});
+            Cookies.set("email", email, {expires : 1}); //not sent back by the API since the user has already entered it
+            Cookies.set("firstName", json.firstName, {expires : 1});
+            Cookies.set("lastName", json.lastName, {expires : 1});
+            Cookies.set('jwt', json.jwt, {expires : 1}) //save JWT to a cookie because it's the most secure way
             window.location.href = "./index.html"; //redirect back to home page upon successful login
-            Cookies.set('jwt', json.jwt) //save JWT to a cookie because it's the most secure way
         }
         else {
             formMessage.innerHTML = json.message;
         }
     })
 });
+
+submitButton.addEventListener("click", login());

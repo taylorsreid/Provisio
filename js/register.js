@@ -43,14 +43,14 @@ submitButton.addEventListener("click", function(){
         })
         .then(resp => resp.json())
         .then(json => {
-            //if the API responds that the account was created successfully, then save commonly accessed items to session storage to avoid repeated database calls
+            //if the API responds that the account was created successfully, then save commonly accessed items to a cookie to avoid repeated database calls
             if (json.success == true) {
-                Cookies.set("loggedIn", true);
-                Cookies.set("customerId", json.customerId);
-                Cookies.set("email", json.email);
-                Cookies.set("firstName", json.firstName);
-                Cookies.set("lastName", json.lastName);
-                Cookies.set('jwt', json.jwt) //save JWT to a cookie because it's the most secure way
+                Cookies.set("loggedIn", true, {expires : 1});
+                Cookies.set("customerId", json.customerId, {expires : 1});
+                Cookies.set("email", json.email, {expires : 1});
+                Cookies.set("firstName", json.firstName, {expires : 1});
+                Cookies.set("lastName", json.lastName, {expires : 1});
+                Cookies.set('jwt', json.jwt, {expires : 1}) //save JWT to a cookie because it's the most secure way
                 window.location.href = "index.html"; //redirect back to home page upon successful login
             }
             else {
