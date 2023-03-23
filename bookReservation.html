@@ -20,56 +20,52 @@
     
     <div id="root">
         
-        <form id="form" action="./confirmReservation.html">
-            <fieldset>
-                <legend>Dates:</legend>
-                <label for="checkIn">Check in:</label>
-                <input type="text" id="checkIn" class="date" required>
-                <br>
-                <label for="checkOut">Check out:</label>
-                <input type="text" id="checkOut" class="date" required>
-            </fieldset>
+        <fieldset>
+            <legend>Dates:</legend>
+            <label for="checkIn">Check in:</label>
+            <input type="text" id="checkIn" class="date" required>
+            <br>
+            <label for="checkOut">Check out:</label>
+            <input type="text" id="checkOut" class="date" required>
+        </fieldset>
 
-            <fieldset>
-                <legend>Room Size:</legend>
-                <select name="roomSize" id="roomSize" required>
-                    <option></option>
-                    <option value="Double Full Beds">Double Full Beds</option>
-                    <option value="Single Queen Bed">Single Queen Bed</option>
-                    <option value="Double Queen Beds">Double Queen Beds</option>
-                    <option value="Single King Bed">Single King Bed</option>
-                </select>
-            </fieldset>
+        <fieldset>
+            <legend>Room Size:</legend>
+            <select name="roomSize" id="roomSize" required>
+                <option></option>
+                <option value="Double Full Beds">Double Full Beds</option>
+                <option value="Single Queen Bed">Single Queen Bed</option>
+                <option value="Double Queen Beds">Double Queen Beds</option>
+                <option value="Single King Bed">Single King Bed</option>
+            </select>
+        </fieldset>
 
-            <fieldset>
-                <legend>Amenities:</legend>
-                <label for="wifi">WiFi</label>
-                <input type="checkbox" id="wifi" name="wifi" value="true">
-                <br>
-                <label for="breakfast">Breakfast</label>
-                <input type="checkbox" id="breakfast" name="breakfast" value="true">
-                <br>
-                <label for="parking">Parking</label>
-                <input type="checkbox" id="parking" name="parking" value="true">
-            </fieldset>
+        <fieldset>
+            <legend>Amenities:</legend>
+            <label for="wifi">WiFi</label>
+            <input type="checkbox" id="wifi" name="wifi" value="true">
+            <br>
+            <label for="breakfast">Breakfast</label>
+            <input type="checkbox" id="breakfast" name="breakfast" value="true">
+            <br>
+            <label for="parking">Parking</label>
+            <input type="checkbox" id="parking" name="parking" value="true">
+        </fieldset>
 
-            <fieldset>
-                <legend>Number of Guests:</legend>
-                <select name="guests" id="guests" required>
-                    <!-- <option></option> -->
-                    <option value=1>1</option>
-                    <option value=2>2</option>
-                    <option value=3>3</option>
-                    <option value=4>4</option>
-                </select>
-            </fieldset>
-            
+        <fieldset>
+            <legend>Number of Guests:</legend>
+            <select name="guests" id="guests" required>
+                <option></option>
+                <option value=1>1</option>
+                <option value=2>2</option>
+                <option value=3>3</option>
+                <option value=4>4</option>
+            </select>
+        </fieldset>
 
-            <div id="formMessage"></div>
+        <div id="formMessage"></div>
 
-            <input type="submit" value="Book" id="submitButton">
-
-        </div>
+        <input type="submit" value="Go to Confirmation" id="submitButton">
         
     </div>
 
