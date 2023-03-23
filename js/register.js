@@ -1,9 +1,19 @@
 import apiLocation from "./apiLocation.js";
 import Cookies from 'https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/+esm';
 
-document.getElementById("registerSubmitButton").addEventListener("click", function(){
+//assign easy to use variables
+let form = document.getElementById("form");
+let submitButton = document.getElementById("submitButton");
+let formMessage = document.getElementById("formMessage");
 
-    //assign easy to use variables
+//if user is already logged in then replace login form with message. Cookies returns string.
+if(Cookies.get("loggedIn") === "true"){
+    form.innerHTML = `You are already logged in as ${Cookies.get("firstName")} ${Cookies.get("lastName")}.`;
+}
+
+submitButton.addEventListener("click", function(){
+
+    //assign easy to use variables, must be assigned after click event otherwise they're blank
     let email = document.getElementById("email").value;
     let firstName = document.getElementById("firstName").value;
     let lastName = document.getElementById("lastName").value;
@@ -13,7 +23,7 @@ document.getElementById("registerSubmitButton").addEventListener("click", functi
     let validEmail = email.match("@{1}") !== null; //only checks for the @ symbol
     let validPassword = password.match("^(?=.*[a-z])(?=.*[A-Z]).{8,}$") !== null; //checks if the password is at least 8 characters in length and includes one uppercase and one lowercase letter
 
-    //validate that first name and last name are not blank since HTML required attribute does not work correctly
+    //validate that first name and last name are not blank since HTML required attribute does not work correctly with a JS EventListener
     let validFirstName = firstName !== "";
     let validLastName = lastName !== "";
 
@@ -44,24 +54,24 @@ document.getElementById("registerSubmitButton").addEventListener("click", functi
                 window.location.href = "index.html"; //redirect back to home page upon successful login
             }
             else {
-                document.getElementById("message").innerHTML = json.message;
+                formMessage.innerHTML = json.message;
             }
         })
     }
     //if the email or password doesn't meet requirements
     else {
-        document.getElementById("message").innerHTML = ""; //blank out message box so messages don't pile up
+        formMessage.innerHTML = ""; //blank out message box so messages don't pile up
         if(!validEmail){
-            document.getElementById("message").insertAdjacentHTML('beforeend', `"${email}" is not a valid email.<br>`);
+            formMessage.insertAdjacentHTML('beforeend', `"${email}" is not a valid email.<br>`);
         }
         if(!validFirstName){
-            document.getElementById("message").insertAdjacentHTML('beforeend', `First name cannot be blank.<br>`);
+            formMessage.insertAdjacentHTML('beforeend', `First name cannot be blank.<br>`);
         }
         if(!validLastName){
-            document.getElementById("message").insertAdjacentHTML('beforeend', `Last name cannot be blank.<br>`);
+            formMessage.insertAdjacentHTML('beforeend', `Last name cannot be blank.<br>`);
         }
         if(!validPassword){
-            document.getElementById("message").insertAdjacentHTML('beforeend', `
+            formMessage.insertAdjacentHTML('beforeend', `
                 Your password does not meet requirements.
                 It must be least 8 characters in length and include one uppercase letter and one lowercase letter.<br>
             `);

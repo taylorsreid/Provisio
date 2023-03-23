@@ -1,7 +1,6 @@
 package provisio.api.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
@@ -9,7 +8,6 @@ import provisio.api.db.ConnectionManager;
 import provisio.api.models.requests.ReservationGetRequest;
 import provisio.api.models.requests.ReservationPostRequest;
 import provisio.api.models.responses.GenericResponse;
-import java.net.URI;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;

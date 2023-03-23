@@ -5,6 +5,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac86c9ae-18ca-4d7a-a719-bca25a9a6c6d" name="Changes" comment="API mostly functional, but going to attempt to revert to using JSON objects for requests.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/ApiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/ApiApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/MainController.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/db/ConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/db/ConnectionManager.java" afterDir="false" />
