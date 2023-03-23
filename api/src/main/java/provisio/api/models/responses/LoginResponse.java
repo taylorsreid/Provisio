@@ -16,7 +16,6 @@ public class LoginResponse {
     private boolean success;
     private String jwt;
     private String customerId;
-    private String email;
     private String firstName;
     private String lastName;
 

@@ -9,12 +9,15 @@
     <script src="https://www.w3schools.com/lib/w3.js"></script>
 
     <link rel="stylesheet" href="//code.jquery.com/ui/1.13.2/themes/base/jquery-ui.css">
-    <link rel="stylesheet" href="/resources/demos/style.css">
     <script src="https://code.jquery.com/jquery-3.6.0.js"></script>
     <script src="https://code.jquery.com/ui/1.13.2/jquery-ui.js"></script>
     <script>
         $( function() {
             $( "#checkIn" ).datepicker();
+        } );
+
+        $( function() {
+            $( "#checkOut" ).datepicker();
         } );
     </script>
 
@@ -26,7 +29,11 @@
     <script>w3.includeHTML();</script>
     
     <div id="root">
-        <p>Date: <input type="text" id="checkIn"></p>
+        <div>Check in: <input type="text" id="checkIn"></div>
+        <div>Check out: <input type="text" id="checkOut"></div>
+
+        <input type="submit" value="Book" id="loginSubmitButton">
+        <script type="module" src="./js/login.js"></script>
     </div>
 
     <!-- insert footer -->

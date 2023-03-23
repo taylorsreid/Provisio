@@ -7,6 +7,7 @@
     <title>Provisio</title>
 
     <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script type="module" src="./js/index.js"></script>
 
 </head>
 <body>
@@ -16,15 +17,7 @@
     <script>w3.includeHTML();</script>
     
     <div id="root">
-        <script>
-            if(sessionStorage.getItem("loggedIn") === "true"){
-                document.write(`Welcome ${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`); //super buggy
-            }
-            else{
-                document.write("Welcome, please log in.");
-            }
-        </script>
-
+        <div id="welcomeMessage"></div>
     </div>
 
     <!-- insert footer -->
