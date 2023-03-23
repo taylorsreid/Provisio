@@ -50,7 +50,7 @@ public class ReservationService {
 
                 System.out.println("Customer " + authorizationService.getCustomerIdFromAuthorizationHeader(authorizationHeader) + " has made a reservation.");
 
-                return new ResponseEntity<>(new GenericResponse(true, "Reservation " + reservationId + " is booked!").toString(), HttpStatus.OK);
+                return new ResponseEntity<>(new GenericResponse(true, "Reservation " + reservationId + " has been booked!").toString(), HttpStatus.OK);
 
             }
             catch (SQLException | ClassNotFoundException ex) {
