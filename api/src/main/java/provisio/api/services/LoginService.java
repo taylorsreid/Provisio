@@ -59,7 +59,7 @@ public class LoginService {
             System.out.println(firstName + " " + lastName + " has logged in.");
 
             //return positive response along with JWT bearer token
-            return new ResponseEntity<>(new LoginResponse(true, token, customerId, loginRequest.getEmail(), firstName, lastName).toString(), HttpStatus.OK);
+            return new ResponseEntity<>(new LoginResponse(true, token, customerId, firstName, lastName).toString(), HttpStatus.OK);
 
         }
         //this occurs when username is found but password doesn't match

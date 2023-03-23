@@ -35,11 +35,11 @@ document.getElementById("registerSubmitButton").addEventListener("click", functi
         .then(json => {
             //if the API responds that the account was created successfully, then save commonly accessed items to session storage to avoid repeated database calls
             if (json.success == true) {
-                sessionStorage.setItem("loggedIn", true);
-                sessionStorage.setItem("customerId", json.customerId);
-                sessionStorage.setItem("email", json.email);
-                sessionStorage.setItem("firstName", json.firstName);
-                sessionStorage.setItem("lastName", json.lastName);
+                Cookies.set("loggedIn", true);
+                Cookies.set("customerId", json.customerId);
+                Cookies.set("email", json.email);
+                Cookies.set("firstName", json.firstName);
+                Cookies.set("lastName", json.lastName);
                 Cookies.set('jwt', json.jwt) //save JWT to a cookie because it's the most secure way
                 window.location.href = "index.html"; //redirect back to home page upon successful login
             }

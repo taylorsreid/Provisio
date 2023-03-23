@@ -18,6 +18,8 @@ import java.util.UUID;
 @Service
 public class ReservationService {
 
+    final String unauthorizedMessage = "You must be logged in to do that!";
+
     @Autowired
     private AuthorizationService authorizationService;
 
@@ -57,27 +59,19 @@ public class ReservationService {
 
         }
         else{
-            return redirectToLogin();
+            return new ResponseEntity<>(new GenericResponse(false, unauthorizedMessage).toString(), HttpStatus.UNAUTHORIZED);
         }
+
     }
 
+    //TODO: determine if the user needs to be logged in or not to retrieve reservations, if so, remove authorization header argument and if statement
     public ResponseEntity<String> get(String authorizationHeader, ReservationGetRequest reservationGetRequest){
 
         //verify token
         if(authorizationHeader != null && authorizationService.verifyAuthorizationHeader(authorizationHeader)){
-
-
             return null;
         }
-        else{
-            return redirectToLogin();
-        }
-    }
-
-    private ResponseEntity<String> redirectToLogin(){
-        HttpHeaders httpHeaders = new HttpHeaders();
-        httpHeaders.setLocation(URI.create("https://taylorsreid.github.io/Provisio/login.html"));
-        return new ResponseEntity<>("Redirecting you to the login page...", httpHeaders, 302);
+        return null;
     }
 
 }
