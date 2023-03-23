@@ -54,7 +54,7 @@ submitButton.addEventListener("click", function(){
             document.getElementById("formMessage").innerHTML = json.message;
         }
         else {
-            console.log(json);
+            document.getElementById("formMessage").innerHTML = json.message;
         }
     });
 });
