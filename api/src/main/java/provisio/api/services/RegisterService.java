@@ -34,7 +34,7 @@ public class RegisterService {
         }
         catch (Exception ex){
             ex.printStackTrace();
-            return ResponseEntity.internalServerError().body(new GenericResponse(false, "An internal server error occurred.").toString());
+            return ResponseEntity.internalServerError().body(new GenericResponse(false, "An internal server error has occurred.").toString());
         }
 
         //if email isn't taken
@@ -58,6 +58,8 @@ public class RegisterService {
                 ps.setString(4, hashedPassword);
                 ps.execute();
 
+                conn.close();
+
                 System.out.println(registerRequest.getFirstName() + " " + registerRequest.getLastName() + " has created an account.");
 
                 //returns a login response with token if the account creation was successful
@@ -65,13 +67,13 @@ public class RegisterService {
             }
             catch (Exception ex){
                 ex.printStackTrace();
-                return ResponseEntity.internalServerError().body(new GenericResponse(false, "An internal server error occurred.").toString());
+                return ResponseEntity.internalServerError().body(new GenericResponse(false, "An internal server error has occurred.").toString());
             }
 
         }
         else {
             //if account creation was unsuccessful, the reasons why are returned as JSON
-            return ResponseEntity.badRequest().body(new GenericResponse(false, "An account already already exists for that email").toString());
+            return ResponseEntity.badRequest().body(new GenericResponse(false, "An account already already exists for that email.").toString());
         }
 
     }

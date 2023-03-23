@@ -27,10 +27,13 @@ public class ReservationService {
         if(authorizationHeader != null && authorizationService.verifyAuthorizationHeader(authorizationHeader)){
 
             try{
+
+                String reservationId = UUID.randomUUID().toString();
+
                 Connection conn = ConnectionManager.getConnection();
                 PreparedStatement ps = conn.prepareStatement("INSERT INTO `reservations` (`customer_id`, `reservation_id`, `check_in`, `check_out`, `room_size`, `wifi`, `breakfast`, `parking`, `guests`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
                 ps.setString(1, new AuthorizationService().getCustomerIdFromAuthorizationHeader(authorizationHeader));
-                ps.setString(2, UUID.randomUUID().toString());
+                ps.setString(2, reservationId);
                 ps.setString(3, reservationPostRequest.getCheckIn());
                 ps.setString(4, reservationPostRequest.getCheckOut());
                 ps.setString(5, reservationPostRequest.getRoomSize());
@@ -40,13 +43,16 @@ public class ReservationService {
                 ps.setInt(9, reservationPostRequest.getGuests());
                 ps.executeUpdate();
 
+                conn.close();
+
                 System.out.println("Customer " + authorizationService.getCustomerIdFromAuthorizationHeader(authorizationHeader) + " has made a reservation.");
 
-                return new ResponseEntity<>(new GenericResponse(true, "Your reservation is booked!").toString(), HttpStatus.OK);
+                return new ResponseEntity<>(new GenericResponse(true, "Reservation " + reservationId + " is booked!").toString(), HttpStatus.OK);
 
             }
             catch (SQLException | ClassNotFoundException ex) {
-                throw new RuntimeException(ex);
+                ex.printStackTrace();
+                return ResponseEntity.internalServerError().body(new GenericResponse(false, "An internal server error has occurred.").toString());
             }
 
         }
