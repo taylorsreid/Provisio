@@ -7,6 +7,7 @@
     <title>Login</title>
 
     <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script type="module" src="./js/login.js"></script>
 
 </head>
 <body>
@@ -18,33 +19,7 @@
     <h1>Login</h1>
 
     <div id="root">
-        <script>
-            if(sessionStorage.getItem("loggedIn") === "true"){
-                document.write(`
-                You are already logged in as ${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}
-                `);
-            }
-            else{
-                document.write(`
-                    <label for="email">Email:</label>
-                    <input type="text" id="email" name="email">
-    
-                    <br>
-    
-                    <label for="password">Password:</label>
-                    <input type="password" id="password" name="password" minlength="8" required>
-    
-                    <br>
-                    
-                    <input type="submit" value="Login" id="loginSubmitButton">
-                    <script type="module" src="./js/login.js"><\/script>
-
-                    <br>
-
-                    <div id="message"></div>
-                `);
-            }
-        </script>
+        
     </div>
 
     <!-- insert footer -->
