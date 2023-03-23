@@ -12,7 +12,7 @@ import java.time.Instant;
 public class AuthorizationService {
 
     //token configuration
-    private final String ISSUER = "tiptracker"; //issuer name
+    private final String ISSUER = "provisio"; //issuer name
 //    private final String ENV_VAR = "HMAC256"; //name of secret key stored in system environment variables
 
     //algorithm and verifier
@@ -28,7 +28,7 @@ public class AuthorizationService {
      */
     public String getTokenForCustomerId(String customerId) throws JWTCreationException{
 
-        final int SECONDS_TO_ADD = 7200; //7200 seconds is two hours
+        final int SECONDS_TO_ADD = 86400; //86400 seconds is one day
 
         return JWT.create()
                 .withIssuer(ISSUER)

@@ -1,62 +1,42 @@
-import apiLocation from "./apiLocation.js";
 import Cookies from 'https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/+esm';
+import "https://code.jquery.com/jquery-3.6.4.js";
+import "https://code.jquery.com/ui/1.13.2/jquery-ui.js";
 
-let submitButton = document.getElementById("submitButton");
-let formMessage = document.getElementById("formMessage");
+const formMessage = document.getElementById("formMessage");
+const submitButton = document.getElementById("submitButton")
 
-// document.getElementById("checkIn").addEventListener("change", updatePoints());
-// document.getElementById("checkOut").addEventListener("change", updatePoints());
+//if user is not logged in. Cookies returns string.
+if(Cookies.get("loggedIn") !== "true"){
+    document.getElementById("form").innerHTML = `You must be logged in to make a reservation, click <a href="./login.html">here</a> if you are not redirected in 3 seconds...`;
+    setTimeout(function(){window.location.href = "./login.html"}, 3000); //callback to wait 3 seconds then redirect
+}
 
-// function updatePoints(){
+//jquery datepicker adds calendar popout to date inputs
+$(".date").datepicker({
+    onSelect: function(dateText) {
 
-//     console.log(document.getElementById("checkIn"));
-//     console.log(document.getElementById("checkOut"));
+        let checkIn = $("#checkIn").datepicker("getDate");
+        let checkOut = $("#checkOut").datepicker("getDate");
 
-//     let checkInDate = new Date(document.getElementById("checkIn").textContent);
-//     let checkOutDate = new Date(document.getElementById("checkOut").textContent);
+        //prevents a null error from being thrown in the console
+        if(checkIn !== null && checkOut !== null){
 
-//     console.log(checkInDate);
-//     console.log(checkOutDate);
+            //ensures that the user is picking a date that's not in the past, new Date().setHours(0,0,0,0) returns today at midnight
+            if(checkIn >= new Date().setHours(0,0,0,0)){
 
-//     let deltaTime = checkOutDate.getTime() - checkInDate.getTime();
-//     let deltaDays = deltaTime / (1000 * 3600 * 24);
+                let deltaTime = checkOut.getTime() - checkIn.getTime();
+                let deltaDays = deltaTime / (1000 * 3600 * 24);
 
-//     console.log(`typeof deltaTime: ${typeof deltaTime}`);
-//     console.log(`typeof deltaDays: ${typeof deltaDays}`);
-//     console.log(`deltaTime value: ${deltaTime}`);
-//     console.log(`deltaDays value: ${deltaDays}`);
-
-//     formMessage.innerHTML = `You will earn ${deltaDays * 150} points for this reservation.`;
-// }
-
-submitButton.addEventListener("click", function(){
-
-    //
-    
-
-    fetch(apiLocation + '/reservation', {
-        method : "POST",
-        headers: {
-            'Content-Type': 'application/json',
-            Authorization : 'Bearer ' + Cookies.get('jwt'),
-        },
-        body : JSON.stringify({
-            checkIn : "2023-3-25",
-            checkOut : "2023-3-26",
-            roomSize : "k",
-            wifi : true,
-            breakfast : true,
-            parking : true,
-            guests : 3
-        })
-    })
-    .then(resp => resp.json())
-    .then(json => {
-        if (json.success == true) {
-            window.location.href = `./confirmReservation.html?`;
-        }
-        else {
-            console.log(json);
-        }
-    });
+                //ensures that the user picks at least a one night stay and not a negative number of nights
+                if(checkOut > checkIn){
+                    submitButton.disabled = false;
+                    formMessage.innerHTML = `You will earn ${deltaDays * 150} points for this trip.`;
+                }
+                else{
+                    submitButton.disabled = true;
+                    formMessage.innerHTML = `You must select at least a one night stay.`;
+                }
+            }
+        } 
+    }
 });

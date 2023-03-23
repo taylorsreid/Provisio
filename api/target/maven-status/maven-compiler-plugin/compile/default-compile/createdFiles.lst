@@ -1,7 +1,7 @@
 provisio/api/services/RegisterService.class
 provisio/api/models/requests/LoginRequest.class
-provisio/api/MainController.class
 provisio/api/models/requests/ReservationGetRequest.class
+provisio/api/MainController.class
 provisio/api/ApiApplication.class
 provisio/api/models/requests/RegisterRequest.class
 provisio/api/services/LoginService.class
