@@ -9,6 +9,5 @@ provisio/api/models/responses/LoginResponse.class
 provisio/api/models/responses/GenericResponse.class
 provisio/api/services/ReservationService.class
 provisio/api/models/requests/ReservationPostRequest.class
-provisio/api/models/responses/RegisterResponse.class
 provisio/api/db/ConnectionManager.class
 provisio/api/services/AuthorizationService.class

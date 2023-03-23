@@ -1,19 +1,16 @@
 package provisio.api.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import provisio.api.MainController;
 import provisio.api.db.ConnectionManager;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import provisio.api.models.requests.LoginRequest;
 import provisio.api.models.requests.RegisterRequest;
-import provisio.api.models.responses.RegisterResponse;
+import provisio.api.models.responses.GenericResponse;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 @Service
 public class RegisterService {
@@ -23,7 +20,7 @@ public class RegisterService {
 
     public ResponseEntity<String> register(RegisterRequest registerRequest) {
 
-        boolean availableEmail = false;
+        boolean availableEmail;
 
         //check that email doesn't already exist
         try{
@@ -37,22 +34,11 @@ public class RegisterService {
         }
         catch (Exception ex){
             ex.printStackTrace();
+            return ResponseEntity.internalServerError().body(new GenericResponse(false, "An internal server error occurred.").toString());
         }
 
-        //validate email is real
-        //TODO: fix regex to meet project requirements
-        Pattern emailPattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
-        Matcher matcher = emailPattern.matcher(registerRequest.getEmail());
-        boolean validEmail = matcher.find();
-
-        //validate password meets requirements
-        //TODO: fix regex to meet project requirements
-        Pattern passwordPattern = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)(?=.*[@$!%*?&])[A-Za-z\\d@$!%*?&]{8,}$");
-        Matcher passwordMatcher = passwordPattern.matcher(registerRequest.getPassword());
-        boolean validPassword = passwordMatcher.find();
-
-        //if password meets requirements and email isn't taken
-        if (availableEmail && validEmail && validPassword) {
+        //if email isn't taken
+        if (availableEmail) {
 
             //create encoder and encode raw password into a hashed one
             BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
@@ -79,13 +65,13 @@ public class RegisterService {
             }
             catch (Exception ex){
                 ex.printStackTrace();
-                return ResponseEntity.internalServerError().build();
+                return ResponseEntity.internalServerError().body(new GenericResponse(false, "An internal server error occurred.").toString());
             }
 
         }
         else {
             //if account creation was unsuccessful, the reasons why are returned as JSON
-            return ResponseEntity.badRequest().body(new RegisterResponse(false, availableEmail, validEmail, validPassword).toString());
+            return ResponseEntity.badRequest().body(new GenericResponse(false, "An account already already exists for that email").toString());
         }
 
     }

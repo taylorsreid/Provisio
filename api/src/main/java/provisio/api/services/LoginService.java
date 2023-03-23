@@ -25,6 +25,8 @@ public class LoginService {
         String firstName;
         String lastName;
 
+        final String unauthorizedMessage = "Incorrect username or password.";
+
         //gets the actual user so that they can be compared to the alleged user
         try{
             Connection conn = ConnectionManager.getConnection();
@@ -38,8 +40,9 @@ public class LoginService {
             lastName = rs.getString("last_name");
             conn.close();
         }
+        //this occurs when username not found
         catch (Exception ex){
-            return new ResponseEntity<>(new GenericResponse(false, "Incorrect username or password!").toString(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(new GenericResponse(false, unauthorizedMessage).toString(), HttpStatus.UNAUTHORIZED);
         }
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -59,9 +62,10 @@ public class LoginService {
             return new ResponseEntity<>(new LoginResponse(true, token, customerId, loginRequest.getEmail(), firstName, lastName).toString(), HttpStatus.OK);
 
         }
+        //this occurs when username is found but password doesn't match
         else {
             //return negative response with 401 code
-            return new ResponseEntity<>(new GenericResponse(false, "Incorrect username or password!").toString(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(new GenericResponse(false, unauthorizedMessage).toString(), HttpStatus.UNAUTHORIZED);
         }
 
     }

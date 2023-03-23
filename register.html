@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Provisio</title>
 
-    <script type="module" src="main.js"></script>
     <script src="https://www.w3schools.com/lib/w3.js"></script>
 
 </head>
@@ -15,30 +14,42 @@
     <!-- insert header -->
     <div w3-include-html="header.html"></div>
     <script>w3.includeHTML();</script>
+
+    <h1>Register</h1>
     
-    <div id="main">
-        <!-- <script>
+    <div id="root">
+
+        <script>
             if(sessionStorage.getItem("loggedIn") === "true"){
-                document.write(`
-                    You are already logged in as ${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}
-                `);
+                document.write(`You are currently logged in as ${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")} <br><br>`);
             }
-            else{
-                document.write("Welcome");
-            }
-        </script> -->
+        </script>
 
         <label for="email">Email:</label>
-        <input type="text" id="email" name="email">
+        <input type="text" id="email" name="email" required>
+        
+        <br>
 
         <label for="firstName">First name:</label>
-        <input type="text" id="firstName" name="firstName">
+        <input type="text" id="firstName" name="firstName" required>
+        
+        <br>
 
         <label for="lastName">Last name:</label>
-        <input type="text" id="lastName" name="lastName">
+        <input type="text" id="lastName" name="lastName" required>
+        
+        <br>
 
         <label for="password">Password:</label>
-        <input type="password" id="password" name="password">
+        <input type="password" id="password" name="password" required>
+
+        <br>
+        <input type="submit" value="Register" id="registerSubmitButton">
+
+        <!-- script to submit form to API -->
+        <script type="module" src="./js/register.js"></script>
+
+        <div id="message"></div>
 
     </div>
 
