@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Provisio</title>
 
-    <script src="main.js"></script>
     <script src="https://www.w3schools.com/lib/w3.js"></script>
 
 </head>
@@ -16,13 +15,13 @@
     <div w3-include-html="header.html"></div>
     <script>w3.includeHTML();</script>
     
-    <div id="main">
+    <div id="root">
         <script>
             if(sessionStorage.getItem("loggedIn") === "true"){
-                document.write(`Welcome ${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`); //buggy, don't touch because nothing else works
+                document.write(`Welcome ${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}`); //super buggy
             }
             else{
-                document.write("Welcome");
+                document.write("Welcome, please log in.");
             }
         </script>
 

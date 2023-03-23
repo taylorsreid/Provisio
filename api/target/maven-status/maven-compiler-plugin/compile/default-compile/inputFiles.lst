@@ -1,4 +1,3 @@
-/var/www/html/Provisio/api/src/main/java/provisio/api/models/responses/RegisterResponse.java
 /var/www/html/Provisio/api/src/main/java/provisio/api/models/requests/RegisterRequest.java
 /var/www/html/Provisio/api/src/main/java/provisio/api/ApiApplication.java
 /var/www/html/Provisio/api/src/main/java/provisio/api/models/requests/LoginRequest.java

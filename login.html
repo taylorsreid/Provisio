@@ -6,7 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 
-    <script src="main.js"></script>
     <script src="https://www.w3schools.com/lib/w3.js"></script>
 
 </head>
@@ -18,17 +17,35 @@
 
     <h1>Login</h1>
 
-    <label for="email">Email:</label>
-    <input type="text" id="email" name="email">
-
-    <br>
-
-    <label for="password">Password:</label>
-    <input type="password" id="password" name="password" minlength="8" required>
-
-    <br>
+    <div id="root">
+        <script>
+            if(sessionStorage.getItem("loggedIn") === "true"){
+                document.write(`
+                You are already logged in as ${sessionStorage.getItem("firstName")} ${sessionStorage.getItem("lastName")}
+                `);
+            }
+            else{
+                document.write(`
+                    <label for="email">Email:</label>
+                    <input type="text" id="email" name="email">
     
-    <input type="submit" value="Sign in" onclick="login()">
+                    <br>
+    
+                    <label for="password">Password:</label>
+                    <input type="password" id="password" name="password" minlength="8" required>
+    
+                    <br>
+                    
+                    <input type="submit" value="Login" id="loginSubmitButton">
+                    <script type="module" src="./js/login.js"><\/script>
+
+                    <br>
+
+                    <div id="message"></div>
+                `);
+            }
+        </script>
+    </div>
 
     <!-- insert footer -->
     <div w3-include-html="footer.html"></div>
