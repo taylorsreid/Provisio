@@ -32,22 +32,24 @@ public class ReservationService {
                 String reservationId = UUID.randomUUID().toString();
 
                 Connection conn = ConnectionManager.getConnection();
-                PreparedStatement ps = conn.prepareStatement("INSERT INTO `reservations` (`customer_id`, `reservation_id`, `check_in`, `check_out`, `room_size`, `wifi`, `breakfast`, `parking`, `guests`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                PreparedStatement ps = conn.prepareStatement("INSERT INTO `reservations` (`customer_id`, `reservation_id`, `hotel_id`, `check_in`, `check_out`, `room_size_id`, `wifi`, `breakfast`, `parking`, `guests`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
                 //the customer ID is stored in the JWT so that it can't be forged
                 ps.setString(1, authorizationService.getCustomerIdFromAuthorizationHeader(authorizationHeader));
                 ps.setString(2, reservationId);
-                ps.setString(3, reservationPostRequest.getCheckIn());
-                ps.setString(4, reservationPostRequest.getCheckOut());
-                ps.setString(5, reservationPostRequest.getRoomSize());
-                ps.setBoolean(6, reservationPostRequest.isWifi());
-                ps.setBoolean(7, reservationPostRequest.isBreakfast());
-                ps.setBoolean(8, reservationPostRequest.isParking());
-                ps.setInt(9, reservationPostRequest.getGuests());
+                ps.setInt(3, reservationPostRequest.getHotelId());
+                ps.setString(4, reservationPostRequest.getCheckIn());
+                ps.setString(5, reservationPostRequest.getCheckOut());
+                ps.setInt(6, reservationPostRequest.getRoomSizeId());
+                ps.setBoolean(7, reservationPostRequest.isWifi());
+                ps.setBoolean(8, reservationPostRequest.isBreakfast());
+                ps.setBoolean(9, reservationPostRequest.isParking());
+                ps.setInt(10, reservationPostRequest.getGuests());
                 ps.executeUpdate();
 
                 conn.close();
 
+                //for watching the application run
                 System.out.println("Customer " + authorizationService.getCustomerIdFromAuthorizationHeader(authorizationHeader) + " has made a reservation.");
 
                 return new ResponseEntity<>(new GenericResponse(true, "Reservation " + reservationId + " has been booked!").toString(), HttpStatus.OK);

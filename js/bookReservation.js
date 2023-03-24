@@ -51,6 +51,8 @@ function updatePoints(){
 
 $('#form').submit(function(){
 
+    sessionStorage.setItem("hotelId", document.querySelector('input[name="hotel"]:checked').value); //transmitted to API
+    sessionStorage.setItem("hotelName", document.querySelector('input[name="hotel"]:checked').innerHTML); //only used on webpage
     sessionStorage.setItem("checkInLocalDate", $("#checkIn").val());
     sessionStorage.setItem("checkOutLocalDate", $("#checkOut").val());
     sessionStorage.setItem("roomSize", document.getElementById("roomSize").value);
