@@ -1,0 +1,13 @@
+/var/www/html/Provisio/api/src/main/java/provisio/api/models/requests/RegisterRequest.java
+/var/www/html/Provisio/api/src/main/java/provisio/api/ApiApplication.java
+/var/www/html/Provisio/api/src/main/java/provisio/api/models/requests/LoginRequest.java
+/var/www/html/Provisio/api/src/main/java/provisio/api/db/ConnectionManager.java
+/var/www/html/Provisio/api/src/main/java/provisio/api/services/ReservationService.java
+/var/www/html/Provisio/api/src/main/java/provisio/api/models/responses/GenericResponse.java
+/var/www/html/Provisio/api/src/main/java/provisio/api/MainController.java
+/var/www/html/Provisio/api/src/main/java/provisio/api/services/AuthorizationService.java
+/var/www/html/Provisio/api/src/main/java/provisio/api/services/RegisterService.java
+/var/www/html/Provisio/api/src/main/java/provisio/api/models/requests/ReservationPostRequest.java
+/var/www/html/Provisio/api/src/main/java/provisio/api/models/requests/ReservationGetRequest.java
+/var/www/html/Provisio/api/src/main/java/provisio/api/services/LoginService.java
+/var/www/html/Provisio/api/src/main/java/provisio/api/models/responses/LoginResponse.java

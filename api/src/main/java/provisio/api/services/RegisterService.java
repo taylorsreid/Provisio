@@ -51,7 +51,7 @@ public class RegisterService {
 
             try{
                 Connection conn = ConnectionManager.getConnection();
-                PreparedStatement ps = conn.prepareStatement("INSERT INTO `users` (`customer_id`, `email`, `first_name`, `last_name`, `hashed_password`) VALUES (UUID(), ?, ?, ?, ?)");
+                PreparedStatement ps = conn.prepareStatement("INSERT INTO `customers` (`customer_id`, `email`, `first_name`, `last_name`, `hashed_password`) VALUES (UUID(), ?, ?, ?, ?)");
                 ps.setString(1, registerRequest.getEmail());
                 ps.setString(2, registerRequest.getFirstName());
                 ps.setString(3, registerRequest.getLastName());
