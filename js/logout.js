@@ -6,3 +6,4 @@ Cookies.remove("email");
 Cookies.remove("firstName");
 Cookies.remove("lastName");
 Cookies.remove("jwt")
+sessionStorage.clear();
