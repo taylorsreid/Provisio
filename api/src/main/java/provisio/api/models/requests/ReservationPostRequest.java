@@ -7,9 +7,10 @@ import lombok.Getter;
 @Getter
 public class ReservationPostRequest {
 
+    int hotelId;
     String checkIn;
     String checkOut;
-    String roomSize;
+    int roomSizeId;
     boolean wifi;
     boolean breakfast;
     boolean parking;

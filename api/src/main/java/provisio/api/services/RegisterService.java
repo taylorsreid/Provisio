@@ -25,7 +25,7 @@ public class RegisterService {
         //check that email doesn't already exist
         try{
             Connection conn = ConnectionManager.getConnection();
-            PreparedStatement ps = conn.prepareStatement("SELECT EXISTS(SELECT * FROM `users` WHERE email=?) as `exists`;");
+            PreparedStatement ps = conn.prepareStatement("SELECT EXISTS(SELECT * FROM `customers` WHERE email=?) as `exists`;");
             ps.setString(1, registerRequest.getEmail());
             ResultSet rs = ps.executeQuery();
             rs.next();
