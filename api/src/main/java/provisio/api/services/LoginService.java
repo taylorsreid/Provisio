@@ -30,7 +30,7 @@ public class LoginService {
         //gets the actual user so that they can be compared to the alleged user
         try{
             Connection conn = ConnectionManager.getConnection();
-            PreparedStatement ps = conn.prepareStatement("SELECT `customer_id`, `hashed_password`, `first_name`, `last_name` FROM `users` WHERE email=?;");
+            PreparedStatement ps = conn.prepareStatement("SELECT `customer_id`, `hashed_password`, `first_name`, `last_name` FROM `customers` WHERE email=?;");
             ps.setString(1, loginRequest.getEmail());
             ResultSet rs = ps.executeQuery();
             rs.next();
