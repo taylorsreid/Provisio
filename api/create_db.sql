@@ -33,10 +33,10 @@ CREATE TABLE `provisio`.`room_sizes` (
   PRIMARY KEY (`room_size_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-INSERT INTO `provisio`.`room_sizes` (`room_size_id`, `room_size_name`) VALUES (1, "double full beds");
-INSERT INTO `provisio`.`room_sizes` (`room_size_id`, `room_size_name`) VALUES (2, "single queen bed");
-INSERT INTO `provisio`.`room_sizes` (`room_size_id`, `room_size_name`) VALUES (3, "double queen beds");
-INSERT INTO `provisio`.`room_sizes` (`room_size_id`, `room_size_name`) VALUES (4, "single king bed");
+INSERT INTO `provisio`.`room_sizes` (`room_size_id`, `room_size_name`) VALUES (1, "Double Full Beds");
+INSERT INTO `provisio`.`room_sizes` (`room_size_id`, `room_size_name`) VALUES (2, "Single Queen Bed");
+INSERT INTO `provisio`.`room_sizes` (`room_size_id`, `room_size_name`) VALUES (3, "Double Queen Beds");
+INSERT INTO `provisio`.`room_sizes` (`room_size_id`, `room_size_name`) VALUES (4, "Single King Bed");
 
 -- create reservations table
 CREATE TABLE `provisio`.`reservations` (

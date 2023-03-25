@@ -29,7 +29,7 @@ submitButton.addEventListener("click", function(){
 
     //if everything matches then build request to API
     if (validEmail && validPassword && validFirstName && validLastName) {
-        fetch(apiLocation + '/register', {
+        fetch(apiLocation + 'register', {
             method : "POST",
             headers: {
                 'Content-Type': 'application/json'
