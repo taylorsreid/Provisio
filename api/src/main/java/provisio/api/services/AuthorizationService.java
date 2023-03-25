@@ -17,7 +17,7 @@ public class AuthorizationService {
 
     //algorithm and verifier
 //    private final Algorithm algorithm = Algorithm.HMAC256(System.getenv(ENV_VAR));
-    private final Algorithm algorithm = Algorithm.HMAC256("test");
+    private final Algorithm algorithm = Algorithm.HMAC256("Capstone!2023"); //fake secret since this is proof of concept, not production
     private final JWTVerifier verifier = JWT.require(algorithm).withIssuer(ISSUER).build();
 
     /**

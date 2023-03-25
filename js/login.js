@@ -17,7 +17,7 @@ submitButton.addEventListener("click", function(){
     let email = document.getElementById("email").value;
     let password = document.getElementById("password").value;
 
-    fetch(apiLocation + '/login', {
+    fetch(apiLocation + 'login', {
         method : "POST",
         headers: {
             'Content-Type': 'application/json'
