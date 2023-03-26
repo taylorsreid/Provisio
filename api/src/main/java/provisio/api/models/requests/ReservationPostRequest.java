@@ -3,6 +3,8 @@ package provisio.api.models.requests;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
+import provisio.api.models.Guest;
+import java.util.List;
 
 @Getter
 public class ReservationPostRequest {
@@ -14,7 +16,7 @@ public class ReservationPostRequest {
     boolean wifi;
     boolean breakfast;
     boolean parking;
-    int guests;
+    List<Guest> guests;
 
     @Override
     public String toString() {
