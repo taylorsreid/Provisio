@@ -18,15 +18,10 @@ public class GenericResponse {
 
     @Override
     public String toString() {
-//        return "{\"success\":" + success + "," +
-//                "\"message\":\"" + message + "\"}";
-
         try {
             return new ObjectMapper().writeValueAsString(this);
         } catch (JsonProcessingException e) {
             throw new RuntimeException(e);
         }
-
     }
-
 }

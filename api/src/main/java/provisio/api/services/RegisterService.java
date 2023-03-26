@@ -11,6 +11,7 @@ import provisio.api.models.responses.GenericResponse;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.util.regex.Pattern;
 
 @Service
 public class RegisterService {
@@ -37,8 +38,20 @@ public class RegisterService {
             return ResponseEntity.internalServerError().body(new GenericResponse(false, "An internal server error has occurred.").toString());
         }
 
-        //if email isn't taken
-        if (availableEmail) {
+        //validate email is real
+        Pattern emailPattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
+        boolean validEmail = emailPattern.matcher(registerRequest.getEmail()).find();
+
+        //validate password meets requirements
+        Pattern passwordPattern = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z]).{8,}$");
+        boolean validPassword = passwordPattern.matcher(registerRequest.getPassword()).find();
+
+        //validate first name and last name are not blank
+        boolean validFirstName = !registerRequest.getFirstName().isBlank();
+        boolean validLastName = !registerRequest.getLastName().isBlank();
+
+        //if everything meets requirements
+        if (availableEmail && validEmail && validPassword && validFirstName && validLastName) {
 
             //create encoder and encode raw password into a hashed one
             BCryptPasswordEncoder bcpe = new BCryptPasswordEncoder();
@@ -72,8 +85,25 @@ public class RegisterService {
 
         }
         else {
-            //if account creation was unsuccessful, the reasons why are returned as JSON
-            return ResponseEntity.badRequest().body(new GenericResponse(false, "An account already already exists for that email.").toString());
+            StringBuilder message = new StringBuilder();
+            if (!availableEmail){
+                message.append(" An account already already exists for that email.");
+            }
+            if (!validEmail){
+                message.append(" Invalid email address.");
+            }
+            if (!validPassword){
+                message.append(" Invalid password. Passwords must be least 8 characters in length and include at least one uppercase letter and one lowercase letter.");
+            }
+            if (!validFirstName){
+                message.append(" First name cannot be blank.");
+            }
+            if (!validLastName){
+                message.append(" Last name cannot be blank.");
+            }
+
+            //if account creation was unsuccessful, return reasons why
+            return ResponseEntity.ok().body(new GenericResponse(false, message.toString()).toString());
         }
 
     }

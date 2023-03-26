@@ -5,6 +5,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import provisio.api.db.ConnectionManager;
+import provisio.api.models.Guest;
 import provisio.api.models.requests.ReservationGetRequest;
 import provisio.api.models.requests.ReservationPostRequest;
 import provisio.api.models.responses.GenericResponse;
@@ -21,32 +22,44 @@ public class ReservationService {
     @Autowired
     private AuthorizationService authorizationService;
 
+    //TODO add check in and check out date verification
     public ResponseEntity<String> post(String authorizationHeader, ReservationPostRequest reservationPostRequest){
 
         //verify token
         if(authorizationHeader != null && authorizationService.verifyAuthorizationHeader(authorizationHeader)){
 
             try{
-
                 //generate random UUID as reservation ID
                 String reservationId = UUID.randomUUID().toString();
 
                 Connection conn = ConnectionManager.getConnection();
-                PreparedStatement ps = conn.prepareStatement("INSERT INTO `reservations` (`customer_id`, `reservation_id`, `hotel_id`, `check_in`, `check_out`, `room_size_id`, `wifi`, `breakfast`, `parking`, `guests`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                PreparedStatement resPs = conn.prepareStatement("INSERT INTO `reservations` (`reservation_id`, `customer_id`, `hotel_id`, `check_in`, `check_out`, `room_size_id`, `wifi`, `breakfast`, `parking`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+//                conn.setAutoCommit(false);
 
                 //the customer ID is stored in the JWT so that it can't be forged
-                ps.setString(1, authorizationService.getCustomerIdFromAuthorizationHeader(authorizationHeader));
-                ps.setString(2, reservationId);
-                ps.setInt(3, reservationPostRequest.getHotelId());
-                ps.setString(4, reservationPostRequest.getCheckIn());
-                ps.setString(5, reservationPostRequest.getCheckOut());
-                ps.setInt(6, reservationPostRequest.getRoomSizeId());
-                ps.setBoolean(7, reservationPostRequest.isWifi());
-                ps.setBoolean(8, reservationPostRequest.isBreakfast());
-                ps.setBoolean(9, reservationPostRequest.isParking());
-                ps.setInt(10, reservationPostRequest.getGuests());
-                ps.executeUpdate();
+                resPs.setString(1, reservationId);
+                resPs.setString(2, authorizationService.getCustomerIdFromAuthorizationHeader(authorizationHeader));
+                resPs.setInt(3, reservationPostRequest.getHotelId());
+                resPs.setString(4, reservationPostRequest.getCheckIn());
+                resPs.setString(5, reservationPostRequest.getCheckOut());
+                resPs.setInt(6, reservationPostRequest.getRoomSizeId());
+                resPs.setBoolean(7, reservationPostRequest.isWifi());
+                resPs.setBoolean(8, reservationPostRequest.isBreakfast());
+                resPs.setBoolean(9, reservationPostRequest.isParking());
+                resPs.executeUpdate();
 
+//                conn.commit();
+
+                for (Guest guest : reservationPostRequest.getGuests()) {
+                    PreparedStatement guestsPs = conn.prepareStatement("INSERT INTO `guests` (`reservation_id`, `first_name`, `last_name`) VALUES (?, ?, ?)");
+                    guestsPs.setString(1, reservationId);
+                    guestsPs.setString(2, guest.getFirstName());
+                    guestsPs.setString(3, guest.getLastName());
+                    guestsPs.executeUpdate();
+                }
+
+//                conn.commit();
                 conn.close();
 
                 //for watching the application run
