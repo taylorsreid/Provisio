@@ -6,88 +6,170 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import provisio.api.db.ConnectionManager;
 import provisio.api.models.Guest;
-import provisio.api.models.requests.ReservationGetRequest;
+import provisio.api.models.requests.ReservationGetByUserIdRequest;
+import provisio.api.models.requests.ReservationGetByReservationIdRequest;
 import provisio.api.models.requests.ReservationPostRequest;
 import provisio.api.models.responses.GenericResponse;
+import provisio.api.models.responses.ReservationGetByReservationIdResponse;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.Instant;
+import java.time.temporal.ChronoUnit;
+import java.util.ArrayList;
+import java.util.Date;
 import java.util.UUID;
 
 @Service
 public class ReservationService {
 
-    final String unauthorizedMessage = "BAD TOKEN";
+    final String UNAUTHORIZED_MESSAGE = "Invalid token, your session may have expired, please log in again.";
 
     @Autowired
     private AuthorizationService authorizationService;
 
-    //TODO add check in and check out date verification
     public ResponseEntity<String> post(String authorizationHeader, ReservationPostRequest reservationPostRequest){
 
         //verify token
         if(authorizationHeader != null && authorizationService.verifyAuthorizationHeader(authorizationHeader)){
 
-            try{
-                //generate random UUID as reservation ID
-                String reservationId = UUID.randomUUID().toString();
+            // Use Java Date objects for comparisons but send the date as a string because
+            // Java and MySQL have compatibility issues between their date objects but strings always work.
+            SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd");
+            boolean isValidCheckInDate;
+            boolean isValidDates;
+            try {
+                Date checkInAsDate = isoFormat.parse(reservationPostRequest.getCheckIn());
+                Date checkOutAsDate = isoFormat.parse(reservationPostRequest.getCheckOut());
+                isValidCheckInDate = checkInAsDate.compareTo(Date.from(Instant.now().truncatedTo(ChronoUnit.DAYS))) >= 0; //checks that the check in date is today or greater
+                isValidDates = checkOutAsDate.after(checkInAsDate); //checks that the check out date is after the check in date
+            } catch (ParseException e) {
+                return ResponseEntity.badRequest().body(new GenericResponse(false, "You must enter valid dates in ISO format.").toString());
+            }
 
-                Connection conn = ConnectionManager.getConnection();
-                PreparedStatement resPs = conn.prepareStatement("INSERT INTO `reservations` (`reservation_id`, `customer_id`, `hotel_id`, `check_in`, `check_out`, `room_size_id`, `wifi`, `breakfast`, `parking`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            if (isValidDates && isValidCheckInDate){
 
-//                conn.setAutoCommit(false);
+                try{
+                    //generate random UUID as reservation ID
+                    String reservationId = UUID.randomUUID().toString();
 
-                //the customer ID is stored in the JWT so that it can't be forged
-                resPs.setString(1, reservationId);
-                resPs.setString(2, authorizationService.getCustomerIdFromAuthorizationHeader(authorizationHeader));
-                resPs.setInt(3, reservationPostRequest.getHotelId());
-                resPs.setString(4, reservationPostRequest.getCheckIn());
-                resPs.setString(5, reservationPostRequest.getCheckOut());
-                resPs.setInt(6, reservationPostRequest.getRoomSizeId());
-                resPs.setBoolean(7, reservationPostRequest.isWifi());
-                resPs.setBoolean(8, reservationPostRequest.isBreakfast());
-                resPs.setBoolean(9, reservationPostRequest.isParking());
-                resPs.executeUpdate();
+                    Connection conn = ConnectionManager.getConnection();
 
-//                conn.commit();
+                    PreparedStatement locationIdPs = conn.prepareStatement("SELECT `location_id` FROM `locations` WHERE `location_name` = ?");
+                    locationIdPs.setString(1, reservationPostRequest.getLocationName());
+                    ResultSet locationIdRs = locationIdPs.executeQuery();
+                    locationIdRs.next();
+                    int locationId = locationIdRs.getInt("location_id");
 
-                for (Guest guest : reservationPostRequest.getGuests()) {
-                    PreparedStatement guestsPs = conn.prepareStatement("INSERT INTO `guests` (`reservation_id`, `first_name`, `last_name`) VALUES (?, ?, ?)");
-                    guestsPs.setString(1, reservationId);
-                    guestsPs.setString(2, guest.getFirstName());
-                    guestsPs.setString(3, guest.getLastName());
-                    guestsPs.executeUpdate();
+                    PreparedStatement reservationsPs = conn.prepareStatement("INSERT INTO `reservations` (`reservation_id`, `user_id`, `location_id`, `check_in`, `check_out`, `room_size_id`, `wifi`, `breakfast`, `parking`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+
+                    //the customer ID is stored in the JWT so that it can't be forged
+                    reservationsPs.setString(1, reservationId);
+                    reservationsPs.setString(2, authorizationService.getUserIdFromAuthorizationHeader(authorizationHeader));
+                    reservationsPs.setInt(3, locationId);
+                    reservationsPs.setString(4, reservationPostRequest.getCheckIn());
+                    reservationsPs.setString(5, reservationPostRequest.getCheckOut());
+                    reservationsPs.setInt(6, reservationPostRequest.getRoomSizeId());
+                    reservationsPs.setBoolean(7, reservationPostRequest.isWifi());
+                    reservationsPs.setBoolean(8, reservationPostRequest.isBreakfast());
+                    reservationsPs.setBoolean(9, reservationPostRequest.isParking());
+                    reservationsPs.executeUpdate();
+
+                    for (Guest guest : reservationPostRequest.getGuests()) {
+                        PreparedStatement guestsPs = conn.prepareStatement("INSERT INTO `guests` (`reservation_id`, `first_name`, `last_name`) VALUES (?, ?, ?)");
+                        guestsPs.setString(1, reservationId);
+                        guestsPs.setString(2, guest.getFirstName());
+                        guestsPs.setString(3, guest.getLastName());
+                        guestsPs.executeUpdate();
+                    }
+
+                    conn.close();
+
+                    //for watching the application run
+                    System.out.println("User " + authorizationService.getUserIdFromAuthorizationHeader(authorizationHeader) + " has made a reservation.");
+
+                    return new ResponseEntity<>(new GenericResponse(true, "Reservation " + reservationId + " has been booked!").toString(), HttpStatus.OK);
+
+                }
+                catch (SQLException | ClassNotFoundException ex) {
+                    ex.printStackTrace();
+                    return ResponseEntity.internalServerError().body(new GenericResponse(false, "An internal server error has occurred.").toString());
                 }
 
-//                conn.commit();
-                conn.close();
+            }
+            else {
+                return ResponseEntity.badRequest().body(new GenericResponse(false, "Your check out date must be after your check in date and your check in date must be at least today.").toString());
+            }
 
-                //for watching the application run
-                System.out.println("Customer " + authorizationService.getCustomerIdFromAuthorizationHeader(authorizationHeader) + " has made a reservation.");
+        }
+        else{
+            return new ResponseEntity<>(new GenericResponse(false, UNAUTHORIZED_MESSAGE).toString(), HttpStatus.UNAUTHORIZED);
+        }
 
-                return new ResponseEntity<>(new GenericResponse(true, "Reservation " + reservationId + " has been booked!").toString(), HttpStatus.OK);
+    }
+
+    //The page should include a field to search by reservation ID and display a summary of the reservation.
+    // List the location, room size, number of guests, amenities, and check-in/check-out dates.
+    //TODO: determine if the user needs to be logged in or not to retrieve reservations, if so, remove authorization header argument and if statement
+    public ResponseEntity<String> getByReservationId(String authorizationHeader, ReservationGetByReservationIdRequest reservationGetByReservationIdRequest){
+
+        //verify token
+        if(authorizationHeader != null && authorizationService.verifyAuthorizationHeader(authorizationHeader)){
+            try {
+                Connection conn = ConnectionManager.getConnection();
+
+                //select from inner joined view
+                PreparedStatement ps = conn.prepareStatement(
+                """
+                    SELECT `location_name`, `room_size_name`, `wifi`, `breakfast`, `parking`, `check_in`, `check_out`
+                    FROM `reservations_view`
+                    WHERE `reservations_view`.`reservation_id` = ?
+                    """);
+                ps.setString(1, reservationGetByReservationIdRequest.getReservationId());
+                ResultSet resultSetReservation = ps.executeQuery();
+
+                ps = conn.prepareStatement("SELECT `first_name`, `last_name` FROM `guests` WHERE `reservation_id` = ?");
+                ps.setString(1, reservationGetByReservationIdRequest.getReservationId());
+                ResultSet resultSetGuests = ps.executeQuery();
+
+                ArrayList<Guest> arGuests = new ArrayList<>();
+
+                while(resultSetGuests.next()){
+                    arGuests.add(new Guest(resultSetGuests.getString("first_name"), resultSetGuests.getString("last_name")));
+                }
+
+                ReservationGetByReservationIdResponse rsResponse = new ReservationGetByReservationIdResponse();
+                if (resultSetReservation.next()){
+                    rsResponse.setSuccess(true);
+                    rsResponse.setLocationName(resultSetReservation.getString("location_name"));
+                    rsResponse.setRoomSizeName(resultSetReservation.getString("room_size_name"));
+                    rsResponse.setWifi(resultSetReservation.getBoolean("wifi"));
+                    rsResponse.setBreakfast(resultSetReservation.getBoolean("breakfast"));
+                    rsResponse.setParking(resultSetReservation.getBoolean("parking"));
+                    rsResponse.setCheckIn(resultSetReservation.getDate("check_in").toString());
+                    rsResponse.setCheckOut(resultSetReservation.getDate("check_out").toString());
+                    rsResponse.setGuests(arGuests);
+                    return ResponseEntity.ok(rsResponse.toString());
+                }
+                else {
+                    return ResponseEntity.ok(new GenericResponse(false, "No results for reservation ID" + reservationGetByReservationIdRequest.getReservationId()).toString());
+                }
 
             }
             catch (SQLException | ClassNotFoundException ex) {
                 ex.printStackTrace();
                 return ResponseEntity.internalServerError().body(new GenericResponse(false, "An internal server error has occurred.").toString());
             }
-
         }
         else{
-            System.out.println("Authorization header: " + authorizationHeader);
-            return new ResponseEntity<>(new GenericResponse(false, unauthorizedMessage).toString(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(new GenericResponse(false, UNAUTHORIZED_MESSAGE).toString(), HttpStatus.UNAUTHORIZED);
         }
-
     }
 
-    //TODO: determine if the user needs to be logged in or not to retrieve reservations, if so, remove authorization header argument and if statement
-    public ResponseEntity<String> get(String authorizationHeader, ReservationGetRequest reservationGetRequest){
-
-        //verify token
-        if(authorizationHeader != null && authorizationService.verifyAuthorizationHeader(authorizationHeader)){
-            return null;
-        }
+    public ResponseEntity<String> getByCustomerId(String authorizationHeader, ReservationGetByUserIdRequest reservationGetByUserIdRequest){
         return null;
     }
 
