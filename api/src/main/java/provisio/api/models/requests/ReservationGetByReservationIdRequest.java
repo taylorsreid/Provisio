@@ -1,23 +1,13 @@
-package provisio.api.models.responses;
+package provisio.api.models.requests;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import lombok.AllArgsConstructor;
 import lombok.Getter;
-import lombok.Setter;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 @Getter
-@Setter
-@AllArgsConstructor
-@ResponseBody
-public class LoginResponse {
+public class ReservationGetByReservationIdRequest {
 
-    private boolean success;
-    private String jwt;
-    private String userId;
-    private String firstName;
-    private String lastName;
+    String reservationId;
 
     @Override
     public String toString() {

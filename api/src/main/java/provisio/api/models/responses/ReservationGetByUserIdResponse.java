@@ -11,13 +11,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Setter
 @AllArgsConstructor
 @ResponseBody
-public class LoginResponse {
+public class ReservationGetByUserIdResponse {
 
     private boolean success;
-    private String jwt;
-    private String userId;
-    private String firstName;
-    private String lastName;
+    private String message;
 
     @Override
     public String toString() {
@@ -27,5 +24,4 @@ public class LoginResponse {
             throw new RuntimeException(e);
         }
     }
-
 }

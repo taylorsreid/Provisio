@@ -20,7 +20,7 @@ public class LoginService {
     @ResponseBody
     public ResponseEntity<String> login(LoginRequest loginRequest){
 
-        String customerId;
+        String userId;
         String hashedPassword;
         String firstName;
         String lastName;
@@ -30,11 +30,11 @@ public class LoginService {
         //gets the actual user so that they can be compared to the alleged user
         try{
             Connection conn = ConnectionManager.getConnection();
-            PreparedStatement ps = conn.prepareStatement("SELECT `customer_id`, `hashed_password`, `first_name`, `last_name` FROM `customers` WHERE email=?;");
+            PreparedStatement ps = conn.prepareStatement("SELECT `user_id`, `hashed_password`, `first_name`, `last_name` FROM `users` WHERE email=?;");
             ps.setString(1, loginRequest.getEmail());
             ResultSet rs = ps.executeQuery();
             rs.next();
-            customerId = rs.getString("customer_id");
+            userId = rs.getString("user_id");
             hashedPassword = rs.getString("hashed_password");
             firstName = rs.getString("first_name");
             lastName = rs.getString("last_name");
@@ -54,12 +54,12 @@ public class LoginService {
             AuthorizationService authorizationService = new AuthorizationService();
 
             //create token for authorized user
-            String token = authorizationService.getTokenForCustomerId(customerId);
+            String token = authorizationService.getTokenForUserId(userId);
 
             System.out.println(firstName + " " + lastName + " has logged in.");
 
             //return positive response along with JWT bearer token
-            return new ResponseEntity<>(new LoginResponse(true, token, customerId, firstName, lastName).toString(), HttpStatus.OK);
+            return new ResponseEntity<>(new LoginResponse(true, token, userId, firstName, lastName).toString(), HttpStatus.OK);
 
         }
         //this occurs when username is found but password doesn't match
