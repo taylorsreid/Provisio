@@ -5,9 +5,9 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 
 @Getter
-public class ReservationGetRequest {
+public class ReservationGetByUserIdRequest {
 
-    String reservationId;
+    String userId;
 
     @Override
     public String toString() {

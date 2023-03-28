@@ -17,25 +17,25 @@ public class AuthorizationService {
 
     //algorithm and verifier
 //    private final Algorithm algorithm = Algorithm.HMAC256(System.getenv(ENV_VAR));
-    private final Algorithm algorithm = Algorithm.HMAC256("***REMOVED***"); //fake secret since this is proof of concept, not production
-    private final JWTVerifier verifier = JWT.require(algorithm).withIssuer(ISSUER).build();
+    private final Algorithm ALGORITHM = Algorithm.HMAC256("***REMOVED***"); //fake secret since this is proof of concept, not production
+    private final JWTVerifier VERIFIER = JWT.require(ALGORITHM).withIssuer(ISSUER).build();
 
     /**
      * Generates a token for the passed UUID of the user.  Does NOT perform verification or validation.
-     * @param customerId the UUID of the user to get a token for
+     * @param userId the UUID of the user to getByReservationId a token for
      * @return a new JWT for the passed user argument
      * @throws JWTCreationException if the token can't be created
      */
-    public String getTokenForCustomerId(String customerId) throws JWTCreationException{
+    public String getTokenForUserId(String userId) throws JWTCreationException{
 
         final int SECONDS_TO_ADD = 86400; //86400 seconds is one day
 
         return JWT.create()
                 .withIssuer(ISSUER)
-                .withSubject(customerId)
+                .withSubject(userId)
                 .withIssuedAt(Instant.now())
                 .withExpiresAt(Instant.now().plusSeconds(SECONDS_TO_ADD))
-                .sign(algorithm);
+                .sign(ALGORITHM);
     }
 
     /**
@@ -46,7 +46,7 @@ public class AuthorizationService {
     public boolean verifyAuthorizationHeader(String authorizationHeader) {
         if (authorizationHeader.startsWith("Bearer ")) {
             try {
-                verifier.verify(authorizationHeader.substring(7));
+                VERIFIER.verify(authorizationHeader.substring(7));
                 return true;
             }
             catch (JWTVerificationException e){
@@ -62,8 +62,8 @@ public class AuthorizationService {
      * @param authorizationHeader the authorization header passed.
      * @return the UUID contained in the token as a string.
      */
-    public String getCustomerIdFromAuthorizationHeader(String authorizationHeader){
-        return verifier.verify(authorizationHeader.substring(7)).getSubject();
+    public String getUserIdFromAuthorizationHeader(String authorizationHeader){
+        return VERIFIER.verify(authorizationHeader.substring(7)).getSubject();
     }
 
 }
