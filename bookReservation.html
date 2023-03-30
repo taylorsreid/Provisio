@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provisio</title>
+
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script src="./js/bookReservation.js" type="module"></script>
+    <link rel="stylesheet" href="./header.css">
+
+</head>
+<body>
+
+    <!-- insert header -->
+    <div w3-include-html="header.html"></div>
+    <script>w3.includeHTML();</script>
+    
+    <div id="root">
+
+        <form id="form" action="./confirmReservation.html">
+
+            <fieldset>
+                <legend>Choose resort:</legend>
+                <input type="radio" name="hotel" value="1|Hotel 1" id="hotel1">
+                <label for="hotel1">Hotel 1</label>
+
+                <input type="radio" name="hotel" value="2|Hotel 2" id="hotel2">
+                <label for="hotel2">Hotel 2</label>
+
+                <input type="radio" name="hotel" value="3|Hotel 3" id="hotel3">
+                <label for="hotel3">Hotel 3</label>
+
+                <input type="radio" name="hotel" value="4|Hotel 4" id="hotel4">
+                <label for="hotel4">Hotel 4</label>
+            </fieldset>
+
+            <fieldset>
+                <legend>Dates:</legend>
+                <label for="checkIn">Check in:</label>
+                <input type="date" name="checkIn" id="checkIn" min="" required>
+                <br>
+                <label for="checkOut">Check out:</label>
+                <input type="date" name="checkOut" id="checkOut" required>
+            </fieldset>
+    
+            <fieldset>
+                <legend>Room Size:</legend>
+                <input type="radio" name="roomSize" value="1|Double Full Beds" id="roomSize1">
+                <label for="room1">Double Full Beds</label>
+
+                <input type="radio" name="roomSize" value="2|Single Queen Bed" id="roomSize2">
+                <label for="room2">Single Queen Bed</label>
+
+                <input type="radio" name="roomSize" value="3|Double Queen Beds" id="roomSize3">
+                <label for="room3">Double Queen Beds</label>
+
+                <input type="radio" name="roomSize" value="4|Single King Bed" id="roomSize4">
+                <label for="room4">Single King Bed</label>
+            </fieldset>
+    
+            <fieldset>
+                <legend>Amenities:</legend>
+                <label for="wifi">WiFi</label>
+                <input type="checkbox" id="wifi" name="wifi" value="true">
+                <br>
+                <label for="breakfast">Breakfast</label>
+                <input type="checkbox" id="breakfast" name="breakfast" value="true">
+                <br>
+                <label for="parking">Parking</label>
+                <input type="checkbox" id="parking" name="parking" value="true">
+            </fieldset>
+    
+            <fieldset>
+                <legend>Number of Guests:</legend>
+                <select name="guests" id="guests" required>
+                    <option></option>
+                    <option value="1">1</option>
+                    <option value="2">2</option>
+                    <option value="3">3</option>
+                    <option value="4">4</option>
+                    <option value="5">5</option>
+                </select>
+            </fieldset>
+    
+            <div id="formMessage"></div>
+    
+            <input type="submit" value="Review Reservation" id="submitButton">
+        </div>
+        
+    </form>
+
+    <!-- insert footer -->
+    <div w3-include-html="footer.html"></div>
+    <script>w3.includeHTML();</script>
+
+</body>
+</html>

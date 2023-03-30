@@ -1,0 +1,416 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="AutoImportSettings">
+    <option name="autoReloadType" value="SELECTIVE" />
+  </component>
+  <component name="ChangeListManager">
+    <list default="true" id="ac86c9ae-18ca-4d7a-a719-bca25a9a6c6d" name="Changes" comment="Get reservation details by reservation id backend feature added.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/ReservationByUserId.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationPostRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationPostRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByReservationIdResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByReservationIdResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByUserIdResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByUserIdResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/AuthorizationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/AuthorizationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/ReservationService.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Interface" />
+        <option value="Class" />
+      </list>
+    </option>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_BRANCH_BY_REPOSITORY">
+      <map>
+        <entry key="$PROJECT_DIR$" value="1ff28bd9b9f390d157a9bdab839bf076dc3b1894" />
+      </map>
+    </option>
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+    <option name="RESET_MODE" value="HARD" />
+  </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">
+    <option name="selectedUrlAndAccountId">
+      <UrlAndAccount>
+        <option name="accountId" value="0157dbae-ef76-47f9-bf2d-eba14b32c84b" />
+        <option name="url" value="https://github.com/taylorsreid/Provisio.git" />
+      </UrlAndAccount>
+    </option>
+  </component>
+  <component name="JpbToolWindowState">
+    <option name="isToolWindowVisible" value="false" />
+  </component>
+  <component name="MarkdownSettingsMigration">
+    <option name="stateVersion" value="1" />
+  </component>
+  <component name="MavenImportPreferences">
+    <option name="generalSettings">
+      <MavenGeneralSettings>
+        <option name="mavenHome" value="Use Maven wrapper" />
+        <option name="useMavenConfig" value="true" />
+      </MavenGeneralSettings>
+    </option>
+    <option name="importingSettings">
+      <MavenImportingSettings>
+        <option name="workspaceImportEnabled" value="true" />
+      </MavenImportingSettings>
+    </option>
+  </component>
+  <component name="ProblemsViewState">
+    <option name="selectedTabId" value="CurrentFile" />
+  </component>
+  <component name="ProjectId" id="2Kq1s4RTUg7kTn0vZ6hlAoHGyb0" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;Downloaded.Files.Path.Enabled&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Annotations&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.JavaDocs&quot;: &quot;false&quot;,
+    &quot;Repository.Attach.Sources&quot;: &quot;false&quot;,
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;last_opened_file_path&quot;: &quot;L:/Provisio/api&quot;,
+    &quot;project.structure.last.edited&quot;: &quot;Modules&quot;,
+    &quot;project.structure.proportion&quot;: &quot;0.15&quot;,
+    &quot;project.structure.side.proportion&quot;: &quot;0.2&quot;,
+    &quot;run.code.analysis.last.selected.profile&quot;: &quot;pProject Default&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;project.propVCSSupport.DirectoryMappings&quot;
+  },
+  &quot;keyToStringList&quot;: {
+    &quot;com.intellij.ide.scratch.ScratchImplUtil$2/New Scratch File&quot;: [
+      &quot;JAVA&quot;
+    ]
+  }
+}</component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="N:\tip-tracker\api\src\main\java\com\tiptracker\api\user\register" />
+      <recent name="N:\tip-tracker\api\src\main\java\com\tiptracker\api" />
+    </key>
+    <key name="MoveClassesOrPackagesDialog.RECENTS_KEY">
+      <recent name="provisio.api.services" />
+      <recent name="provisio.api.db" />
+      <recent name="provisio.api.responses" />
+      <recent name="provisio.api.models" />
+      <recent name="com.tiptracker.api" />
+    </key>
+    <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="provisio.api.models.responses" />
+      <recent name="provisio.api.models.requests" />
+      <recent name="provisio.api.authentication" />
+      <recent name="com.tiptracker.api.user" />
+      <recent name="com.tiptracker.api" />
+    </key>
+  </component>
+  <component name="RunManager" selected="Java Scratch.Scratch">
+    <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <option name="MAIN_CLASS_NAME" value="provisio.api.Test" />
+      <module name="api" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="provisio.api.responses.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="Application" factoryName="Application">
+      <option name="ALTERNATIVE_JRE_PATH" value="17" />
+      <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JarApplication">
+      <option name="ALTERNATIVE_JRE_PATH" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Scratch" type="Java Scratch" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Scratch" />
+      <option name="SCRATCH_FILE_URL" value="file://$APPLICATION_CONFIG_DIR$/scratches/scratch.java" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="JetRunConfigurationType">
+      <module name="tip-tracker" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration default="true" type="KotlinStandaloneScriptRunConfigurationType">
+      <module name="tip-tracker" />
+      <option name="filePath" />
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Java Scratch.Scratch" />
+        <item itemvalue="Application.Test" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="ac86c9ae-18ca-4d7a-a719-bca25a9a6c6d" name="Changes" comment="" />
+      <created>1674687503506</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1674687503506</updated>
+    </task>
+    <task id="LOCAL-00001" summary="Switched to java and have post working.">
+      <created>1674703348361</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1674703348361</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Registration API now returns a JWT.  Split backend and frontend.">
+      <created>1674731974071</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1674731974071</updated>
+    </task>
+    <task id="LOCAL-00003" summary="Going to branch and attempt switching to MongoDB.">
+      <created>1674855338592</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1674855338592</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Going to branch and attempt switching to MongoDB.">
+      <created>1674855357669</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1674855357669</updated>
+    </task>
+    <task id="LOCAL-00005" summary="Registration is working flawlessly with MongoDB.  Move on to login next and follow registration example.  Make sure to include the JWT in the authorization header.">
+      <created>1674912654888</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1674912654888</updated>
+    </task>
+    <task id="LOCAL-00006" summary="Added the ability to add one or multiple jobs during user registration.">
+      <created>1674915943172</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1674915943172</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Final MongoDB commit. Switching back to SQL because nested collections will be incredibly slow.">
+      <created>1675162900299</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1675162900299</updated>
+    </task>
+    <task id="LOCAL-00008" summary="Switching back to MySQL.">
+      <created>1675191655032</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1675191655032</updated>
+    </task>
+    <task id="LOCAL-00009" summary="Switch back to MySQL successful.  Registration is working.">
+      <created>1675196961703</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1675196961703</updated>
+    </task>
+    <task id="LOCAL-00010" summary="Added file to security subpackage so that it will push the subpackage.">
+      <created>1675205242308</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1675205242308</updated>
+    </task>
+    <task id="LOCAL-00011" summary="Added new dependencies for OAUTH2">
+      <created>1675309801943</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1675309801943</updated>
+    </task>
+    <task id="LOCAL-00012" summary="Post and Get shifts are sort of working.  Removed OAuth2 because it's way more than my use case needs.">
+      <created>1675342941994</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1675342941994</updated>
+    </task>
+    <task id="LOCAL-00013" summary="Fixed Jackson not parsing dates correctly.">
+      <created>1675343697800</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1675343697800</updated>
+    </task>
+    <task id="LOCAL-00014" summary="Switched to HttpStatus.OK when nothing is found because NO_CONTENT doesn't return JSON.">
+      <created>1675344444469</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1675344444469</updated>
+    </task>
+    <task id="LOCAL-00015" summary="Off by one day bug in shift is fixed, but it is still not doing date math correctly.">
+      <created>1675369736744</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1675369736744</updated>
+    </task>
+    <task id="LOCAL-00016" summary="API mostly functional, but going to attempt to revert to using JSON objects for requests.">
+      <created>1679415926505</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1679415926505</updated>
+    </task>
+    <task id="LOCAL-00017" summary="API registers, logs in and out, and takes new reservations. A few demo HTML pages are in place.">
+      <created>1679440548620</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1679440548620</updated>
+    </task>
+    <task id="LOCAL-00018" summary="API mostly functional, but going to attempt to revert to using JSON objects for requests.">
+      <created>1679440556738</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1679440556738</updated>
+    </task>
+    <task id="LOCAL-00019" summary="API mostly functional, but going to attempt to revert to using JSON objects for requests.">
+      <created>1679440565510</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1679440565510</updated>
+    </task>
+    <task id="LOCAL-00020" summary="Moved email and password validation back to the backend. Backend now responds with reasons for registration failure and frontend simply displays backend's message.  Fixed API calls in register.js  Register service fixed.  SQL creation script updated.">
+      <created>1679831163598</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1679831163598</updated>
+    </task>
+    <task id="LOCAL-00021" summary="Get reservation details by reservation id backend feature added.">
+      <created>1680024245561</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1680024245561</updated>
+    </task>
+    <task id="LOCAL-00022" summary="Get reservation details by reservation id backend feature added.">
+      <created>1680024301194</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1680024301194</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Get reservation details by reservation id backend feature added.">
+      <created>1680024331800</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1680024331800</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
+    <servers />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State>
+              <option name="FILTERS">
+                <map>
+                  <entry key="branch">
+                    <value>
+                      <list>
+                        <option value="api-option" />
+                      </list>
+                    </value>
+                  </entry>
+                </map>
+              </option>
+            </State>
+          </value>
+        </entry>
+      </map>
+    </option>
+    <option name="RECENT_FILTERS">
+      <map>
+        <entry key="Branch">
+          <value>
+            <list>
+              <RecentGroup>
+                <option name="FILTER_VALUES">
+                  <option value="mongodb" />
+                </option>
+              </RecentGroup>
+            </list>
+          </value>
+        </entry>
+      </map>
+    </option>
+  </component>
+  <component name="VcsManagerConfiguration">
+    <ignored-roots>
+      <path value="$PROJECT_DIR$/../" />
+      <path value="$PROJECT_DIR$" />
+    </ignored-roots>
+    <MESSAGE value="Switched to java and have post working." />
+    <MESSAGE value="Registration API now returns a JWT.  Split backend and frontend." />
+    <MESSAGE value="Going to branch and attempt switching to MongoDB." />
+    <MESSAGE value="Registration is working flawlessly with MongoDB.  Move on to login next and follow registration example.  Make sure to include the JWT in the authorization header." />
+    <MESSAGE value="Added the ability to add one or multiple jobs during user registration." />
+    <MESSAGE value="Final MongoDB commit. Switching back to SQL because nested collections will be incredibly slow." />
+    <MESSAGE value="Switching back to MySQL." />
+    <MESSAGE value="Switch back to MySQL successful.  Registration is working." />
+    <MESSAGE value="Added a simplified JWT library to POM." />
+    <MESSAGE value="Added file to security subpackage so that it will push the subpackage." />
+    <MESSAGE value="Added new dependencies for OAUTH2" />
+    <MESSAGE value="Post and Get shifts are sort of working.  Removed OAuth2 because it's way more than my use case needs." />
+    <MESSAGE value="Fixed Jackson not parsing dates correctly." />
+    <MESSAGE value="Switched to HttpStatus.OK when nothing is found because NO_CONTENT doesn't return JSON." />
+    <MESSAGE value="Off by one day bug in shift is fixed, but it is still not doing date math correctly." />
+    <MESSAGE value="API registers, logs in and out, and takes new reservations. A few demo HTML pages are in place." />
+    <MESSAGE value="API mostly functional, but going to attempt to revert to using JSON objects for requests." />
+    <MESSAGE value="Moved email and password validation back to the backend. Backend now responds with reasons for registration failure and frontend simply displays backend's message.  Fixed API calls in register.js  Register service still failing due to foreign key constraint." />
+    <MESSAGE value="Moved email and password validation back to the backend. Backend now responds with reasons for registration failure and frontend simply displays backend's message.  Fixed API calls in register.js  Register service fixed.  SQL creation script updated." />
+    <MESSAGE value="Get reservation details by reservation id backend feature added." />
+    <option name="LAST_COMMIT_MESSAGE" value="Get reservation details by reservation id backend feature added." />
+  </component>
+</project>
