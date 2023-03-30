@@ -6,9 +6,9 @@ provisio/api/ApiApplication.class
 provisio/api/models/requests/RegisterRequest.class
 provisio/api/models/responses/ReservationGetByUserIdResponse.class
 provisio/api/services/LoginService.class
+provisio/api/models/IndividualReservation.class
 provisio/api/models/responses/ReservationGetByReservationIdResponse.class
 provisio/api/models/responses/LoginResponse.class
-provisio/api/models/ReservationByUserId.class
 provisio/api/models/requests/ReservationGetByReservationIdRequest.class
 provisio/api/models/responses/GenericResponse.class
 provisio/api/services/ReservationService.class
