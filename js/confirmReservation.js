@@ -32,7 +32,7 @@ document.getElementById("parking").insertAdjacentHTML("beforeend", parking);
 
 document.getElementById("submitButton").addEventListener("click", function(){
 
-    fetch(apiLocation + `reservations/new`, {
+    fetch(apiLocation + 'reservation', {
         method : "POST",
         headers: {
             'Content-Type': 'application/json',

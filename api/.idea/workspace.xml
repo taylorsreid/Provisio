@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac86c9ae-18ca-4d7a-a719-bca25a9a6c6d" name="Changes" comment="Minor changes to HTML,">
+    <list default="true" id="ac86c9ae-18ca-4d7a-a719-bca25a9a6c6d" name="Changes" comment="Added catching a bad request to ReservationService.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/ReservationService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -352,7 +351,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680147763039</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="Added catching a bad request to ReservationService.">
+      <created>1680154162080</created>
+      <option name="number" value="00026" />
+      <option name="presentableId" value="LOCAL-00026" />
+      <option name="project" value="LOCAL" />
+      <updated>1680154162080</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -420,6 +426,7 @@
     <MESSAGE value="Get reservation details by reservation id backend feature added." />
     <MESSAGE value="Fix line endings (again, note to self, stop pushing from Windows cmd), removed login and registration sending user UUID since it's embedded in the JWT, refactored RegisterService to make less SQL connection calls." />
     <MESSAGE value="Added documentation to .java files." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added documentation to .java files." />
+    <MESSAGE value="Added catching a bad request to ReservationService." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added catching a bad request to ReservationService." />
   </component>
 </project>
