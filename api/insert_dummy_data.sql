@@ -31,7 +31,7 @@ INSERT INTO `guests` (guest_id, reservation_id, first_name, last_name)
 VALUES(2, '046be693-9145-4d45-a63d-034ae708725a', 'Jane', 'User');
 
 INSERT INTO `guests` (guest_id, reservation_id, first_name, last_name)
-VALUES(3, '179dc8db-a8ae-423e-9a74-e42a44900e65', 'Test', 'User Sr.');
+VALUES(3, '179dc8db-a8ae-423e-9a74-e42a44900e65', 'Test', 'User Jr.');
 INSERT INTO `guests` (guest_id, reservation_id, first_name, last_name)
 VALUES(4, '179dc8db-a8ae-423e-9a74-e42a44900e65', 'Jill', 'User');
 
