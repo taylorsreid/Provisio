@@ -7,18 +7,13 @@ if(Cookies.get("loggedIn") !== "true"){
     setTimeout(function(){window.location.href = "./login.html"}, 3000); //callback to wait 3 seconds then redirect
 }
 
-let params = new URLSearchParams(document.location.search);
-const wifi = params.get("wifi");
-const breakfast = params.get("breakfast");
-const parking = params.get("parking");
-const guests = params.get("guests");
-const location= params.get("location");
-const roomSize = params.get("roomSize");
-const checkInIsoDate = params.get("checkIn");
-const checkOutIsoDate = params.get("checkOut");
+// const checkOutIsoDate = params.get("checkOut");
+// const checkInLocalDate = checkInIsoDate.split("-")[1] + "/" + checkInIsoDate.split("-")[2] + "/" + checkInIsoDate.split("-")[0];
+// const checkOutLocalDate = checkOutIsoDate.split("-")[1] + "/" + checkOutIsoDate.split("-")[2] + "/" + checkOutIsoDate.split("-")[0];
 
-const checkInLocalDate = checkInIsoDate.split("-")[1] + "/" + checkInIsoDate.split("-")[2] + "/" + checkInIsoDate.split("-")[0];
-const checkOutLocalDate = checkOutIsoDate.split("-")[1] + "/" + checkOutIsoDate.split("-")[2] + "/" + checkOutIsoDate.split("-")[0]
+let requestBody = JSON.parse(sessionStorage.getItem("requestBody"));
+const checkInLocalDate = requestBody.checkIn.split("-")[1] + "/" + requestBody.checkIn.split("-")[2] + "/" + requestBody.checkIn.split("-")[0];
+const checkOutLocalDate = requestBody.checkOut.split("-")[1] + "/" + requestBody.checkOut.split("-")[2] + "/" + requestBody.checkOut.split("-")[0];
 
 document.getElementById("location").insertAdjacentHTML("beforeend", location)
 document.getElementById("checkIn").insertAdjacentHTML("beforeend", checkInLocalDate);
@@ -27,12 +22,10 @@ document.getElementById("roomSize").insertAdjacentHTML("beforeend", roomSize);
 document.getElementById("wifi").insertAdjacentHTML("beforeend", wifi);
 document.getElementById("breakfast").insertAdjacentHTML("beforeend", breakfast);
 document.getElementById("parking").insertAdjacentHTML("beforeend", parking);
-// document.getElementById("guests").insertAdjacentHTML("beforeend", guests);
-
 
 document.getElementById("submitButton").addEventListener("click", function(){
 
-    fetch(apiLocation + 'reservation', {
+    fetch(apiLocation + 'reservations/new', {
         method : "POST",
         headers: {
             'Content-Type': 'application/json',

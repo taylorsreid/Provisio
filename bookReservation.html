@@ -19,11 +19,11 @@
     
     <div id="root">
 
-        <form id="form" action="./confirmReservation.html">
+        <form action="javascript:void()" id="form">
 
             <div>
-                <legend>Choose resort:</legend>
-                <input type="radio" name="location" value="Hotel 1" id="hotel1">
+                <div>Choose resort:</div>
+                <input type="radio" name="location" value="Hotel 1" id="hotel1" required>
                 <label for="hotel1">Hotel 1</label>
 
                 <input type="radio" name="location" value="Hotel 2" id="hotel2">
@@ -39,7 +39,7 @@
             <br>
 
             <div>
-                <legend>Dates:</legend>
+                <div>Dates:</div>
                 <label for="checkIn">Check in:</label>
                 <input type="date" name="checkIn" id="checkIn" min="" required>
                 <br>
@@ -50,7 +50,7 @@
             <br>
     
             <div>
-                <legend>Room Size:</legend>
+                <div>Room Size:</div>
                 <input type="radio" name="roomSize" value="Double Full Beds" id="room1">
                 <label for="room1">Double Full Beds</label>
 
@@ -67,7 +67,7 @@
             <br>
     
             <div>
-                <legend>Amenities:</legend>
+                <div>Amenities:</div>
                 <label for="wifi">WiFi</label>
                 <input type="checkbox" id="wifi" name="wifi" value="true">
                 <br>
@@ -84,33 +84,39 @@
 
                 <div id="guest1" class="guest">
                     <label>Guest 1:</label>
-                    <input type="text" name="guest1FirstName" placeholder="First Name" required>
-                    <input type="text" name="guest1LastName" placeholder="Last Name" required>
+                    <input type="text" name="guest1FirstName" id="guest1FirstName" placeholder="First Name" required>
+                    <input type="text" name="guest1LastName" id="guest1LastName" placeholder="Last Name" required>
                 </div>
 
-                <div id="guest2" class="guest">
+                <div id="guest2" class="guest" hidden>
                     <label>Guest 2:</label>
-                    <input type="text" name="guest2FirstName" placeholder="First Name">
-                    <input type="text" name="guest2LastName" placeholder="Last Name">
+                    <input type="text" name="guest2FirstName" id="guest2FirstName" placeholder="First Name">
+                    <input type="text" name="guest2LastName" id="guest2LastName" placeholder="Last Name">
+                    <input type="button" value="Remove" id="removeGuestButton2">
                 </div>
                 
-                <div id="guest3" class="guest">
+                <div id="guest3" class="guest" hidden>
                     <label>Guest 3:</label>
-                    <input type="text" name="guest3FirstName" placeholder="First Name">
-                    <input type="text" name="guest3LastName" placeholder="Last Name">
+                    <input type="text" name="guest3FirstName" id="guest3FirstName" placeholder="First Name">
+                    <input type="text" name="guest3LastName" id="guest3LastName" placeholder="Last Name">
+                    <input type="button" value="Remove" id="removeGuestButton3">
                 </div>
 
-                <div id="guest4" class="guest">
+                <div id="guest4" class="guest" hidden>
                     <label>Guest 4:</label>
-                    <input type="text" name="guest4FirstName" placeholder="First Name">
-                    <input type="text" name="guest4LastName" placeholder="Last Name">
+                    <input type="text" name="guest4FirstName" id="guest4FirstName" placeholder="First Name">
+                    <input type="text" name="guest4LastName" id="guest4LastName" placeholder="Last Name">
+                    <input type="button" value="Remove" id="removeGuestButton4">
                 </div>
 
-                <div id="guest5" class="guest">
+                <div id="guest5" class="guest" hidden>
                     <label>Guest 5:</label>
-                    <input type="text" name="guest5FirstName" placeholder="First Name">
-                    <input type="text" name="guest5LastName" placeholder="Last Name">
+                    <input type="text" name="guest5FirstName" id="guest5FirstName" placeholder="First Name">
+                    <input type="text" name="guest5LastName" id="guest5LastName" placeholder="Last Name">
+                    <input type="button" value="Remove" id="removeGuestButton5">
                 </div>
+
+                <input type="button" value="Add Another Guest" id="addGuestButton">
 
             </div>
 
@@ -121,7 +127,8 @@
             <br>
     
             <input type="submit" value="Review Your Reservation" id="submitButton">
-        </div>
+        </form>
+    </div>
 
 
     <!-- insert footer -->

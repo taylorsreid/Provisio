@@ -4,10 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac86c9ae-18ca-4d7a-a719-bca25a9a6c6d" name="Changes" comment="Added crossorigin annotations.">
+    <list default="true" id="ac86c9ae-18ca-4d7a-a719-bca25a9a6c6d" name="Changes" comment="Changed all instances of the word &quot;location&quot; to &quot;hotel&quot; because apparently the former is a reserved word in Javascript lol.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create_db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/create_db.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/insert_dummy_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/insert_dummy_data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/IndividualReservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/IndividualReservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationPostRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationPostRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByReservationIdResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByReservationIdResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/ReservationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bookReservation.html" beforeDir="false" afterPath="$PROJECT_DIR$/../bookReservation.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../js/apiLocation.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/apiLocation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../js/bookReservation.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/bookReservation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../js/confirmReservation.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/confirmReservation.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -367,7 +375,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680155448348</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="Fixed crossorigin again lol.">
+      <created>1680156064695</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1680156064695</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -413,7 +428,6 @@
       <path value="$PROJECT_DIR$/../" />
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Switched to java and have post working." />
     <MESSAGE value="Registration API now returns a JWT.  Split backend and frontend." />
     <MESSAGE value="Going to branch and attempt switching to MongoDB." />
     <MESSAGE value="Registration is working flawlessly with MongoDB.  Move on to login next and follow registration example.  Make sure to include the JWT in the authorization header." />
@@ -437,6 +451,8 @@
     <MESSAGE value="Added documentation to .java files." />
     <MESSAGE value="Added catching a bad request to ReservationService." />
     <MESSAGE value="Added crossorigin annotations." />
-    <option name="LAST_COMMIT_MESSAGE" value="Added crossorigin annotations." />
+    <MESSAGE value="Fixed crossorigin again lol." />
+    <MESSAGE value="Changed all instances of the word &quot;location&quot; to &quot;hotel&quot; because apparently the former is a reserved word in Javascript lol." />
+    <option name="LAST_COMMIT_MESSAGE" value="Changed all instances of the word &quot;location&quot; to &quot;hotel&quot; because apparently the former is a reserved word in Javascript lol." />
   </component>
 </project>
