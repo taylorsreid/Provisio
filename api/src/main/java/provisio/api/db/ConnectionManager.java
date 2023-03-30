@@ -6,6 +6,11 @@ import java.sql.SQLException;
 
 public class ConnectionManager {
 
+    /**
+     *
+     * @return a preconfigured connection object for the Provisio project's database.
+     * @throws ClassNotFoundException when the JDBC driver is not in your classpath.
+     */
     public static Connection getConnection() throws ClassNotFoundException {
 
         //connection details, easily modifiable

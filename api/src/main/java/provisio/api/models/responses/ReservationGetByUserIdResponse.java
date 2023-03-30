@@ -9,6 +9,10 @@ import provisio.api.models.ReservationByUserId;
 
 import java.util.ArrayList;
 
+/**
+ * Model object for a JSON get reservations by user ID request response body.
+ * For use in the customer loyalty points tracking page, requirement 10.
+ */
 @Getter
 @Setter
 @ResponseBody

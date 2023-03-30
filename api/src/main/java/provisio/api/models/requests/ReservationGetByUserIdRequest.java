@@ -4,6 +4,10 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 
+/**
+ * Model object for a JSON get reservations by user ID request body.
+ * For use in the customer loyalty points tracking page, requirement 10.
+ */
 @Getter
 public class ReservationGetByUserIdRequest {
 

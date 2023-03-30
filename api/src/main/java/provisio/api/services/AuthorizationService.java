@@ -13,11 +13,13 @@ public class AuthorizationService {
 
     //token configuration
     private final String ISSUER = "provisio"; //issuer name
-//    private final String ENV_VAR = "HMAC256"; //name of secret key stored in system environment variables
 
-    //algorithm and verifier
-//    private final Algorithm algorithm = Algorithm.HMAC256(System.getenv(ENV_VAR));
-    private final Algorithm ALGORITHM = Algorithm.HMAC256("Capstone!2023"); //fake secret since this is proof of concept, not production
+    /*
+    Normally the secret would be stored in a .env file or a system variable, but since this is a school project,
+    and not a production application, it is being stored in a string literal to ensure that all project members have
+    access to it and that it is included in git clones.
+     */
+    private final Algorithm ALGORITHM = Algorithm.HMAC256("Capstone!2023");
     private final JWTVerifier VERIFIER = JWT.require(ALGORITHM).withIssuer(ISSUER).build();
 
     /**
@@ -28,8 +30,10 @@ public class AuthorizationService {
      */
     public String getTokenForUserId(String userId) throws JWTCreationException{
 
+        //validity of token
         final int SECONDS_TO_ADD = 86400; //86400 seconds is one day
 
+        //create and return a JWT
         return JWT.create()
                 .withIssuer(ISSUER)
                 .withSubject(userId)
@@ -44,15 +48,15 @@ public class AuthorizationService {
      * @return boolean true if the token is valid, false if it is not
      */
     public boolean verifyAuthorizationHeader(String authorizationHeader) {
-        if (authorizationHeader.startsWith("Bearer ")) {
-            try {
+        if (authorizationHeader.startsWith("Bearer ")) { //check that authorization header is correctly formatted
+            try { //verify that authorization header was signed with the project "secret"
                 VERIFIER.verify(authorizationHeader.substring(7));
                 return true;
             }
             catch (JWTVerificationException e){
                 return false;
             }
-        } else {
+        } else { //when token is invalid
             return false;
         }
     }

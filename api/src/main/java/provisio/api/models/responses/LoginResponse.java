@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * Model object for a JSON login request response body.
+ */
 @Getter
 @Setter
 @AllArgsConstructor
@@ -15,7 +18,7 @@ public class LoginResponse {
 
     private boolean success;
     private String jwt;
-    private String userId;
+//    private String userId;
     private String firstName;
     private String lastName;
 
