@@ -5,18 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac86c9ae-18ca-4d7a-a719-bca25a9a6c6d" name="Changes" comment="Changed all instances of the word &quot;location&quot; to &quot;hotel&quot; because apparently the former is a reserved word in Javascript lol.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/db/ConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/db/ConnectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bookReservation.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../confirmReservation.html" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../js/apiLocation.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../js/bookReservation.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../js/confirmReservation.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../js/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../js/login.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../js/logout.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../js/register.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/../register.html" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/../create_db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../create_db.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../insert_dummy_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../insert_dummy_data.sql" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
