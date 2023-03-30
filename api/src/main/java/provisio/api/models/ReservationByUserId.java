@@ -1,28 +1,21 @@
-package provisio.api.models.responses;
+package provisio.api.models;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.bind.annotation.ResponseBody;
-import provisio.api.models.Guest;
-
-import java.util.ArrayList;
 
 @Getter
 @Setter
 @ResponseBody
-public class ReservationGetByReservationIdResponse {
+public class ReservationByUserId {
 
-    private boolean success;
-    private String location;
-    private String roomSize;
-    ArrayList<Guest> guests;
-    boolean wifi;
-    boolean breakfast;
-    boolean parking;
+    private String reservationId;
+    String location;
     String checkIn;
     String checkOut;
+    int pointsEarned;
 
     @Override
     public String toString() {

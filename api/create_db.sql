@@ -1,8 +1,18 @@
+-- Kendrick Baker
+-- Julia Delightly
+-- Nathan Mausbach
+-- Jessica Phan
+-- Taylor Reid
+-- 3/29/2023 
+-- Module 5.1
+
+-- removes DB if it already exists and will create a clean DB
 DROP DATABASE IF EXISTS `provisio`;
 
 -- create db
 CREATE DATABASE `provisio` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci */;
 
+-- select which DB to use
 USE `provisio`;
 
 -- create customers table
@@ -37,16 +47,16 @@ CREATE TABLE `reservations` (
   `check_in` date NOT NULL,
   `check_out` date NOT NULL,
   `room_size_id` tinyint NOT NULL,
-  `wifi` tinyint DEFAULT NULL,
-  `breakfast` tinyint DEFAULT NULL,
-  `parking` tinyint DEFAULT NULL,
+  `wifi` boolean DEFAULT NULL,
+  `breakfast` boolean DEFAULT NULL,
+  `parking` boolean DEFAULT NULL,
   PRIMARY KEY (`reservation_id`),
   FOREIGN KEY (`user_id`) REFERENCES users(`user_id`),
   FOREIGN KEY (`location_id`) REFERENCES locations(`location_id`),
   FOREIGN KEY (`room_size_id`) REFERENCES room_sizes(`room_size_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- the purpose of this function is to make it easier reservation information to query from Java
+-- the purpose of this view is to make it easier to query from Java
 CREATE OR REPLACE VIEW `reservations_view` AS SELECT 
 `reservation_id`,
 `user_id`,
@@ -61,7 +71,6 @@ CREATE OR REPLACE VIEW `reservations_view` AS SELECT
 `parking`,
 (DATEDIFF(`check_out`, `check_in`) * 150) AS `points_earned` FROM `reservations`;
 -- query for total points earned like this: SELECT SUM(`points_earned`)FROM `reservations_view` WHERE `user_id` = "f81c3fe5-cc03-11ed-a4d2-1735c641f2fc";
--- do guest count, guest names, and guest fees in Java because I don't know how to do them in SQL lol
 
 CREATE TABLE `guests` (
   `guest_id` bigint NOT NULL AUTO_INCREMENT,
@@ -72,17 +81,16 @@ CREATE TABLE `guests` (
   FOREIGN KEY (`reservation_id`) REFERENCES reservations(`reservation_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- insert hotel data
+-- dummy data is created in a separate file, everything in this file is necessary for the database and API to function
+
+-- insert necessary location data
 INSERT INTO `locations` (`location_id`, `location_name`) VALUES (1, "Hotel 1"); -- names need to be changed
 INSERT INTO `locations` (`location_id`, `location_name`) VALUES (2, "Hotel 2");
 INSERT INTO `locations` (`location_id`, `location_name`) VALUES (3, "Hotel 3");
 INSERT INTO `locations` (`location_id`, `location_name`) VALUES (4, "Hotel 4");
 
--- insert room sizes talbes
+-- insert necessary room sizes table
 INSERT INTO `room_sizes` (`room_size_id`, `room_size_name`) VALUES (1, "Double Full Beds");
 INSERT INTO `room_sizes` (`room_size_id`, `room_size_name`) VALUES (2, "Single Queen Bed");
 INSERT INTO `room_sizes` (`room_size_id`, `room_size_name`) VALUES (3, "Double Queen Beds");
 INSERT INTO `room_sizes` (`room_size_id`, `room_size_name`) VALUES (4, "Single King Bed");
-
--- create test user
-INSERT INTO users (user_id, email, first_name, last_name, hashed_password) VALUES('f81c3fe5-cc03-11ed-a4d2-1735c641f2fc', 'test@example.com', 'Test', 'User', '$2a$10$W9A1VVvL4OoqaTvH3dq6sOdq8D2xQl2NR4nsIrdiX24DhZNc38n7G');
