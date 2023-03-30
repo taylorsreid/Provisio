@@ -22,7 +22,7 @@ public class AuthorizationService {
 
     /**
      * Generates a token for the passed UUID of the user.  Does NOT perform verification or validation.
-     * @param userId the UUID of the user to getByReservationId a token for
+     * @param userId the UUID of the user to getReservationByReservationId a token for
      * @return a new JWT for the passed user argument
      * @throws JWTCreationException if the token can't be created
      */

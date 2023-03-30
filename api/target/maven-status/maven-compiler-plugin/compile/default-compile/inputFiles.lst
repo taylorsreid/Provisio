@@ -7,6 +7,7 @@
 /var/www/html/Provisio/api/src/main/java/provisio/api/models/responses/GenericResponse.java
 /var/www/html/Provisio/api/src/main/java/provisio/api/MainController.java
 /var/www/html/Provisio/api/src/main/java/provisio/api/services/AuthorizationService.java
+/var/www/html/Provisio/api/src/main/java/provisio/api/models/ReservationByUserId.java
 /var/www/html/Provisio/api/src/main/java/provisio/api/models/responses/ReservationGetByUserIdResponse.java
 /var/www/html/Provisio/api/src/main/java/provisio/api/services/RegisterService.java
 /var/www/html/Provisio/api/src/main/java/provisio/api/models/requests/ReservationPostRequest.java

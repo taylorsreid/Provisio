@@ -9,10 +9,10 @@ import java.util.List;
 @Getter
 public class ReservationPostRequest {
 
-    String locationName;
+    String location;
     String checkIn; //Use a string, not a date.  Java and MySQL have compatibility issues between their date objects but strings always work.
     String checkOut; //Use a string, not a date.  Java and MySQL have compatibility issues between their date objects but strings always work.
-    int roomSizeId;
+    String roomSize;
     boolean wifi;
     boolean breakfast;
     boolean parking;

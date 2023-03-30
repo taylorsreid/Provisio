@@ -2,7 +2,6 @@ package provisio.api;
 
 import org.springframework.http.*;
 import provisio.api.models.requests.*;
-import provisio.api.models.responses.GenericResponse;
 import provisio.api.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -29,7 +28,7 @@ public class MainController {
         return loginService.login(loginRequest);
     }
 
-    @PostMapping(path = "/reservation", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/reservations/new", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<String> createReservation(
             @RequestHeader(value = HttpHeaders.AUTHORIZATION) String authorizationHeader,
             @RequestBody ReservationPostRequest reservationPostRequest
@@ -39,22 +38,14 @@ public class MainController {
 
     //authorization header is optional for now because it's not listed in the project requirements that the user be
     //logged in to retrieve by reservation ID
-    @GetMapping(path = "/reservation", produces = MediaType.APPLICATION_JSON_VALUE)
-    public @ResponseBody ResponseEntity<String> getReservation(
-            @RequestHeader(value = HttpHeaders.AUTHORIZATION, required = false) String authorizationHeader,
-            @RequestBody(required = false) ReservationGetByReservationIdRequest reservationGetByReservationIdRequest,
-            @RequestBody(required = false) ReservationGetByUserIdRequest reservationGetByUserIdRequest
-            ){
+    @GetMapping(path = "/reservations/getByReservationId", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<String> getReservationByReservationId(@RequestBody ReservationGetByReservationIdRequest reservationGetByReservationIdRequest){
+        return reservationService.getByReservationId(reservationGetByReservationIdRequest);
+    }
 
-        if (reservationGetByUserIdRequest != null) {
-            return reservationService.getByCustomerId(authorizationHeader, reservationGetByUserIdRequest);
-        }
-        if (reservationGetByReservationIdRequest != null) {
-            return reservationService.getByReservationId(authorizationHeader, reservationGetByReservationIdRequest);
-        }
-
-        return ResponseEntity.badRequest().body(new GenericResponse(false, "BAD REQUEST").toString());
-
+    @GetMapping(path = "/reservations/getByUserId", produces = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<String> getReservationByUserId(@RequestHeader(value = HttpHeaders.AUTHORIZATION) String authorizationHeader){
+            return reservationService.getByUserId(authorizationHeader);
     }
 
 //    @RestControllerAdvice
