@@ -90,7 +90,7 @@ public class RegisterService {
 
                     System.out.println(registerRequest.getFirstName() + " " + registerRequest.getLastName() + " has created an account.");
 
-                    //return a login response with token if the account creation was successful
+                    //close connection and return a login response with token if the account creation was successful
                     conn.close();
                     return loginService.login(new LoginRequest(registerRequest.getEmail(), registerRequest.getPassword()));
                 }
@@ -117,7 +117,7 @@ public class RegisterService {
                     message.append(" Last name cannot be blank.");
                 }
 
-                //if account creation was unsuccessful, return reasons why
+                //if account creation was unsuccessful, close connection and return reasons why
                 conn.close();
                 return ResponseEntity.ok().body(new GenericResponse(false, message.toString()).toString());
             }

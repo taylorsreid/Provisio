@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Getter
 @Setter
 @ResponseBody
-public class ReservationByUserId {
+public class IndividualReservation {
 
     private String reservationId;
     String location;

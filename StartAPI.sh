@@ -1,3 +1,3 @@
 #!/bin/bash
-cd api
+cd api || exit
 sh ./mvnw spring-boot:run

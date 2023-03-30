@@ -6,7 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import provisio.api.db.ConnectionManager;
 import provisio.api.models.Guest;
-import provisio.api.models.ReservationByUserId;
+import provisio.api.models.IndividualReservation;
 import provisio.api.models.requests.ReservationGetByReservationIdRequest;
 import provisio.api.models.requests.ReservationPostRequest;
 import provisio.api.models.responses.GenericResponse;
@@ -191,21 +191,25 @@ public class ReservationService {
                 ps.setString(1, userId);
                 ResultSet reservationsRs = ps.executeQuery();
 
+                //create response objects to be added to
                 ReservationGetByUserIdResponse response = new ReservationGetByUserIdResponse();
-                ArrayList<ReservationByUserId> reservationArrayList = new ArrayList<>();
+                ArrayList<IndividualReservation> individualReservationArrayList = new ArrayList<>();
 
+                //loop through result set and generate individual reservation objects then add them to the array list
+                //that will be returned inside the ReservationGetByUserIdResponse object
                 while (reservationsRs.next()){
                     response.setSuccess(true);
-                    ReservationByUserId reservation = new ReservationByUserId();
-                    reservation.setReservationId(reservationsRs.getString("reservation_id"));
-                    reservation.setLocation(reservationsRs.getString("location_name"));
-                    reservation.setCheckIn(reservationsRs.getString("check_in"));
-                    reservation.setCheckOut(reservationsRs.getString("check_out"));
-                    reservation.setPointsEarned(reservationsRs.getInt("points_earned"));
-                    reservationArrayList.add(reservation);
+                    IndividualReservation individualReservation = new IndividualReservation();
+                    individualReservation.setReservationId(reservationsRs.getString("reservation_id"));
+                    individualReservation.setLocation(reservationsRs.getString("location_name"));
+                    individualReservation.setCheckIn(reservationsRs.getString("check_in"));
+                    individualReservation.setCheckOut(reservationsRs.getString("check_out"));
+                    individualReservation.setPointsEarned(reservationsRs.getInt("points_earned"));
+                    individualReservationArrayList.add(individualReservation);
                 }
 
-                response.setReservations(reservationArrayList);
+                //add array list of reservations to ReservationGetByUserIdResponse object
+                response.setReservations(individualReservationArrayList);
 
                 ps = conn.prepareStatement("SELECT SUM(`points_earned`) AS 'total_points_earned' FROM `reservations_view` WHERE `user_id` = ?");
                 ps.setString(1, userId);
@@ -214,6 +218,8 @@ public class ReservationService {
                     response.setTotalPointsEarned(pointsRs.getInt("total_points_earned"));
                 }
 
+                //close db connection and return response
+                conn.close();
                 return ResponseEntity.ok(response.toString());
             }
             catch (SQLException | ClassNotFoundException ex){

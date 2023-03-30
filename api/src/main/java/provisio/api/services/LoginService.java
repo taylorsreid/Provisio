@@ -53,7 +53,7 @@ public class LoginService {
                 lastName = rs.getString("last_name");
             }
             //purposely cryptic response for security reasons
-            else{
+            else {
                 return new ResponseEntity<>(new GenericResponse(false, unauthorizedMessage).toString(), HttpStatus.UNAUTHORIZED);
             }
             conn.close();
