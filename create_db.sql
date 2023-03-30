@@ -19,8 +19,8 @@ USE `provisio`;
 CREATE TABLE `users` (
   `user_id` varchar(36) UNIQUE NOT NULL, -- UUID
   `email` varchar(255) NOT NULL,
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
+  `user_first_name` varchar(255) NOT NULL,
+  `user_last_name` varchar(255) NOT NULL,
   `hashed_password` varchar(255) NOT NULL,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -60,8 +60,8 @@ CREATE TABLE `reservations` (
 CREATE OR REPLACE VIEW `reservations_view` AS SELECT 
 `reservation_id`,
 `user_id`,
-(SELECT `first_name` FROM `users` WHERE `reservations`.`user_id` = `users`.`user_id`) AS 'first_name',
-(SELECT `last_name` FROM `users` WHERE `reservations`.`user_id` = `users`.`user_id`) AS 'last_name',
+(SELECT `user_first_name` FROM `users` WHERE `reservations`.`user_id` = `users`.`user_id`) AS 'user_first_name',
+(SELECT `user_last_name` FROM `users` WHERE `reservations`.`user_id` = `users`.`user_id`) AS 'user_last_name',
 (SELECT `hotel_name` FROM `hotels` WHERE `reservations`.`hotel_id` = `hotels`.`hotel_id`) AS 'hotel_name',
 `check_in`,
 `check_out`,
@@ -75,8 +75,8 @@ CREATE OR REPLACE VIEW `reservations_view` AS SELECT
 CREATE TABLE `guests` (
   `guest_id` bigint NOT NULL AUTO_INCREMENT,
   `reservation_id` varchar(36) NOT NULL,  -- UUIDs
-  `first_name` varchar(255) NOT NULL,
-  `last_name` varchar(255) NOT NULL,
+  `guest_first_name` varchar(255) NOT NULL,
+  `guest_last_name` varchar(255) NOT NULL,
   PRIMARY KEY (`guest_id`),
   FOREIGN KEY (`reservation_id`) REFERENCES reservations(`reservation_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;

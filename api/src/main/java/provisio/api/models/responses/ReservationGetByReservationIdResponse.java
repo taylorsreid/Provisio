@@ -18,7 +18,7 @@ import java.util.ArrayList;
 public class ReservationGetByReservationIdResponse {
 
     private boolean success;
-    private String location;
+    private String hotel;
     private String roomSize;
     ArrayList<Guest> guests;
     boolean wifi;
