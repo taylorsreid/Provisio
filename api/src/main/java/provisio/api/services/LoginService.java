@@ -1,5 +1,6 @@
 package provisio.api.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -17,6 +18,16 @@ import java.sql.ResultSet;
 @Service
 public class LoginService {
 
+    //start authorization service
+    @Autowired
+    AuthorizationService authorizationService;
+
+    /**
+     * Connects to the database and verifies the credentials sent to it in the LoginRequest object.
+     * @param loginRequest A JSON string containing the users
+     * @return A ResponseEntity with a JSON body that either contains a LoginResponse object or a GenericResponse with
+     * a success of false and the reason why.
+     */
     @ResponseBody
     public ResponseEntity<String> login(LoginRequest loginRequest){
 
@@ -30,19 +41,27 @@ public class LoginService {
         //gets the actual user so that they can be compared to the alleged user
         try{
             Connection conn = ConnectionManager.getConnection();
-            PreparedStatement ps = conn.prepareStatement("SELECT `user_id`, `hashed_password`, `first_name`, `last_name` FROM `users` WHERE email=?;");
+            PreparedStatement ps = conn.prepareStatement("SELECT `user_id`, `hashed_password`, `first_name`, `last_name` FROM `users` WHERE email = ?");
             ps.setString(1, loginRequest.getEmail());
             ResultSet rs = ps.executeQuery();
-            rs.next();
-            userId = rs.getString("user_id");
-            hashedPassword = rs.getString("hashed_password");
-            firstName = rs.getString("first_name");
-            lastName = rs.getString("last_name");
+
+            //if there is a result, then the user exists
+            if (rs.next()){
+                userId = rs.getString("user_id");
+                hashedPassword = rs.getString("hashed_password");
+                firstName = rs.getString("first_name");
+                lastName = rs.getString("last_name");
+            }
+            //purposely cryptic response for security reasons
+            else{
+                return new ResponseEntity<>(new GenericResponse(false, unauthorizedMessage).toString(), HttpStatus.UNAUTHORIZED);
+            }
             conn.close();
         }
-        //this occurs when username not found
+        //catch any errors, purposely do not return details for security
         catch (Exception ex){
-            return new ResponseEntity<>(new GenericResponse(false, unauthorizedMessage).toString(), HttpStatus.UNAUTHORIZED);
+            ex.printStackTrace();
+            return ResponseEntity.internalServerError().body(new GenericResponse(false, "An internal server error has occurred.").toString());
         }
 
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
@@ -50,19 +69,17 @@ public class LoginService {
         //compare requested password with the actual one's hash
         if (passwordEncoder.matches(loginRequest.getPassword(), hashedPassword)){
 
-            //create AuthorizationService object
-            AuthorizationService authorizationService = new AuthorizationService();
-
             //create token for authorized user
             String token = authorizationService.getTokenForUserId(userId);
 
+            //for watching the API run
             System.out.println(firstName + " " + lastName + " has logged in.");
 
             //return positive response along with JWT bearer token
-            return new ResponseEntity<>(new LoginResponse(true, token, userId, firstName, lastName).toString(), HttpStatus.OK);
+            return new ResponseEntity<>(new LoginResponse(true, token, firstName, lastName).toString(), HttpStatus.OK);
 
         }
-        //this occurs when username is found but password doesn't match
+        //this occurs when username is found but password doesn't match, purposely cryptic response for security reasons
         else {
             //return negative response with 401 code
             return new ResponseEntity<>(new GenericResponse(false, unauthorizedMessage).toString(), HttpStatus.UNAUTHORIZED);

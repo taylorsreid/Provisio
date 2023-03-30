@@ -5,6 +5,10 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 
+/**
+ * Model object for a JSON login request body.
+ * For use in the login page, requirement 6.
+ */
 @AllArgsConstructor
 @Getter
 public class LoginRequest {

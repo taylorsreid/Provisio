@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * A sub-model object that is used by the customer loyalty page that is used to represent reservations within a list.
+ */
 @Getter
 @Setter
 @ResponseBody

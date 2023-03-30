@@ -7,6 +7,9 @@ import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+/**
+ * This is a generic response object that can be used to return a success status, and if the request was unsuccessful, the reason why.
+ */
 @Getter
 @Setter
 @AllArgsConstructor
