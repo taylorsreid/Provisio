@@ -14,7 +14,6 @@ public class ConnectionManager {
     public static Connection getConnection() throws ClassNotFoundException {
 
         //connection details, easily modifiable
-//        final String dbURL = "jdbc:mysql://104.237.154.92/provisio?allowPublicKeyRetrieval=true&useSSL=true";
         final String dbURL = "jdbc:mysql://localhost/provisio";
         final String dbUserName = "provisio_user";
         final String dbPassword = "***REMOVED***";
