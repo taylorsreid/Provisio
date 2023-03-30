@@ -4,15 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac86c9ae-18ca-4d7a-a719-bca25a9a6c6d" name="Changes" comment="Fix line endings (again, note to self, stop pushing from Windows cmd), removed login and registration sending user UUID since it's embedded in the JWT, refactored RegisterService to make less SQL connection calls.">
-      <change beforePath="$PROJECT_DIR$/../StartAPI.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../StartAPI.sh" afterDir="false" />
+    <list default="true" id="ac86c9ae-18ca-4d7a-a719-bca25a9a6c6d" name="Changes" comment="Added documentation to .java files.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/ReservationByUserId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/IndividualReservation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByUserIdResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByUserIdResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/LoginService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/RegisterService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/ReservationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../bookReservation.html" beforeDir="false" afterPath="$PROJECT_DIR$/../bookReservation.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -351,7 +344,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680146464524</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Added documentation to .java files.">
+      <created>1680147763039</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1680147763039</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -418,6 +418,7 @@
     <MESSAGE value="Moved email and password validation back to the backend. Backend now responds with reasons for registration failure and frontend simply displays backend's message.  Fixed API calls in register.js  Register service fixed.  SQL creation script updated." />
     <MESSAGE value="Get reservation details by reservation id backend feature added." />
     <MESSAGE value="Fix line endings (again, note to self, stop pushing from Windows cmd), removed login and registration sending user UUID since it's embedded in the JWT, refactored RegisterService to make less SQL connection calls." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix line endings (again, note to self, stop pushing from Windows cmd), removed login and registration sending user UUID since it's embedded in the JWT, refactored RegisterService to make less SQL connection calls." />
+    <MESSAGE value="Added documentation to .java files." />
+    <option name="LAST_COMMIT_MESSAGE" value="Added documentation to .java files." />
   </component>
 </project>
