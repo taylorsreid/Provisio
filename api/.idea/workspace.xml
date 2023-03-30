@@ -4,16 +4,69 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac86c9ae-18ca-4d7a-a719-bca25a9a6c6d" name="Changes" comment="Get reservation details by reservation id backend feature added.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/ReservationByUserId.java" afterDir="false" />
+    <list default="true" id="ac86c9ae-18ca-4d7a-a719-bca25a9a6c6d" name="Changes" comment="Fix line endings (again, note to self, stop pushing from Windows cmd), removed login and registration sending user UUID since it's embedded in the JWT, refactored RegisterService to make less SQL connection calls.">
+      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../.vscode/settings.json" beforeDir="false" afterPath="$PROJECT_DIR$/../.vscode/settings.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StartAPI.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../StartAPI.bat" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../StartAPI.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../StartAPI.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/create_db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/create_db.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/insert_dummy_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/insert_dummy_data.sql" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/ApiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/ApiApplication.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/db/ConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/db/ConnectionManager.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/Guest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/Guest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/ReservationByUserId.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/ReservationByUserId.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/LoginRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/RegisterRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/RegisterRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationGetByReservationIdRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationGetByReservationIdRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationGetByUserIdRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationGetByUserIdRequest.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationPostRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationPostRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/GenericResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/GenericResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/LoginResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/LoginResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByReservationIdResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByReservationIdResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByUserIdResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByUserIdResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/AuthorizationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/AuthorizationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/LoginService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/RegisterService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/ReservationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/test/java/provisio/api/ApiApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/provisio/api/ApiApplicationTests.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" beforeDir="false" afterPath="$PROJECT_DIR$/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../bookReservation.html" beforeDir="false" afterPath="$PROJECT_DIR$/../bookReservation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../confirmReservation.html" beforeDir="false" afterPath="$PROJECT_DIR$/../confirmReservation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../fixLineEndings.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../fixLineEndings.sh" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/../footer.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../header.css" beforeDir="false" afterPath="$PROJECT_DIR$/../header.css" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../header.html" beforeDir="false" afterPath="$PROJECT_DIR$/../header.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../index.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../js/apiLocation.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/apiLocation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../js/bookReservation.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/bookReservation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../js/confirmReservation.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/confirmReservation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../js/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../js/logout.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/logout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../js/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../login.html" beforeDir="false" afterPath="$PROJECT_DIR$/../login.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../logout.html" beforeDir="false" afterPath="$PROJECT_DIR$/../logout.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../register.html" beforeDir="false" afterPath="$PROJECT_DIR$/../register.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../template.html" beforeDir="false" afterPath="$PROJECT_DIR$/../template.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -411,6 +464,7 @@
     <MESSAGE value="Moved email and password validation back to the backend. Backend now responds with reasons for registration failure and frontend simply displays backend's message.  Fixed API calls in register.js  Register service still failing due to foreign key constraint." />
     <MESSAGE value="Moved email and password validation back to the backend. Backend now responds with reasons for registration failure and frontend simply displays backend's message.  Fixed API calls in register.js  Register service fixed.  SQL creation script updated." />
     <MESSAGE value="Get reservation details by reservation id backend feature added." />
-    <option name="LAST_COMMIT_MESSAGE" value="Get reservation details by reservation id backend feature added." />
+    <MESSAGE value="Fix line endings (again, note to self, stop pushing from Windows cmd), removed login and registration sending user UUID since it's embedded in the JWT, refactored RegisterService to make less SQL connection calls." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix line endings (again, note to self, stop pushing from Windows cmd), removed login and registration sending user UUID since it's embedded in the JWT, refactored RegisterService to make less SQL connection calls." />
   </component>
 </project>

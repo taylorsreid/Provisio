@@ -6,6 +6,10 @@ import lombok.Getter;
 import provisio.api.models.Guest;
 import java.util.List;
 
+/**
+ * Model object for a JSON new reservation request body.
+ * For use in the hotel reservation page, requirement 5.
+ */
 @Getter
 public class ReservationPostRequest {
 
