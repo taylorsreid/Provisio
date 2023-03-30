@@ -5,7 +5,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.web.bind.annotation.ResponseBody;
-import provisio.api.models.ReservationByUserId;
+import provisio.api.models.IndividualReservation;
 
 import java.util.ArrayList;
 
@@ -19,7 +19,7 @@ import java.util.ArrayList;
 public class ReservationGetByUserIdResponse {
 
     private boolean success;
-    ArrayList<ReservationByUserId> reservations;
+    ArrayList<IndividualReservation> reservations;
     int totalPointsEarned;
 
     @Override
