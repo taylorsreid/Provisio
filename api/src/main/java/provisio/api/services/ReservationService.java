@@ -106,6 +106,10 @@ public class ReservationService {
                     ex.printStackTrace();
                     return ResponseEntity.internalServerError().body(new GenericResponse(false, "An internal server error has occurred.").toString());
                 }
+                catch (NullPointerException ex){
+                    ex.printStackTrace();
+                    return ResponseEntity.badRequest().body(new GenericResponse(false, "Your request is incomplete, please check it and try again.").toString());
+                }
 
             }
             else {
