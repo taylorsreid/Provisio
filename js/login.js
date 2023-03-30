@@ -32,7 +32,6 @@ submitButton.addEventListener("click", function(){
         if (json.success == true) {
             //save commonly accessed items to a cookie to avoid repeated database calls
             Cookies.set("loggedIn", true, {expires : 1});
-            Cookies.set("customerId", json.customerId, {expires : 1});
             Cookies.set("email", email, {expires : 1}); //not sent back by the API since the user has already entered it
             Cookies.set("firstName", json.firstName, {expires : 1});
             Cookies.set("lastName", json.lastName, {expires : 1});

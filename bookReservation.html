@@ -21,46 +21,52 @@
 
         <form id="form" action="./confirmReservation.html">
 
-            <fieldset>
+            <div>
                 <legend>Choose resort:</legend>
-                <input type="radio" name="hotel" value="1|Hotel 1" id="hotel1">
+                <input type="radio" name="location" value="Hotel 1" id="hotel1">
                 <label for="hotel1">Hotel 1</label>
 
-                <input type="radio" name="hotel" value="2|Hotel 2" id="hotel2">
+                <input type="radio" name="location" value="Hotel 2" id="hotel2">
                 <label for="hotel2">Hotel 2</label>
 
-                <input type="radio" name="hotel" value="3|Hotel 3" id="hotel3">
+                <input type="radio" name="location" value="Hotel 3" id="hotel3">
                 <label for="hotel3">Hotel 3</label>
 
-                <input type="radio" name="hotel" value="4|Hotel 4" id="hotel4">
+                <input type="radio" name="location" value="Hotel 4" id="hotel4">
                 <label for="hotel4">Hotel 4</label>
-            </fieldset>
+            </div>
 
-            <fieldset>
+            <br>
+
+            <div>
                 <legend>Dates:</legend>
                 <label for="checkIn">Check in:</label>
                 <input type="date" name="checkIn" id="checkIn" min="" required>
                 <br>
                 <label for="checkOut">Check out:</label>
                 <input type="date" name="checkOut" id="checkOut" required>
-            </fieldset>
+            </div>
+
+            <br>
     
-            <fieldset>
+            <div>
                 <legend>Room Size:</legend>
-                <input type="radio" name="roomSize" value="1|Double Full Beds" id="roomSize1">
+                <input type="radio" name="roomSize" value="Double Full Beds" id="room1">
                 <label for="room1">Double Full Beds</label>
 
-                <input type="radio" name="roomSize" value="2|Single Queen Bed" id="roomSize2">
+                <input type="radio" name="roomSize" value="Single Queen Bed" id="room2">
                 <label for="room2">Single Queen Bed</label>
 
-                <input type="radio" name="roomSize" value="3|Double Queen Beds" id="roomSize3">
+                <input type="radio" name="roomSize" value="Double Queen Beds" id="room3">
                 <label for="room3">Double Queen Beds</label>
 
-                <input type="radio" name="roomSize" value="4|Single King Bed" id="roomSize4">
+                <input type="radio" name="roomSize" value="Single King Bed" id="room4">
                 <label for="room4">Single King Bed</label>
-            </fieldset>
+            </div>
+
+            <br>
     
-            <fieldset>
+            <div>
                 <legend>Amenities:</legend>
                 <label for="wifi">WiFi</label>
                 <input type="checkbox" id="wifi" name="wifi" value="true">
@@ -70,23 +76,51 @@
                 <br>
                 <label for="parking">Parking</label>
                 <input type="checkbox" id="parking" name="parking" value="true">
-            </fieldset>
+            </div>
+
+            <br>
     
-            <fieldset>
-                <legend>Number of Guests:</legend>
-                <select name="guests" id="guests" required>
-                    <option></option>
-                    <option value="1">1</option>
-                    <option value="2">2</option>
-                    <option value="3">3</option>
-                    <option value="4">4</option>
-                    <option value="5">5</option>
-                </select>
-            </fieldset>
+            <div id="guests">
+
+                <div id="guest1" class="guest">
+                    <label>Guest 1:</label>
+                    <input type="text" name="guest1FirstName" placeholder="First Name" required>
+                    <input type="text" name="guest1LastName" placeholder="Last Name" required>
+                </div>
+
+                <div id="guest2" class="guest">
+                    <label>Guest 2:</label>
+                    <input type="text" name="guest2FirstName" placeholder="First Name">
+                    <input type="text" name="guest2LastName" placeholder="Last Name">
+                </div>
+                
+                <div id="guest3" class="guest">
+                    <label>Guest 3:</label>
+                    <input type="text" name="guest3FirstName" placeholder="First Name">
+                    <input type="text" name="guest3LastName" placeholder="Last Name">
+                </div>
+
+                <div id="guest4" class="guest">
+                    <label>Guest 4:</label>
+                    <input type="text" name="guest4FirstName" placeholder="First Name">
+                    <input type="text" name="guest4LastName" placeholder="Last Name">
+                </div>
+
+                <div id="guest5" class="guest">
+                    <label>Guest 5:</label>
+                    <input type="text" name="guest5FirstName" placeholder="First Name">
+                    <input type="text" name="guest5LastName" placeholder="Last Name">
+                </div>
+
+            </div>
+
+            <br>
     
             <div id="formMessage"></div>
+
+            <br>
     
-            <input type="submit" value="Review Reservation" id="submitButton">
+            <input type="submit" value="Review Your Reservation" id="submitButton">
         </div>
 
 

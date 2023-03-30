@@ -38,12 +38,12 @@ public class MainController {
 
     //authorization header is optional for now because it's not listed in the project requirements that the user be
     //logged in to retrieve by reservation ID
-    @GetMapping(path = "/reservations/getByReservationId", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/reservations/getByReservationId", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<String> getReservationByReservationId(@RequestBody ReservationGetByReservationIdRequest reservationGetByReservationIdRequest){
         return reservationService.getByReservationId(reservationGetByReservationIdRequest);
     }
 
-    @GetMapping(path = "/reservations/getByUserId", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/reservations/getByUserId", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<String> getReservationByUserId(@RequestHeader(value = HttpHeaders.AUTHORIZATION) String authorizationHeader){
             return reservationService.getByUserId(authorizationHeader);
     }
