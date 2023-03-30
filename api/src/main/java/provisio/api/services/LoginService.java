@@ -33,15 +33,15 @@ public class LoginService {
 
         String userId;
         String hashedPassword;
-        String firstName;
-        String lastName;
+        String userFirstName;
+        String userLastName;
 
         final String unauthorizedMessage = "Incorrect username or password.";
 
         //gets the actual user so that they can be compared to the alleged user
         try{
             Connection conn = ConnectionManager.getConnection();
-            PreparedStatement ps = conn.prepareStatement("SELECT `user_id`, `hashed_password`, `first_name`, `last_name` FROM `users` WHERE email = ?");
+            PreparedStatement ps = conn.prepareStatement("SELECT `user_id`, `hashed_password`, `user_first_name`, `user_last_name` FROM `users` WHERE email = ?");
             ps.setString(1, loginRequest.getEmail());
             ResultSet rs = ps.executeQuery();
 
@@ -49,8 +49,8 @@ public class LoginService {
             if (rs.next()){
                 userId = rs.getString("user_id");
                 hashedPassword = rs.getString("hashed_password");
-                firstName = rs.getString("first_name");
-                lastName = rs.getString("last_name");
+                userFirstName = rs.getString("user_first_name");
+                userLastName = rs.getString("user_last_name");
             }
             //purposely cryptic response for security reasons
             else {
@@ -73,10 +73,10 @@ public class LoginService {
             String token = authorizationService.getTokenForUserId(userId);
 
             //for watching the API run
-            System.out.println(firstName + " " + lastName + " has logged in.");
+            System.out.println(userFirstName + " " + userLastName + " has logged in.");
 
             //return positive response along with JWT bearer token
-            return new ResponseEntity<>(new LoginResponse(true, token, firstName, lastName).toString(), HttpStatus.OK);
+            return new ResponseEntity<>(new LoginResponse(true, token, userFirstName, userLastName).toString(), HttpStatus.OK);
 
         }
         //this occurs when username is found but password doesn't match, purposely cryptic response for security reasons

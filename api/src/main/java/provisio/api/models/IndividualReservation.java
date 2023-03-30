@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class IndividualReservation {
 
     private String reservationId;
-    String location;
+    String hotel;
     String checkIn;
     String checkOut;
     int pointsEarned;
