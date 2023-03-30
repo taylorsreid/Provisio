@@ -21,20 +21,39 @@
 
         <form action="javascript:void()" id="form">
 
-            <div>
-                <div>Choose resort:</div>
-                <input type="radio" name="location" value="Hotel 1" id="hotel1" required>
-                <label for="hotel1">Hotel 1</label>
+            <h1>Adventure Starts Here</h1>
 
-                <input type="radio" name="location" value="Hotel 2" id="hotel2">
-                <label for="hotel2">Hotel 2</label>
+            <table>
+                <tr>
+                    <td>
+                        <img src="./img/modern.png" id="hotel1Image" height="500" width="500">
+                        <div>Hotel 1 Description</div>
+                        <input type="button" onclick='document.getElementById("hotel1Radio").checked = true' value="Stay here!">
+                    </td>
+                    <td>
+                        <img src="./img/MurallaRoja.png" id="hotel2Image" height="500" width="500">
+                        <div>Hotel 2 Description</div>
+                        <input type="button" onclick='document.getElementById("hotel2Radio").checked = true' value="Stay here!">
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <img src="./img/southwestern.png" id="hotel3Image" height="500" width="500">
+                        <div>Hotel 3 Description</div>
+                        <input type="button" onclick='document.getElementById("hotel3Radio").checked = true' value="Stay here!">
+                    </td>
+                    <td>
+                        <img src="./img/villas.png" id="hotel4Image" height="500" width="500">
+                        <div>Hotel 4 Description</div>
+                        <input type="button" onclick='document.getElementById("hotel4Radio").checked = true' value="Stay here!">
+                    </td>
+                </tr>
+            </table>
 
-                <input type="radio" name="location" value="Hotel 3" id="hotel3">
-                <label for="hotel3">Hotel 3</label>
-
-                <input type="radio" name="location" value="Hotel 4" id="hotel4">
-                <label for="hotel4">Hotel 4</label>
-            </div>
+            <input type="radio" name="hotel" value="Hotel 1" id="hotel1Radio" required hidden>
+            <input type="radio" name="hotel" value="Hotel 2" id="hotel2Radio" hidden>
+            <input type="radio" name="hotel" value="Hotel 3" id="hotel3Radio" hidden>
+            <input type="radio" name="hotel" value="Hotel 4" id="hotel4Radio" hidden>
 
             <br>
 

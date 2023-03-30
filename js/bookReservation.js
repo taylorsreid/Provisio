@@ -55,7 +55,7 @@ for (let i = 2; i <= 5; i++) {
 
 form.addEventListener("submit", function(){
     let requestBody = {};
-    requestBody.location = document.querySelector('input[type=radio][name=location]:checked').value;
+    requestBody.hotel = document.querySelector('input[type=radio][name=hotel]:checked').value;
     requestBody.checkIn = document.getElementById('checkIn').value;
     requestBody.checkOut = document.getElementById('checkOut').value;
     requestBody.roomSize = document.querySelector('input[type=radio][name=roomSize]:checked').value;

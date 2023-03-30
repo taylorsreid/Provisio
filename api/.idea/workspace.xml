@@ -6,16 +6,11 @@
   <component name="ChangeListManager">
     <list default="true" id="ac86c9ae-18ca-4d7a-a719-bca25a9a6c6d" name="Changes" comment="Changed all instances of the word &quot;location&quot; to &quot;hotel&quot; because apparently the former is a reserved word in Javascript lol.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/create_db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/create_db.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/insert_dummy_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/insert_dummy_data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/IndividualReservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/IndividualReservation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationPostRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationPostRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByReservationIdResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByReservationIdResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/ReservationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../bookReservation.html" beforeDir="false" afterPath="$PROJECT_DIR$/../bookReservation.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../js/apiLocation.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/apiLocation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../confirmReservation.html" beforeDir="false" afterPath="$PROJECT_DIR$/../confirmReservation.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../js/bookReservation.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/bookReservation.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../js/confirmReservation.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/confirmReservation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../js/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/login.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -382,7 +377,14 @@
       <option name="project" value="LOCAL" />
       <updated>1680156064695</updated>
     </task>
-    <option name="localTasksCounter" value="29" />
+    <task id="LOCAL-00029" summary="Changed all instances of the word &quot;location&quot; to &quot;hotel&quot; because apparently the former is a reserved word in Javascript lol.">
+      <created>1680175653032</created>
+      <option name="number" value="00029" />
+      <option name="presentableId" value="LOCAL-00029" />
+      <option name="project" value="LOCAL" />
+      <updated>1680175653032</updated>
+    </task>
+    <option name="localTasksCounter" value="30" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

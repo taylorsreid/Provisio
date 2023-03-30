@@ -2,15 +2,13 @@ import apiLocation from "./apiLocation.js";
 import Cookies from 'https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/+esm';
 
 //assign easy to use variables
-let form = document.getElementById("form");
+let root = document.getElementById("root");
 let submitButton = document.getElementById("submitButton");
 let formMessage = document.getElementById("formMessage");
 
 //if user is already logged in then replace login form with message. Cookies returns string.
 if(Cookies.get("loggedIn") === "true"){
-    form.innerHTML = (`
-        You are already logged in as ${Cookies.get("firstName")} ${Cookies.get("lastName")}
-    `);
+    root.innerHTML = (`You are already logged in as ${Cookies.get("firstName")} ${Cookies.get("lastName")}`);
 }
 submitButton.addEventListener("click", function(){
     //assign easy to use variables, must be assigned after click event otherwise they're blank
@@ -43,5 +41,3 @@ submitButton.addEventListener("click", function(){
         }
     })
 });
-
-// submitButton.addEventListener("click", login());
