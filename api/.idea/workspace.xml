@@ -4,7 +4,17 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac86c9ae-18ca-4d7a-a719-bca25a9a6c6d" name="Changes" comment="Get reservation details by reservation id backend feature added." />
+    <list default="true" id="ac86c9ae-18ca-4d7a-a719-bca25a9a6c6d" name="Changes" comment="Get reservation details by reservation id backend feature added.">
+      <change afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/ReservationByUserId.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationPostRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationPostRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByReservationIdResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByReservationIdResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByUserIdResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByUserIdResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/AuthorizationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/AuthorizationService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/ReservationService.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -321,7 +331,21 @@
       <option name="project" value="LOCAL" />
       <updated>1680024245561</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Get reservation details by reservation id backend feature added.">
+      <created>1680024301194</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1680024301194</updated>
+    </task>
+    <task id="LOCAL-00023" summary="Get reservation details by reservation id backend feature added.">
+      <created>1680024331800</created>
+      <option name="number" value="00023" />
+      <option name="presentableId" value="LOCAL-00023" />
+      <option name="project" value="LOCAL" />
+      <updated>1680024331800</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">

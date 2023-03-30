@@ -6,11 +6,13 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 import provisio.api.db.ConnectionManager;
 import provisio.api.models.Guest;
-import provisio.api.models.requests.ReservationGetByUserIdRequest;
+import provisio.api.models.ReservationByUserId;
 import provisio.api.models.requests.ReservationGetByReservationIdRequest;
 import provisio.api.models.requests.ReservationPostRequest;
 import provisio.api.models.responses.GenericResponse;
 import provisio.api.models.responses.ReservationGetByReservationIdResponse;
+import provisio.api.models.responses.ReservationGetByUserIdResponse;
+
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -59,10 +61,16 @@ public class ReservationService {
                     Connection conn = ConnectionManager.getConnection();
 
                     PreparedStatement locationIdPs = conn.prepareStatement("SELECT `location_id` FROM `locations` WHERE `location_name` = ?");
-                    locationIdPs.setString(1, reservationPostRequest.getLocationName());
+                    locationIdPs.setString(1, reservationPostRequest.getLocation());
                     ResultSet locationIdRs = locationIdPs.executeQuery();
                     locationIdRs.next();
                     int locationId = locationIdRs.getInt("location_id");
+
+                    PreparedStatement roomSizeIdPs = conn.prepareStatement("SELECT `room_size_id` FROM `room_sizes` WHERE `room_size_name` = ?");
+                    roomSizeIdPs.setString(1, reservationPostRequest.getRoomSize());
+                    ResultSet roomSizeIdRs = roomSizeIdPs.executeQuery();
+                    roomSizeIdRs.next();
+                    int roomSizeId = roomSizeIdRs.getInt("room_size_id");
 
                     PreparedStatement reservationsPs = conn.prepareStatement("INSERT INTO `reservations` (`reservation_id`, `user_id`, `location_id`, `check_in`, `check_out`, `room_size_id`, `wifi`, `breakfast`, `parking`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
@@ -72,7 +80,7 @@ public class ReservationService {
                     reservationsPs.setInt(3, locationId);
                     reservationsPs.setString(4, reservationPostRequest.getCheckIn());
                     reservationsPs.setString(5, reservationPostRequest.getCheckOut());
-                    reservationsPs.setInt(6, reservationPostRequest.getRoomSizeId());
+                    reservationsPs.setInt(6, roomSizeId);
                     reservationsPs.setBoolean(7, reservationPostRequest.isWifi());
                     reservationsPs.setBoolean(8, reservationPostRequest.isBreakfast());
                     reservationsPs.setBoolean(9, reservationPostRequest.isParking());
@@ -111,28 +119,25 @@ public class ReservationService {
 
     }
 
-    //The page should include a field to search by reservation ID and display a summary of the reservation.
-    // List the location, room size, number of guests, amenities, and check-in/check-out dates.
-    //TODO: determine if the user needs to be logged in or not to retrieve reservations, if so, remove authorization header argument and if statement
-    public ResponseEntity<String> getByReservationId(String authorizationHeader, ReservationGetByReservationIdRequest reservationGetByReservationIdRequest){
-
-        //verify token
-        if(authorizationHeader != null && authorizationService.verifyAuthorizationHeader(authorizationHeader)){
+    //As a group we have determined that the user should not need to be logged in if they are looking up a reservation
+    //by reservation ID, since that is how other companies have their websites setup.
+    public ResponseEntity<String> getByReservationId(ReservationGetByReservationIdRequest request){
             try {
                 Connection conn = ConnectionManager.getConnection();
 
-                //select from inner joined view
+                //select from view because the actual table only contains ID numbers linking to other tables,
+                //whereas the view contains the ID number's corresponding value
                 PreparedStatement ps = conn.prepareStatement(
                 """
                     SELECT `location_name`, `room_size_name`, `wifi`, `breakfast`, `parking`, `check_in`, `check_out`
                     FROM `reservations_view`
                     WHERE `reservations_view`.`reservation_id` = ?
                     """);
-                ps.setString(1, reservationGetByReservationIdRequest.getReservationId());
+                ps.setString(1, request.getReservationId());
                 ResultSet resultSetReservation = ps.executeQuery();
 
                 ps = conn.prepareStatement("SELECT `first_name`, `last_name` FROM `guests` WHERE `reservation_id` = ?");
-                ps.setString(1, reservationGetByReservationIdRequest.getReservationId());
+                ps.setString(1, request.getReservationId());
                 ResultSet resultSetGuests = ps.executeQuery();
 
                 ArrayList<Guest> arGuests = new ArrayList<>();
@@ -141,21 +146,21 @@ public class ReservationService {
                     arGuests.add(new Guest(resultSetGuests.getString("first_name"), resultSetGuests.getString("last_name")));
                 }
 
-                ReservationGetByReservationIdResponse rsResponse = new ReservationGetByReservationIdResponse();
+                ReservationGetByReservationIdResponse response = new ReservationGetByReservationIdResponse();
                 if (resultSetReservation.next()){
-                    rsResponse.setSuccess(true);
-                    rsResponse.setLocationName(resultSetReservation.getString("location_name"));
-                    rsResponse.setRoomSizeName(resultSetReservation.getString("room_size_name"));
-                    rsResponse.setWifi(resultSetReservation.getBoolean("wifi"));
-                    rsResponse.setBreakfast(resultSetReservation.getBoolean("breakfast"));
-                    rsResponse.setParking(resultSetReservation.getBoolean("parking"));
-                    rsResponse.setCheckIn(resultSetReservation.getDate("check_in").toString());
-                    rsResponse.setCheckOut(resultSetReservation.getDate("check_out").toString());
-                    rsResponse.setGuests(arGuests);
-                    return ResponseEntity.ok(rsResponse.toString());
+                    response.setSuccess(true);
+                    response.setLocation(resultSetReservation.getString("location_name"));
+                    response.setRoomSize(resultSetReservation.getString("room_size_name"));
+                    response.setWifi(resultSetReservation.getBoolean("wifi"));
+                    response.setBreakfast(resultSetReservation.getBoolean("breakfast"));
+                    response.setParking(resultSetReservation.getBoolean("parking"));
+                    response.setCheckIn(resultSetReservation.getDate("check_in").toString());
+                    response.setCheckOut(resultSetReservation.getDate("check_out").toString());
+                    response.setGuests(arGuests);
+                    return ResponseEntity.ok(response.toString());
                 }
                 else {
-                    return ResponseEntity.ok(new GenericResponse(false, "No results for reservation ID" + reservationGetByReservationIdRequest.getReservationId()).toString());
+                    return ResponseEntity.ok(new GenericResponse(false, "No results for reservation ID " + request.getReservationId()).toString());
                 }
 
             }
@@ -164,13 +169,61 @@ public class ReservationService {
                 return ResponseEntity.internalServerError().body(new GenericResponse(false, "An internal server error has occurred.").toString());
             }
         }
+
+    //the user must be logged in to retrieve all reservation information saved in the DB for them
+    public ResponseEntity<String> getByUserId(String authorizationHeader){
+        //verify token and that the claimed user ID in the request matches the authorization header's user ID
+        if(authorizationHeader != null && authorizationService.verifyAuthorizationHeader(authorizationHeader)) {
+            try {
+
+                String userId = authorizationService.getUserIdFromAuthorizationHeader(authorizationHeader);
+
+                Connection conn = ConnectionManager.getConnection();
+
+                //select from view because the actual table only contains ID numbers linking to other tables,
+                //whereas the view contains the ID number's corresponding value
+                PreparedStatement ps = conn.prepareStatement(
+                        """
+                            SELECT `reservation_id`, `location_name`, `check_in`, `check_out`, `points_earned`
+                            FROM `reservations_view`
+                            WHERE `reservations_view`.`user_id` = ?
+                            """);
+                ps.setString(1, userId);
+                ResultSet reservationsRs = ps.executeQuery();
+
+                ReservationGetByUserIdResponse response = new ReservationGetByUserIdResponse();
+                ArrayList<ReservationByUserId> reservationArrayList = new ArrayList<>();
+
+                while (reservationsRs.next()){
+                    response.setSuccess(true);
+                    ReservationByUserId reservation = new ReservationByUserId();
+                    reservation.setReservationId(reservationsRs.getString("reservation_id"));
+                    reservation.setLocation(reservationsRs.getString("location_name"));
+                    reservation.setCheckIn(reservationsRs.getString("check_in"));
+                    reservation.setCheckOut(reservationsRs.getString("check_out"));
+                    reservation.setPointsEarned(reservationsRs.getInt("points_earned"));
+                    reservationArrayList.add(reservation);
+                }
+
+                response.setReservations(reservationArrayList);
+
+                ps = conn.prepareStatement("SELECT SUM(`points_earned`) AS 'total_points_earned' FROM `reservations_view` WHERE `user_id` = ?");
+                ps.setString(1, userId);
+                ResultSet pointsRs = ps.executeQuery();
+                if (pointsRs.next()){
+                    response.setTotalPointsEarned(pointsRs.getInt("total_points_earned"));
+                }
+
+                return ResponseEntity.ok(response.toString());
+            }
+            catch (SQLException | ClassNotFoundException ex){
+                ex.printStackTrace();
+                return ResponseEntity.internalServerError().body(new GenericResponse(false, "An internal server error has occurred.").toString());
+            }
+        }
         else{
             return new ResponseEntity<>(new GenericResponse(false, UNAUTHORIZED_MESSAGE).toString(), HttpStatus.UNAUTHORIZED);
         }
-    }
-
-    public ResponseEntity<String> getByCustomerId(String authorizationHeader, ReservationGetByUserIdRequest reservationGetByUserIdRequest){
-        return null;
     }
 
 }
