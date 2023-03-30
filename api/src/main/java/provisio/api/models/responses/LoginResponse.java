@@ -18,7 +18,6 @@ public class LoginResponse {
 
     private boolean success;
     private String jwt;
-//    private String userId;
     private String firstName;
     private String lastName;
 

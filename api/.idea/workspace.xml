@@ -4,7 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac86c9ae-18ca-4d7a-a719-bca25a9a6c6d" name="Changes" comment="Changed all instances of the word &quot;location&quot; to &quot;hotel&quot; because apparently the former is a reserved word in Javascript lol.">
+    <list default="true" id="ac86c9ae-18ca-4d7a-a719-bca25a9a6c6d" name="Changes" comment="Clarified first_name and last_name to user_first_name / user_last_name and guest_first_name / guest_last_name.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/IndividualReservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/IndividualReservation.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationPostRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationPostRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/LoginResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/LoginResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByReservationIdResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByReservationIdResponse.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/LoginService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/RegisterService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/ReservationService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../create_db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../create_db.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../insert_dummy_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../insert_dummy_data.sql" afterDir="false" />
     </list>
@@ -426,7 +434,6 @@
       <path value="$PROJECT_DIR$/../" />
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Registration API now returns a JWT.  Split backend and frontend." />
     <MESSAGE value="Going to branch and attempt switching to MongoDB." />
     <MESSAGE value="Registration is working flawlessly with MongoDB.  Move on to login next and follow registration example.  Make sure to include the JWT in the authorization header." />
     <MESSAGE value="Added the ability to add one or multiple jobs during user registration." />
@@ -451,6 +458,7 @@
     <MESSAGE value="Added crossorigin annotations." />
     <MESSAGE value="Fixed crossorigin again lol." />
     <MESSAGE value="Changed all instances of the word &quot;location&quot; to &quot;hotel&quot; because apparently the former is a reserved word in Javascript lol." />
-    <option name="LAST_COMMIT_MESSAGE" value="Changed all instances of the word &quot;location&quot; to &quot;hotel&quot; because apparently the former is a reserved word in Javascript lol." />
+    <MESSAGE value="Clarified first_name and last_name to user_first_name / user_last_name and guest_first_name / guest_last_name." />
+    <option name="LAST_COMMIT_MESSAGE" value="Clarified first_name and last_name to user_first_name / user_last_name and guest_first_name / guest_last_name." />
   </component>
 </project>

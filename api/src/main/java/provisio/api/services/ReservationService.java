@@ -47,7 +47,7 @@ public class ReservationService {
                 Date checkInAsDate = isoFormat.parse(reservationPostRequest.getCheckIn());
                 Date checkOutAsDate = isoFormat.parse(reservationPostRequest.getCheckOut());
                 isValidCheckInDate = checkInAsDate.compareTo(Date.from(Instant.now().truncatedTo(ChronoUnit.DAYS))) >= 0; //checks that the check in date is today or greater
-                isValidDates = checkOutAsDate.after(checkInAsDate); //checks that the check out date is after the check in date
+                isValidDates = checkOutAsDate.after(checkInAsDate); //checks that the check-out date is after the check in date
             } catch (ParseException e) {
                 return ResponseEntity.badRequest().body(new GenericResponse(false, "You must enter valid dates in ISO format.").toString());
             }
@@ -60,11 +60,11 @@ public class ReservationService {
 
                     Connection conn = ConnectionManager.getConnection();
 
-                    PreparedStatement locationIdPs = conn.prepareStatement("SELECT `location_id` FROM `locations` WHERE `location_name` = ?");
-                    locationIdPs.setString(1, reservationPostRequest.getLocation());
-                    ResultSet locationIdRs = locationIdPs.executeQuery();
-                    locationIdRs.next();
-                    int locationId = locationIdRs.getInt("location_id");
+                    PreparedStatement hotelIdPs = conn.prepareStatement("SELECT `hotel_id` FROM `hotels` WHERE `hotel_name` = ?");
+                    hotelIdPs.setString(1, reservationPostRequest.getHotel());
+                    ResultSet hotelIdRs = hotelIdPs.executeQuery();
+                    hotelIdRs.next();
+                    int hotelId = hotelIdRs.getInt("hotel_id");
 
                     PreparedStatement roomSizeIdPs = conn.prepareStatement("SELECT `room_size_id` FROM `room_sizes` WHERE `room_size_name` = ?");
                     roomSizeIdPs.setString(1, reservationPostRequest.getRoomSize());
@@ -72,12 +72,12 @@ public class ReservationService {
                     roomSizeIdRs.next();
                     int roomSizeId = roomSizeIdRs.getInt("room_size_id");
 
-                    PreparedStatement reservationsPs = conn.prepareStatement("INSERT INTO `reservations` (`reservation_id`, `user_id`, `location_id`, `check_in`, `check_out`, `room_size_id`, `wifi`, `breakfast`, `parking`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    PreparedStatement reservationsPs = conn.prepareStatement("INSERT INTO `reservations` (`reservation_id`, `user_id`, `hotel_id`, `check_in`, `check_out`, `room_size_id`, `wifi`, `breakfast`, `parking`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
                     //the customer ID is stored in the JWT so that it can't be forged
                     reservationsPs.setString(1, reservationId);
                     reservationsPs.setString(2, authorizationService.getUserIdFromAuthorizationHeader(authorizationHeader));
-                    reservationsPs.setInt(3, locationId);
+                    reservationsPs.setInt(3, hotelId);
                     reservationsPs.setString(4, reservationPostRequest.getCheckIn());
                     reservationsPs.setString(5, reservationPostRequest.getCheckOut());
                     reservationsPs.setInt(6, roomSizeId);
@@ -87,7 +87,7 @@ public class ReservationService {
                     reservationsPs.executeUpdate();
 
                     for (Guest guest : reservationPostRequest.getGuests()) {
-                        PreparedStatement guestsPs = conn.prepareStatement("INSERT INTO `guests` (`reservation_id`, `first_name`, `last_name`) VALUES (?, ?, ?)");
+                        PreparedStatement guestsPs = conn.prepareStatement("INSERT INTO `guests` (`reservation_id`, `guest_first_name`, `guest_last_name`) VALUES (?, ?, ?)");
                         guestsPs.setString(1, reservationId);
                         guestsPs.setString(2, guest.getFirstName());
                         guestsPs.setString(3, guest.getLastName());
@@ -129,27 +129,27 @@ public class ReservationService {
                 //whereas the view contains the ID number's corresponding value
                 PreparedStatement ps = conn.prepareStatement(
                 """
-                    SELECT `location_name`, `room_size_name`, `wifi`, `breakfast`, `parking`, `check_in`, `check_out`
+                    SELECT `hotel_name`, `room_size_name`, `wifi`, `breakfast`, `parking`, `check_in`, `check_out`
                     FROM `reservations_view`
                     WHERE `reservations_view`.`reservation_id` = ?
                     """);
                 ps.setString(1, request.getReservationId());
                 ResultSet resultSetReservation = ps.executeQuery();
 
-                ps = conn.prepareStatement("SELECT `first_name`, `last_name` FROM `guests` WHERE `reservation_id` = ?");
+                ps = conn.prepareStatement("SELECT `guest_first_name`, `guest_last_name` FROM `guests` WHERE `reservation_id` = ?");
                 ps.setString(1, request.getReservationId());
                 ResultSet resultSetGuests = ps.executeQuery();
 
                 ArrayList<Guest> arGuests = new ArrayList<>();
 
                 while(resultSetGuests.next()){
-                    arGuests.add(new Guest(resultSetGuests.getString("first_name"), resultSetGuests.getString("last_name")));
+                    arGuests.add(new Guest(resultSetGuests.getString("guest_first_name"), resultSetGuests.getString("guest_last_name")));
                 }
 
                 ReservationGetByReservationIdResponse response = new ReservationGetByReservationIdResponse();
                 if (resultSetReservation.next()){
                     response.setSuccess(true);
-                    response.setLocation(resultSetReservation.getString("location_name"));
+                    response.setHotel(resultSetReservation.getString("hotel_name"));
                     response.setRoomSize(resultSetReservation.getString("room_size_name"));
                     response.setWifi(resultSetReservation.getBoolean("wifi"));
                     response.setBreakfast(resultSetReservation.getBoolean("breakfast"));
@@ -184,7 +184,7 @@ public class ReservationService {
                 //whereas the view contains the ID number's corresponding value
                 PreparedStatement ps = conn.prepareStatement(
                         """
-                            SELECT `reservation_id`, `location_name`, `check_in`, `check_out`, `points_earned`
+                            SELECT `reservation_id`, `hotel_name`, `check_in`, `check_out`, `points_earned`
                             FROM `reservations_view`
                             WHERE `reservations_view`.`user_id` = ?
                             """);
@@ -201,7 +201,7 @@ public class ReservationService {
                     response.setSuccess(true);
                     IndividualReservation individualReservation = new IndividualReservation();
                     individualReservation.setReservationId(reservationsRs.getString("reservation_id"));
-                    individualReservation.setLocation(reservationsRs.getString("location_name"));
+                    individualReservation.setHotel(reservationsRs.getString("hotel_name"));
                     individualReservation.setCheckIn(reservationsRs.getString("check_in"));
                     individualReservation.setCheckOut(reservationsRs.getString("check_out"));
                     individualReservation.setPointsEarned(reservationsRs.getInt("points_earned"));
