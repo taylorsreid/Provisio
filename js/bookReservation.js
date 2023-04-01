@@ -53,27 +53,12 @@ for (let i = 2; i <= 5; i++) {
     });
 }
 
-form.addEventListener("submit", function(){
-    let requestBody = {};
-    requestBody.hotel = document.querySelector('input[type=radio][name=hotel]:checked').value;
-    requestBody.checkIn = document.getElementById('checkIn').value;
-    requestBody.checkOut = document.getElementById('checkOut').value;
-    requestBody.roomSize = document.querySelector('input[type=radio][name=roomSize]:checked').value;
-    requestBody.wifi = document.querySelector('#wifi').value;
-    requestBody.breakfast = document.querySelector('#breakfast').value;
-    requestBody.parking = document.querySelector('#parking').value;
-    let guests = [];
-    for (let i = 1; i <= 5; i++) {
-        let firstName = document.getElementById(`guest${i}FirstName`).value;
-        let lastName = document.getElementById(`guest${i}LastName`).value;
-        if(firstName !== "" && lastName !== ""){
-            let guest = {};
-            guest.firstName = firstName;
-            guest.lastName = lastName;
-            guests.push(guest);
-        }
-    }
-    requestBody.guests = guests;
-    sessionStorage.setItem("requestBody", JSON.stringify(requestBody));
-    window.location.href = "./confirmReservation.html";
+form.addEventListener('submit', function(event){
+    event.preventDefault();
+
+    const data = new FormData(event.target);
+
+    const value = Object.fromEntries(data.entries());
+
+    console.log(JSON.stringify(value));
 })

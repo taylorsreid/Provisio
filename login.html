@@ -19,28 +19,23 @@
 
     <h1>Login</h1>
 
+    <!-- content replaced with a message if the user is already logged in -->
     <div id="root">
 
-        <!-- will be replaced with a message if the user is already logged in -->
-        <div id="form">
+        <form id="form">
+            
             <label for="email">Email:</label>
             <input type="text" id="email" name="email">
 
-            <br>
-
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" minlength="8">
-
-            <br>
+            
+            <input type="submit" value="Login" id="submitButton">
 
             <!-- contains error messages, if any -->
             <div id="formMessage"></div>
 
-            <br>
-            
-            <input type="submit" value="Login" id="submitButton">
-            
-        </div>
+        </form>
 
     </div>
 
