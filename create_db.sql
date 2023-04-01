@@ -81,13 +81,13 @@ CREATE TABLE `guests` (
   FOREIGN KEY (`reservation_id`) REFERENCES reservations(`reservation_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- dummy data is created in a separate file, everything in this file is necessary for the database and API to function
+-- demo data is created in a separate file, everything in this file is necessary for the database and API to function
 
 -- insert necessary hotel data
-INSERT INTO `hotels` (`hotel_id`, `hotel_name`) VALUES (1, "Hotel 1"); -- names need to be changed
-INSERT INTO `hotels` (`hotel_id`, `hotel_name`) VALUES (2, "Hotel 2");
-INSERT INTO `hotels` (`hotel_id`, `hotel_name`) VALUES (3, "Hotel 3");
-INSERT INTO `hotels` (`hotel_id`, `hotel_name`) VALUES (4, "Hotel 4");
+INSERT INTO `hotels` (`hotel_id`, `hotel_name`) VALUES (1, "The Midnight Resort"); -- subject to change
+INSERT INTO `hotels` (`hotel_id`, `hotel_name`) VALUES (2, "The Palatial Hotel");
+INSERT INTO `hotels` (`hotel_id`, `hotel_name`) VALUES (3, "Alpine Haven Ski Lodge");
+INSERT INTO `hotels` (`hotel_id`, `hotel_name`) VALUES (4, "The Serene Harbor Hotel & Yacht Club");
 
 -- insert necessary room sizes table
 INSERT INTO `room_sizes` (`room_size_id`, `room_size_name`) VALUES (1, "Double Full Beds");
