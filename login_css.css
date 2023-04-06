@@ -1,5 +1,5 @@
 #container {
-    width: 20%;
+    width: 15%;
     margin: auto;
   }
   
@@ -22,7 +22,7 @@
     box-sizing: border-box;
   }
   
-  input[type=button] {
+  input[type=submit] {
     background-color: #4CAF50; /* tentative color */
     color: white;
     padding: 14px 20px;
