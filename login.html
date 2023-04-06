@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 
-    <script type="module" src="./login_js.js"></script>
+    <script type="module" src="./js/login.js"></script>
     <link rel="stylesheet" type="text/css" href="./login_css.css">
 
 </head>
@@ -18,17 +18,18 @@
 
     <div class="container">
         <h1>Sign In</h1>
-        <form>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username"><br><br>
+        <form id="form">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email"><br><br>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password"><br><br>
-            <a href="forgot_password.html">Forgot Password?</a><br><br>     <!-- link needs to be replaced with a redirect to reset password -->
-            <input type="button" value="Login" onclick="validate()"><br><br>
+            <input type="button" value="Login" type="submit"><br><br>
             <label>Not a Member?</label>
-            <input id="signup" type="button" value="Join Now" onclick="validate()"><br><br> <!-- link needs to be replaced with a redirect to register page -->
+            <input id="signup" type="button" value="Join Now" onclick='window.location.href = "./register.html"'><br><br>
         </form>
     </div>
+
+    <div id="formMessage"></div>
 
     <!-- insert footer -->
     <div w3-include-html="footer.html"></div>
