@@ -6,9 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
 
-    <script src="https://www.w3schools.com/lib/w3.js"></script>
-    <script type="module" src="./js/login.js"></script>
-    <link rel="stylesheet" href="./header.css">
+    <script type="module" src="./login_js.js"></script>
+    <link rel="stylesheet" type="text/css" href="./login_css.css">
 
 </head>
 <body>
@@ -17,26 +16,18 @@
     <div w3-include-html="header.html"></div>
     <script>w3.includeHTML();</script>
 
-    <h1>Login</h1>
-
-    <!-- content replaced with a message if the user is already logged in -->
-    <div id="root">
-
-        <form id="form">
-            
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email">
-
+    <div class="container">
+        <h1>Sign In</h1>
+        <form>
+            <label for="username">Username:</label>
+            <input type="text" id="username" name="username"><br><br>
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" minlength="8">
-            
-            <input type="submit" value="Login" id="submitButton">
-
-            <!-- contains error messages, if any -->
-            <div id="formMessage"></div>
-
+            <input type="password" id="password" name="password"><br><br>
+            <a href="forgot_password.html">Forgot Password?</a><br><br>     <!-- link needs to be replaced with a redirect to reset password -->
+            <input type="button" value="Login" onclick="validate()"><br><br>
+            <label>Not a Member?</label>
+            <input id="signup" type="button" value="Join Now" onclick="validate()"><br><br> <!-- link needs to be replaced with a redirect to register page -->
         </form>
-
     </div>
 
     <!-- insert footer -->
