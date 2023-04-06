@@ -5,9 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    
+    <!-- import stylesheets -->
+    <link rel="stylesheet" type="text/css" href="./css/login.css">
+    <link rel="stylesheet" type="text/css" href="./css/header.css">
 
-    <script type="module" src="./login_js.js"></script>
-    <link rel="stylesheet" type="text/css" href="./login_css.css">
+    <!-- import Javascript -->
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script type="module" src="./js/login.js"></script>
 
 </head>
 <body>
@@ -16,17 +21,17 @@
     <div w3-include-html="header.html"></div>
     <script>w3.includeHTML();</script>
 
-    <div class="container">
+    <div id="container">
         <h1>Sign In</h1>
-        <form>
-            <label for="username">Username:</label>
-            <input type="text" id="username" name="username"><br><br>
+        <form id="form">
+            <label for="email">Email:</label>
+            <input type="text" id="email" name="email"><br><br>
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password"><br><br>
-            <a href="forgot_password.html">Forgot Password?</a><br><br>     <!-- link needs to be replaced with a redirect to reset password -->
-            <input type="button" value="Login" onclick="validate()"><br><br>
+            <input type="password" id="password" name="password" minlength="8"><br><br>
+            <input type="submit" value="Login"><br><br>
+            <div id="formMessage"></div>
             <label>Not a Member?</label>
-            <input id="signup" type="button" value="Join Now" onclick="validate()"><br><br> <!-- link needs to be replaced with a redirect to register page -->
+            <input id="signup" type="button" value="Join Now" onclick='window.location.href = "./register.html"'><br><br>
         </form>
     </div>
 
