@@ -2,13 +2,13 @@ import apiLocation from "./apiLocation.js";
 import Cookies from 'https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/+esm';
 
 //assign easy to use variables
-const root = document.getElementById("root");
+const container = document.getElementById("container");
 const form = document.getElementById("form");
 const formMessage = document.getElementById("formMessage");
 
 //if user is already logged in then replace page body with a message. Cookies returns string so compare to boolean as a string.
 if(Cookies.get("loggedIn") === "true"){
-    root.innerHTML = (`You are already logged in as ${Cookies.get("firstName")} ${Cookies.get("lastName")}`);
+    container.innerHTML = (`You are already logged in as ${Cookies.get("firstName")} ${Cookies.get("lastName")}`);
 }
 
 //handles the submission of the form
