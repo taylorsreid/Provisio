@@ -1,6 +1,19 @@
 .navbar {
     overflow: hidden;
-    background-color: #333;
+    background-color: #170E00;
+	height: 100px;
+	width: auto;
+	display: grid;
+	grid-template-columns: 10% 1fr;
+	align-items: center;
+	padding: 10px 0px 40px 0px;
+}
+
+.navtabs {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	column-gap: 20px;
 }
 
 .navbar a {
@@ -24,7 +37,7 @@
     font-family: inherit;
 }
 
-.navbar a:hover, .dropdown:hover .dropbtn {
+.navtabs a:hover, .dropdown:hover .dropbtn {
     background-color: gray;
 }
 
