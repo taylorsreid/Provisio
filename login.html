@@ -5,11 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    
+    <!-- import stylesheets -->
+    <link rel="stylesheet" type="text/css" href="./css/login.css">
+    <link rel="stylesheet" type="text/css" href="./css/header.css">
 
-    <script type="module" src="./js/login.js"></script>
-    <link rel="stylesheet" type="text/css" href="./login_css.css">
+    <!-- import Javascript -->
     <script src="https://www.w3schools.com/lib/w3.js"></script>
-    <link rel="stylesheet" href="./header.css">
+    <script type="module" src="./js/login.js"></script>
 
 </head>
 <body>
@@ -25,11 +28,11 @@
             <input type="text" id="email" name="email"><br><br>
             <label for="password">Password:</label>
             <input type="password" id="password" name="password" minlength="8"><br><br>
-            <input type="submit" value="Login" type="submit"><br><br>
+            <input type="submit" value="Login"><br><br>
+            <div id="formMessage"></div>
             <label>Not a Member?</label>
             <input id="signup" type="button" value="Join Now" onclick='window.location.href = "./register.html"'><br><br>
         </form>
-        <div id="formMessage"></div>
     </div>
 
     <!-- insert footer -->
