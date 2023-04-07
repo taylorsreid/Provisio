@@ -24,7 +24,7 @@ input[type=text], input[type=password] {
 }
 
 input[type=submit] {
-    background-color: #170E00; /* tentative color */
+    background-color: #170E00;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
@@ -34,7 +34,7 @@ input[type=submit] {
 }
 
 #signup {
-    background-color:  #403227;  /* tentative color */
+    background-color:  #403227;
     color: white;
     padding: 14px 20px;
     margin: 8px 0;
