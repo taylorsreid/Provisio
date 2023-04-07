@@ -6,9 +6,13 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Provisio</title>
 
+    <!-- import stylesheets -->
+    <link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="https://use.typekit.net/qrv7njf.css">
+
+    <!-- import Javascript -->
     <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script type="module" src="./js/register.js"></script>
-    <link rel="stylesheet" href="./css/header.css">
 
 </head>
 <body>
@@ -17,29 +21,51 @@
     <div w3-include-html="header.html"></div>
     <script>w3.includeHTML();</script>
 
-    <h1>Register</h1>
-    
     <!-- replaced with a message if the user is already logged in -->
-    <div id="root">
-
+    <div id="container">
+        <h1 id="welcomeMessage">Register</h1>
         <form id="form">
-            
-            <label for="email">Email:</label>
-            <input type="text" id="email" name="email" required>
-
-            <label for="firstName">First name:</label>
-            <input type="text" id="firstName" name="firstName" required>
-
-            <label for="lastName">Last name:</label>
-            <input type="text" id="lastName" name="lastName" required>
-
-            <label for="password">Password:</label>
-            <input type="password" id="password" name="password" required>
-
-            <input type="submit" value="Register" id="submitButton">
-
-            <!-- contains error messages, if any -->
-            <div id="formMessage"></div>
+            <table>
+                <tr>
+                    <td>
+                        <label for="firstName">First name:</label>
+                        <input type="text" id="firstName" name="firstName" required>
+                    </td>
+                    <td>
+                        <label for="lastName">Last name:</label>
+                        <input type="text" id="lastName" name="lastName" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" required>
+                    </td>
+                    <td>
+                        <label for="password">Confirm Password:</label>
+                        <input type="password" id="confirmPassword" required>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <label for="email">Email:</label>
+                        <input type="text" id="email" name="email" required>
+                    </td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <!-- contains error messages, if any -->
+                    <td colspan="2" id="formMessage"></td>
+                </tr>
+                <tr>
+                    <td>
+                        <input type="submit" value="Join" id="submitButton">
+                    </td>
+                    <td>
+                        <input type="reset" value="Cancel" id="secondaryButton">
+                    </td>
+                </tr>
+            </table>
 
         </form>
         
