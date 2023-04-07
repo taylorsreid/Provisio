@@ -1,0 +1,24 @@
+ul {
+    list-style-type:none;
+    margin: 0;
+    padding: 0;
+    background-color: black;
+  }
+
+li{
+    display:inline;
+    list-style-type:none;
+}
+
+div.gallery {
+    margin: 5px;
+    border: 1px solid #ccc;
+    float: left;
+    width: 180px;
+    
+}
+
+div.gallery img {
+    width: 100%;
+    height: auto;
+}
