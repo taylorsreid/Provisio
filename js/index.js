@@ -5,5 +5,5 @@ if(Cookies.get("loggedIn") === "true"){ //cookies returns a string not a boolean
     document.getElementById("welcomeMessage").innerHTML = `Welcome ${Cookies.get('firstName')} ${Cookies.get('lastName')}`;
 }
 else{
-    document.getElementById("welcomeMessage").innerHTML = "Welcome, please log in.";
+    document.getElementById("welcomeMessage").innerHTML = "Login for reservation and loyalty points information.";
 }
