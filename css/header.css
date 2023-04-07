@@ -1,5 +1,5 @@
 .navbar {
-    background-color: #170E00;
+  background-color: #170E00;
 	height: 100px;
 	width: auto;
 	display: grid;
@@ -68,7 +68,7 @@
 }
 
 .dropdown:hover .dropdown-content {
-    display: block;
+  display: block;
 	visibility: visible;
 }
 
