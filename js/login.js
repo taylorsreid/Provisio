@@ -8,7 +8,10 @@ const formMessage = document.getElementById("formMessage");
 
 //if user is already logged in then replace page body with a message. Cookies returns string so compare to boolean as a string.
 if(Cookies.get("loggedIn") === "true"){
-    container.innerHTML = (`You are already logged in as ${Cookies.get("firstName")} ${Cookies.get("lastName")}`);
+    container.innerHTML = `
+                            <p>You are already logged in as ${Cookies.get("firstName")} ${Cookies.get("lastName")}.</p>
+                            <p>Did you wish to <a href="./logout.html">logout</a>?</p>
+                        `;
 }
 
 //handles the submission of the form
