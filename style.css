@@ -1,0 +1,229 @@
+html, body {
+	background-color: #FFFFD7;
+	margin: 0px;
+}
+
+#wrapper {
+	width: auto;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+#home-banner {
+	height: 500px;
+	width: auto;
+	position: relative;
+  	text-align: center;
+}
+
+#welcomeMessage {
+	text-align: center;
+	padding: 30px 0px 20px;
+	font-family: freightneocnd-pro, sans-serif;
+	font-weight: 300;
+	font-style: italic;
+	font-size: 30px;
+}
+
+#home-gallery {
+    display: grid;
+    grid-template-columns: auto auto auto;
+	justify-content: center;
+  	align-content: center;
+  	gap: 4px;
+  	grid-auto-flow: column;
+}
+
+figcaption {
+	font-family: mantinia, serif;
+	font-size: 40px;
+	color: #170E00;
+	text-align: center;
+}
+
+.banner {
+	width: 100%;
+	height: 500px;
+	object-fit: cover;
+}
+
+.banner-text {
+	font-family: mantinia, serif;
+	font-size: 70px;
+	color: white;
+	position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+}
+
+.footer {
+	text-align: right;
+	float: right;
+	margin-left: 90%;
+	font-size: 20px;
+	padding: 0px 50px 50px 0px;
+	color: #403227;
+	font-family: freight-neo-pro, sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	text-decoration: none;
+}
+
+.footer:hover {
+	text-decoration: underline;
+}
+
+.ridge {
+	border: ridge 8px #F0CA97;
+}
+
+/* below was formerly login.css */
+
+#container {
+    padding-top: 8%;
+    width: fit-content;
+    margin: auto;
+}
+  
+form {
+    margin: auto;
+    width: 90%;
+    border: 3px solid #f1f1f1;
+    padding: 10px;
+    position: relative;
+    text-align: center;
+	font-family: utopia-std-display, serif;
+	font-weight: 400;
+}
+
+input[type=text], input[type=password] {
+    width: 100%;
+    padding: 12px 20px;
+    margin: 8px 0;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-sizing: border-box;
+}
+
+input[type=submit] {
+    background-color: #170E00;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 80%;
+}
+
+#secondaryButton {
+    background-color:  #403227;
+    color: white;
+    padding: 14px 20px;
+    margin: 8px 0;
+    border: none;
+    cursor: pointer;
+    width: 80%;
+    height: 15%;
+}
+
+input[type=button]:hover {
+    opacity: 0.8;
+}
+
+@media only screen and (max-width: 600px) {
+    #container {
+        text-align: center;
+    }
+
+    h1 {
+        margin-bottom: 0;
+    }
+}
+
+/* navbar aka header css */
+
+.navbar {
+	background-color: #170E00;
+	  height: 100px;
+	  width: auto;
+	  display: grid;
+	  grid-template-columns: 10% 1fr;
+	  align-items: center;
+	  padding: 10px 0px 40px 0px;
+	  position:relative;
+	  z-index: 5;
+  }
+  
+  .navtabs {
+	  display: flex;
+	  align-items: center;
+	  justify-content: center;
+	  column-gap: 20px;
+	  color: #FFBF49;
+	  border-radius: 5px;
+  }
+  
+  .navbar a {
+	  float: left;
+	  color: white;
+	  padding: 14px 16px;
+	  text-decoration: none;
+  }
+  
+  .dropdown {
+	  float: left;
+	  overflow: hidden;
+  }
+  
+  .dropdown .dropbtn {
+	  font-size: inherit;
+	  border: none;
+	  color: white;
+	  padding: 14px 16px;
+	  background-color: inherit;
+	  font-family: utopia-std-display, serif;
+	  font-weight: 400;
+	  font-style: normal;
+  }
+  
+  .navtabs a:hover, .dropdown:hover .dropbtn {
+	  background-color: #FFBF49;
+	  color: #170E00;
+	  font-family: utopia-std-display, serif;
+	  font-weight: 400;
+	  font-style: normal;
+	  transition: linear 0.25s;
+	  border-radius: 5px;
+  }
+  
+  .dropdown-content {
+	  visibility: hidden;
+	  position: absolute;
+	  background-color: #170E00;
+	  border-radius: 5px;
+  }
+  
+  .dropdown-content a {
+	  float: none;
+	  color: white;
+	  padding: 12px 16px;
+	  text-decoration: none;
+	  display: block;
+  }
+  
+  .dropdown:hover .dropdown-content {
+	display: block;
+	  visibility: visible;
+  }
+  
+  .logo {
+	  padding-left: 10px;
+  }
+  
+  a {
+	  font-family: utopia-std-display, serif;
+	  font-weight: 400;
+	  font-style: normal;
+  }
+  
