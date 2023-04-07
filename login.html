@@ -7,8 +7,8 @@
     <title>Login</title>
     
     <!-- import stylesheets -->
-    <link rel="stylesheet" type="text/css" href="./css/login.css">
-    <link rel="stylesheet" type="text/css" href="./css/header.css">
+    <link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="https://use.typekit.net/qrv7njf.css">
 
     <!-- import Javascript -->
     <script src="https://www.w3schools.com/lib/w3.js"></script>
@@ -22,7 +22,7 @@
     <script>w3.includeHTML();</script>
 
     <div id="container">
-        <h1>Sign In</h1>
+        <h1 id="welcomeMessage">Sign In</h1>
         <form id="form">
             <label for="email">Email:</label>
             <input type="text" id="email" name="email"><br><br>
@@ -31,7 +31,7 @@
             <div id="formMessage"></div>
             <input type="submit" value="Login"><br><br>
             <label>Not a Member?</label>
-            <input id="signup" type="button" value="Join Now" onclick='window.location.href = "./register.html"'><br><br>
+            <input id="secondaryButton" type="button" value="Join Now" onclick='window.location.href = "./register.html"'><br><br>
         </form>
     </div>
 
