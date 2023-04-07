@@ -4,6 +4,3 @@ if(Cookies.get("loggedIn") === "true"){ //cookies returns a string not a boolean
     //echo users name if they're logged in
     document.getElementById("welcomeMessage").innerHTML = `Welcome ${Cookies.get('firstName')} ${Cookies.get('lastName')}`;
 }
-else{
-    document.getElementById("welcomeMessage").innerHTML = "Login for reservation and loyalty points information.";
-}
