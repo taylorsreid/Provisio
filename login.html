@@ -5,10 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Login</title>
+    
+    <!-- import stylesheets -->
+    <link rel="stylesheet" type="text/css" href="./css/login.css">
+    <link rel="stylesheet" type="text/css" href="./css/header.css">
 
+    <!-- import Javascript -->
     <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script type="module" src="./js/login.js"></script>
-    <link rel="stylesheet" href="./header.css">
 
 </head>
 <body>
@@ -17,26 +21,18 @@
     <div w3-include-html="header.html"></div>
     <script>w3.includeHTML();</script>
 
-    <h1>Login</h1>
-
-    <!-- content replaced with a message if the user is already logged in -->
-    <div id="root">
-
+    <div id="container">
+        <h1>Sign In</h1>
         <form id="form">
-            
             <label for="email">Email:</label>
-            <input type="text" id="email" name="email">
-
+            <input type="text" id="email" name="email"><br><br>
             <label for="password">Password:</label>
-            <input type="password" id="password" name="password" minlength="8">
-            
-            <input type="submit" value="Login" id="submitButton">
-
-            <!-- contains error messages, if any -->
+            <input type="password" id="password" name="password" minlength="8"><br><br>
             <div id="formMessage"></div>
-
+            <input type="submit" value="Login"><br><br>
+            <label>Not a Member?</label>
+            <input id="signup" type="button" value="Join Now" onclick='window.location.href = "./register.html"'><br><br>
         </form>
-
     </div>
 
     <!-- insert footer -->
