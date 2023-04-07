@@ -1,5 +1,4 @@
 .navbar {
-    overflow: hidden;
     background-color: #170E00;
 	height: 100px;
 	width: auto;
@@ -7,6 +6,8 @@
 	grid-template-columns: 10% 1fr;
 	align-items: center;
 	padding: 10px 0px 40px 0px;
+	position:relative;
+	z-index: 5;
 }
 
 .navtabs {
@@ -14,6 +15,8 @@
 	align-items: center;
 	justify-content: center;
 	column-gap: 20px;
+	color: #FFBF49;
+	border-radius: 5px;
 }
 
 .navbar a {
@@ -34,22 +37,31 @@
     color: white;
     padding: 14px 16px;
     background-color: inherit;
-    font-family: inherit;
+    font-family: utopia-std-display, serif;
+	font-weight: 400;
+	font-style: normal;
 }
 
 .navtabs a:hover, .dropdown:hover .dropbtn {
-    background-color: gray;
+    background-color: #FFBF49;
+	color: #170E00;
+	font-family: utopia-std-display, serif;
+	font-weight: 400;
+	font-style: normal;
+	transition: linear 0.25s;
+	border-radius: 5px;
 }
 
 .dropdown-content {
-    display: none;
+    visibility: hidden;
     position: absolute;
-    background-color: #f9f9f9;
+    background-color: #170E00;
+	border-radius: 5px;
 }
 
 .dropdown-content a {
     float: none;
-    color: black;
+    color: white;
     padding: 12px 16px;
     text-decoration: none;
     display: block;
@@ -57,4 +69,15 @@
 
 .dropdown:hover .dropdown-content {
     display: block;
+	visibility: visible;
+}
+
+.logo {
+	padding-left: 10px;
+}
+
+a {
+	font-family: utopia-std-display, serif;
+	font-weight: 400;
+	font-style: normal;
 }
