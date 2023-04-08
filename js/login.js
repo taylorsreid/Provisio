@@ -37,7 +37,8 @@ form.addEventListener('submit', function(event){
             //things to do if the API accepted the request and the user successfully logged in
 
             //save commonly accessed items to a cookie to avoid repeated database calls
-            //{expires : 1} sets the cookie to be valid for one day
+            //expires : 1 sets the cookie to be valid for one day
+            //sameSite : strict because the API takes authorization headers, not cookies.  Cookies are only used as a storage mechanism.
             Cookies.set("loggedIn", true, {expires : 1, sameSite : 'strict'});
             Cookies.set("email", loginValues.email, {expires : 1, sameSite : 'strict'}); //not sent back by the API since the user has already entered it
             Cookies.set("firstName", json.firstName, {expires : 1, sameSite : 'strict'}); //can be used later
