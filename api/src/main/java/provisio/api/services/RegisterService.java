@@ -108,7 +108,7 @@ public class RegisterService {
                     message.append(" Invalid email address.");
                 }
                 if (!validPassword){
-                    message.append(" Invalid password. Passwords must be least 8 characters in length and include at least one uppercase letter and one lowercase letter.");
+                    message.append(" Password does not meet requirements.");
                 }
                 if (!validFirstName){
                     message.append(" First name cannot be blank.");
