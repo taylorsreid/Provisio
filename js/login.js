@@ -38,11 +38,11 @@ form.addEventListener('submit', function(event){
 
             //save commonly accessed items to a cookie to avoid repeated database calls
             //{expires : 1} sets the cookie to be valid for one day
-            Cookies.set("loggedIn", true, {expires : 1});
-            Cookies.set("email", loginValues.email, {expires : 1}); //not sent back by the API since the user has already entered it
-            Cookies.set("firstName", json.firstName, {expires : 1}); //can be used later
-            Cookies.set("lastName", json.lastName, {expires : 1});
-            Cookies.set('jwt', json.jwt, {expires : 1}) //save JWT to a cookie because it's the most secure way to store them
+            Cookies.set("loggedIn", true, {expires : 1, sameSite : 'strict'});
+            Cookies.set("email", loginValues.email, {expires : 1, sameSite : 'strict'}); //not sent back by the API since the user has already entered it
+            Cookies.set("firstName", json.firstName, {expires : 1, sameSite : 'strict'}); //can be used later
+            Cookies.set("lastName", json.lastName, {expires : 1, sameSite : 'strict'});
+            Cookies.set('jwt', json.jwt, {expires : 1, sameSite : 'strict'}) //save JWT to a cookie because it's the most secure way to store them
             window.location.href = "./index.html"; //redirect back to home page upon successful login
 
             //more things can go here
