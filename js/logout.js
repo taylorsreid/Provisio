@@ -1,5 +1,5 @@
 import Cookies from 'https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/+esm';
-//falisify or remove session storage upon logout
+//remove site related cookies and clear session storage upon logout
 Cookies.remove("loggedIn");
 Cookies.remove("email");
 Cookies.remove("firstName");
