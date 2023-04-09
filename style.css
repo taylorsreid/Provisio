@@ -61,7 +61,7 @@ figcaption {
   	transform: translate(-50%, -50%);
 }
 
-.footer {
+#footer > * {
 	text-align: right;
 	float: right;
 	margin-left: 90%;
@@ -74,7 +74,7 @@ figcaption {
 	text-decoration: none;
 }
 
-.footer:hover {
+#footer:hover > * {
 	text-decoration: underline;
 }
 
