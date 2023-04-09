@@ -38,13 +38,12 @@ form.addEventListener('submit', function(event){
             //API responds to successful register calls with a login request response
             if (json.success == true) {
                 //save commonly accessed items to a cookie to avoid repeated database calls
-                //expires : 1 sets the cookie to be valid for one day
                 //sameSite : strict because the API takes authorization headers, not cookies.  Cookies are only used as a storage mechanism.
-                Cookies.set("loggedIn", true, {expires : 1, sameSite : 'strict'});
-                Cookies.set("email", registerValues.email, {expires : 1, sameSite : 'strict'}); //not sent back by the API since the user has already entered it
-                Cookies.set("firstName", json.firstName, {expires : 1, sameSite : 'strict'});
-                Cookies.set("lastName", json.lastName, {expires : 1, sameSite : 'strict'});
-                Cookies.set('jwt', json.jwt, {expires : 1, sameSite : 'strict'}) //save JWT to a cookie because it's the most secure way to store them
+                Cookies.set("loggedIn", true, {sameSite : 'strict'});
+                Cookies.set("email", registerValues.email, {sameSite : 'strict'}); //not sent back by the API since the user has already entered it
+                Cookies.set("firstName", json.firstName, {sameSite : 'strict'});
+                Cookies.set("lastName", json.lastName, {sameSite : 'strict'});
+                Cookies.set('jwt', json.jwt, {sameSite : 'strict'}) //save JWT to a cookie because it's the most secure way to store them
                 window.location.href = "./index.html"; //redirect back to home page upon successful login
             }
             else {
