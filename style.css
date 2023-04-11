@@ -231,3 +231,66 @@ input[type=button]:hover {
 	  font-style: normal;
   }
   
+.row{
+	border-color: red;
+}
+
+.container {
+	display: grid;
+	grid-template-columns: auto auto;
+	background-color: #3e2723;
+	padding: 10px;
+	border-radius: 10px;
+}
+  
+.item {
+	background-color: #80cbc4;
+	border: 1px solid #fff;
+	padding: 20px;
+	font-size: 30px;
+	text-align: center;
+}
+
+  
+#summary{
+  box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
+  padding:2mm;
+  margin: 0 auto;
+  width: 70mm;
+  background: #FFF;
+  border-radius: 20px;
+}
+
+h2 {
+ text-align: center;
+}
+
+#mid, #information {
+ border-bottom: 1px solid #EEE;
+}
+
+#mid{
+ min-height: 80px;
+} 
+
+#information {
+  min-height: 100px;
+}
+
+.tablecon{
+ border-bottom: 1px solid #EEE;
+ padding-right: 25px;
+}
+
+.date{
+	text-align: center;
+}
+
+#push{
+	text-align: center;
+	padding: 10px;
+}
+
+#table{
+	text-align: -webkit-center;
+}
