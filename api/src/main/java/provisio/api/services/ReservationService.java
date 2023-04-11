@@ -24,6 +24,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 @Service
 public class ReservationService {
@@ -33,7 +34,16 @@ public class ReservationService {
     @Autowired
     private AuthorizationService authorizationService;
 
-    public ResponseEntity<String> post(String authorizationHeader, ReservationPostRequest reservationPostRequest){
+    @Autowired
+    private GuestsService guestsService;
+
+    @Autowired
+    private ChargesService chargesService;
+
+    @Autowired
+    private PricesService pricesService;
+
+    public ResponseEntity<String> post(String authorizationHeader, ReservationPostRequest request){
 
         //verify token
         if(authorizationHeader != null && authorizationService.verifyAuthorizationHeader(authorizationHeader)){
@@ -43,11 +53,13 @@ public class ReservationService {
             SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd");
             boolean isValidCheckInDate;
             boolean isValidDates;
+            int lengthOfStay;
             try {
-                Date checkInAsDate = isoFormat.parse(reservationPostRequest.getCheckIn());
-                Date checkOutAsDate = isoFormat.parse(reservationPostRequest.getCheckOut());
+                Date checkInAsDate = isoFormat.parse(request.getCheckIn());
+                Date checkOutAsDate = isoFormat.parse(request.getCheckOut());
                 isValidCheckInDate = checkInAsDate.compareTo(Date.from(Instant.now().truncatedTo(ChronoUnit.DAYS))) >= 0; //checks that the check in date is today or greater
                 isValidDates = checkOutAsDate.after(checkInAsDate); //checks that the check-out date is after the check in date
+                lengthOfStay = (int) TimeUnit.DAYS.convert(checkOutAsDate.getTime() - checkInAsDate.getTime(), TimeUnit.MILLISECONDS);
             } catch (ParseException e) {
                 return ResponseEntity.badRequest().body(new GenericResponse(false, "You must enter valid dates in ISO format.").toString());
             }
@@ -61,16 +73,12 @@ public class ReservationService {
                     Connection conn = ConnectionManager.getConnection();
 
                     PreparedStatement hotelIdPs = conn.prepareStatement("SELECT `hotel_id` FROM `hotels` WHERE `hotel_name` = ?");
-                    hotelIdPs.setString(1, reservationPostRequest.getHotel());
+                    hotelIdPs.setString(1, request.getHotel());
                     ResultSet hotelIdRs = hotelIdPs.executeQuery();
                     hotelIdRs.next();
                     int hotelId = hotelIdRs.getInt("hotel_id");
 
-                    PreparedStatement roomSizeIdPs = conn.prepareStatement("SELECT `room_size_id` FROM `room_sizes` WHERE `room_size_name` = ?");
-                    roomSizeIdPs.setString(1, reservationPostRequest.getRoomSize());
-                    ResultSet roomSizeIdRs = roomSizeIdPs.executeQuery();
-                    roomSizeIdRs.next();
-                    int roomSizeId = roomSizeIdRs.getInt("room_size_id");
+                    int roomSizeId = pricesService.selectItemIdFromItemName(request.getRoomSize());
 
                     PreparedStatement reservationsPs = conn.prepareStatement("INSERT INTO `reservations` (`reservation_id`, `user_id`, `hotel_id`, `check_in`, `check_out`, `room_size_id`, `wifi`, `breakfast`, `parking`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
@@ -78,20 +86,27 @@ public class ReservationService {
                     reservationsPs.setString(1, reservationId);
                     reservationsPs.setString(2, authorizationService.getUserIdFromAuthorizationHeader(authorizationHeader));
                     reservationsPs.setInt(3, hotelId);
-                    reservationsPs.setString(4, reservationPostRequest.getCheckIn());
-                    reservationsPs.setString(5, reservationPostRequest.getCheckOut());
+                    reservationsPs.setString(4, request.getCheckIn());
+                    reservationsPs.setString(5, request.getCheckOut());
                     reservationsPs.setInt(6, roomSizeId);
-                    reservationsPs.setBoolean(7, reservationPostRequest.isWifi());
-                    reservationsPs.setBoolean(8, reservationPostRequest.isBreakfast());
-                    reservationsPs.setBoolean(9, reservationPostRequest.isParking());
+                    reservationsPs.setBoolean(7, request.isWifi());
+                    reservationsPs.setBoolean(8, request.isBreakfast());
+                    reservationsPs.setBoolean(9, request.isParking());
                     reservationsPs.executeUpdate();
 
-                    for (Guest guest : reservationPostRequest.getGuests()) {
-                        PreparedStatement guestsPs = conn.prepareStatement("INSERT INTO `guests` (`reservation_id`, `guest_first_name`, `guest_last_name`) VALUES (?, ?, ?)");
-                        guestsPs.setString(1, reservationId);
-                        guestsPs.setString(2, guest.getFirstName());
-                        guestsPs.setString(3, guest.getLastName());
-                        guestsPs.executeUpdate();
+                    //insert guests
+                    guestsService.insertMany(reservationId, request.getGuests());
+
+                    //insert charges
+                    chargesService.insertMany(reservationId, request.getHotel(), lengthOfStay);
+                    if (request.isWifi()){
+                        chargesService.insertOne(reservationId, "wifi");
+                    }
+                    if (request.isBreakfast()){
+                        chargesService.insertMany(reservationId, "breakfast", lengthOfStay);
+                    }
+                    if (request.isParking()){
+                        chargesService.insertMany(reservationId, "parking", lengthOfStay);
                     }
 
                     conn.close();
@@ -136,15 +151,7 @@ public class ReservationService {
                 ps.setString(1, request.getReservationId());
                 ResultSet resultSetReservation = ps.executeQuery();
 
-                ps = conn.prepareStatement("SELECT `guest_first_name`, `guest_last_name` FROM `guests` WHERE `reservation_id` = ?");
-                ps.setString(1, request.getReservationId());
-                ResultSet resultSetGuests = ps.executeQuery();
-
-                ArrayList<Guest> arGuests = new ArrayList<>();
-
-                while(resultSetGuests.next()){
-                    arGuests.add(new Guest(resultSetGuests.getString("guest_first_name"), resultSetGuests.getString("guest_last_name")));
-                }
+                ArrayList<Guest> guests = guestsService.selectMany(request.getReservationId());
 
                 ReservationGetByReservationIdResponse response = new ReservationGetByReservationIdResponse();
                 if (resultSetReservation.next()){
@@ -156,7 +163,7 @@ public class ReservationService {
                     response.setParking(resultSetReservation.getBoolean("parking"));
                     response.setCheckIn(resultSetReservation.getDate("check_in").toString());
                     response.setCheckOut(resultSetReservation.getDate("check_out").toString());
-                    response.setGuests(arGuests);
+                    response.setGuests(guests);
                     return ResponseEntity.ok(response.toString());
                 }
                 else {

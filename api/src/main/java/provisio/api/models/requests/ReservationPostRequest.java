@@ -4,7 +4,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import provisio.api.models.Guest;
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * Model object for a JSON new reservation request body.
@@ -20,7 +20,7 @@ public class ReservationPostRequest {
     boolean wifi;
     boolean breakfast;
     boolean parking;
-    List<Guest> guests;
+    ArrayList<Guest> guests;
 
     @Override
     public String toString() {
