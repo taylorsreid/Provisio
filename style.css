@@ -38,7 +38,7 @@ html, body {
 	text-decoration: underline;
 }
 
-figcaption {
+.homeGalleryCaption {
 	font-family: mantinia, serif;
 	font-size: 40px;
 	color: #170E00;
