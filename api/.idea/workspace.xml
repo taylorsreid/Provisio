@@ -4,62 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac86c9ae-18ca-4d7a-a719-bca25a9a6c6d" name="Changes" comment="Fix line endings ugh.">
-      <change beforePath="$PROJECT_DIR$/../.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/../.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StartAPI.bat" beforeDir="false" afterPath="$PROJECT_DIR$/../StartAPI.bat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../StartAPI.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../StartAPI.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/codeStyles/codeStyleConfig.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/compiler.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/compiler.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/encodings.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/encodings.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jarRepositories.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jarRepositories.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/jpa-buddy.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/jpa-buddy.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/uiDesigner.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/uiDesigner.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/vcs.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+    <list default="true" id="ac86c9ae-18ca-4d7a-a719-bca25a9a6c6d" name="Changes" comment="Clarified first_name and last_name to user_first_name / user_last_name and guest_first_name / guest_last_name.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" beforeDir="false" afterPath="$PROJECT_DIR$/.mvn/wrapper/maven-wrapper.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw" beforeDir="false" afterPath="$PROJECT_DIR$/mvnw" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/mvnw.cmd" beforeDir="false" afterPath="$PROJECT_DIR$/mvnw.cmd" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/ApiApplication.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/ApiApplication.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/db/ConnectionManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/db/ConnectionManager.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/Guest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/Guest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/IndividualReservation.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/IndividualReservation.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/LoginRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/LoginRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/RegisterRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/RegisterRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationGetByReservationIdRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationGetByReservationIdRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationGetByUserIdRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationGetByUserIdRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationPostRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationPostRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/GenericResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/GenericResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/LoginResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/LoginResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByReservationIdResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByReservationIdResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByUserIdResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/ReservationGetByUserIdResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/AuthorizationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/AuthorizationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/ChargesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/ChargesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/GuestsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/GuestsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/LoginService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/PricesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/PricesService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/RegisterService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/ReservationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/resources/application.properties" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/resources/application.properties" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/test/java/provisio/api/ApiApplicationTests.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/test/java/provisio/api/ApiApplicationTests.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../create_db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../create_db.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../fixLineEndings.sh" beforeDir="false" afterPath="$PROJECT_DIR$/../fixLineEndings.sh" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../footer.html" beforeDir="false" afterPath="$PROJECT_DIR$/../footer.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../header.html" beforeDir="false" afterPath="$PROJECT_DIR$/../header.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../index.html" beforeDir="false" afterPath="$PROJECT_DIR$/../index.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../insert_demo_data.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../insert_demo_data.sql" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../js/apiLocation.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/apiLocation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../js/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../js/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../js/logout.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/logout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../js/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../login.html" beforeDir="false" afterPath="$PROJECT_DIR$/../login.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../logout.html" beforeDir="false" afterPath="$PROJECT_DIR$/../logout.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../register.html" beforeDir="false" afterPath="$PROJECT_DIR$/../register.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../style.css" beforeDir="false" afterPath="$PROJECT_DIR$/../style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +24,6 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="main" />
         <entry key="$PROJECT_DIR$" value="1ff28bd9b9f390d157a9bdab839bf076dc3b1894" />
       </map>
     </option>
@@ -441,14 +387,7 @@
       <option name="project" value="LOCAL" />
       <updated>1680187948170</updated>
     </task>
-    <task id="LOCAL-00031" summary="Added services to handle different tables and clean up the code.">
-      <created>1681218865894</created>
-      <option name="number" value="00031" />
-      <option name="presentableId" value="LOCAL-00031" />
-      <option name="project" value="LOCAL" />
-      <updated>1681218865894</updated>
-    </task>
-    <option name="localTasksCounter" value="32" />
+    <option name="localTasksCounter" value="31" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -462,7 +401,7 @@
                   <entry key="branch">
                     <value>
                       <list>
-                        <option value="main" />
+                        <option value="api-option" />
                       </list>
                     </value>
                   </entry>
@@ -494,6 +433,8 @@
       <path value="$PROJECT_DIR$/../" />
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
+    <MESSAGE value="Going to branch and attempt switching to MongoDB." />
+    <MESSAGE value="Registration is working flawlessly with MongoDB.  Move on to login next and follow registration example.  Make sure to include the JWT in the authorization header." />
     <MESSAGE value="Added the ability to add one or multiple jobs during user registration." />
     <MESSAGE value="Final MongoDB commit. Switching back to SQL because nested collections will be incredibly slow." />
     <MESSAGE value="Switching back to MySQL." />
@@ -517,8 +458,6 @@
     <MESSAGE value="Fixed crossorigin again lol." />
     <MESSAGE value="Changed all instances of the word &quot;location&quot; to &quot;hotel&quot; because apparently the former is a reserved word in Javascript lol." />
     <MESSAGE value="Clarified first_name and last_name to user_first_name / user_last_name and guest_first_name / guest_last_name." />
-    <MESSAGE value="Added services to handle different tables and clean up the code." />
-    <MESSAGE value="Fix line endings ugh." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix line endings ugh." />
+    <option name="LAST_COMMIT_MESSAGE" value="Clarified first_name and last_name to user_first_name / user_last_name and guest_first_name / guest_last_name." />
   </component>
 </project>

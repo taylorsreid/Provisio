@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provisio</title>
+
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script type="module" src="./js/index.js"></script>
+	<link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="https://use.typekit.net/qrv7njf.css">
+
+</head>
+<body>
+	<div id="wrapper">
+
+    <!-- insert header -->
+    <div w3-include-html="header.html"></div>
+    <script>w3.includeHTML();</script>
+    
+	<div id="home-banner">
+		<img class="banner" src="./img/poolside.jpg" alt="">
+		<div class="banner-text">Welcome to Provisio</div>
+	</div>	
+		
+    <div id="welcomeMessage">Login for reservation and loyalty points information.</div>
+	
+	<div id="home-gallery">
+			<div class="item">
+			<figure><img class="ridge" src="./img/arrive.jpg" height="350" alt="Arrive">
+				<figcaption>Arrive</figcaption></figure>
+			</div>
+			<div class="item">
+			<figure><img class="ridge" src="./img/stay.jpg" height="350" alt="Stay">
+				<figcaption>Stay</figcaption></figure>
+			</div>
+			<div class="item">
+			<figure><img class="ridge" src="./img/escape.jpg" height="350" alt="Escape">
+				<figcaption>Escape</figcaption></figure>
+			</div>
+		</div>
+		<br>
+
+    <!-- insert footer -->
+    <div w3-include-html="footer.html"></div>
+    <script>w3.includeHTML();</script>
+	
+	<br>
+	<br>
+
+</div>
+</body>
+</html>
