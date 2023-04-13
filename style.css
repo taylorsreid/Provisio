@@ -80,6 +80,7 @@ figcaption {
 
 .ridge {
 	border: ridge 8px #F0CA97;
+	height: 350px;
 }
 
 /* below was formerly login.css */
