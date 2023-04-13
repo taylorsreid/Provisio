@@ -27,16 +27,16 @@ CREATE TABLE `users` (
 
 -- create table of hotels, reduces repeated varchar strings in reservations table
 CREATE TABLE `hotels` (
-  `hotel_id` tinyint UNIQUE NOT NULL,
+  `hotel_id` tinyint UNIQUE NOT NULL AUTO_INCREMENT,
   `hotel_name` varchar(255) NOT NULL,
   PRIMARY KEY (`hotel_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- create table of room types, reduces repeated varchar strings in reservations table
-CREATE TABLE `room_sizes` (
-  `room_size_id` tinyint UNIQUE NOT NULL,
-  `room_size_name` varchar(255) NOT NULL,
-  PRIMARY KEY (`room_size_id`)
+CREATE TABLE `prices` (
+	`item_id` bigint UNIQUE NOT NULL AUTO_INCREMENT,
+	`item_name` varchar(255) UNIQUE NOT NULL,
+	`item_price` decimal(13,2),
+	PRIMARY KEY (`item_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- create reservations table
@@ -46,14 +46,32 @@ CREATE TABLE `reservations` (
   `hotel_id` tinyint NOT NULL,
   `check_in` date NOT NULL,
   `check_out` date NOT NULL,
-  `room_size_id` tinyint NOT NULL,
+  `room_size_id` bigint NOT NULL,
   `wifi` boolean DEFAULT NULL,
   `breakfast` boolean DEFAULT NULL,
   `parking` boolean DEFAULT NULL,
   PRIMARY KEY (`reservation_id`),
-  FOREIGN KEY (`user_id`) REFERENCES users(`user_id`),
-  FOREIGN KEY (`hotel_id`) REFERENCES hotels(`hotel_id`),
-  FOREIGN KEY (`room_size_id`) REFERENCES room_sizes(`room_size_id`)
+  FOREIGN KEY (`user_id`) REFERENCES users(`user_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`hotel_id`) REFERENCES hotels(`hotel_id`) ON DELETE CASCADE,
+  FOREIGN KEY (`room_size_id`) REFERENCES prices(`item_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `guests` (
+  `guest_id` bigint UNIQUE NOT NULL AUTO_INCREMENT,
+  `reservation_id` varchar(36) NOT NULL,  -- UUIDs
+  `guest_first_name` varchar(255) NOT NULL,
+  `guest_last_name` varchar(255) NOT NULL,
+  PRIMARY KEY (`guest_id`),
+  FOREIGN KEY (`reservation_id`) REFERENCES reservations(`reservation_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `charges` (
+	`charge_id` bigint UNIQUE NOT NULL AUTO_INCREMENT,
+	`item_id` bigint NOT NULL,
+	`reservation_id` varchar(255) NOT NULL,
+	PRIMARY KEY (`charge_id`),
+	FOREIGN KEY (`item_id`) REFERENCES prices(`item_id`) ON DELETE CASCADE,
+	FOREIGN KEY (`reservation_id`) REFERENCES reservations(`reservation_id`) ON DELETE CASCADE	
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- the purpose of this view is to make it easier to query from Java
@@ -65,32 +83,33 @@ CREATE OR REPLACE VIEW `reservations_view` AS SELECT
 (SELECT `hotel_name` FROM `hotels` WHERE `reservations`.`hotel_id` = `hotels`.`hotel_id`) AS 'hotel_name',
 `check_in`,
 `check_out`,
-(SELECT `room_size_name` FROM `room_sizes` WHERE `reservations`.`room_size_id` = `room_sizes`.`room_size_id`) AS 'room_size_name',
+(SELECT `item_name` FROM `prices` WHERE `reservations`.`room_size_id` = `prices`.`item_id`) AS 'room_size_name',
 `wifi`,
 `breakfast`,
 `parking`,
 (DATEDIFF(`check_out`, `check_in`) * 150) AS `points_earned` FROM `reservations`;
 -- query for total points earned like this: SELECT SUM(`points_earned`)FROM `reservations_view` WHERE `user_id` = "f81c3fe5-cc03-11ed-a4d2-1735c641f2fc";
 
-CREATE TABLE `guests` (
-  `guest_id` bigint NOT NULL AUTO_INCREMENT,
-  `reservation_id` varchar(36) NOT NULL,  -- UUIDs
-  `guest_first_name` varchar(255) NOT NULL,
-  `guest_last_name` varchar(255) NOT NULL,
-  PRIMARY KEY (`guest_id`),
-  FOREIGN KEY (`reservation_id`) REFERENCES reservations(`reservation_id`) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- demo data is created in a separate file, everything in this file is necessary for the database and API to function
+CREATE OR REPLACE VIEW `charges_view` AS SELECT
+	`charge_id`,
+	`item_id`,
+	`reservation_id`,
+	(SELECT `item_name` FROM `prices` WHERE `charges`.`item_id` = `prices`.`item_id`) AS 'item_name',
+	(SELECT `item_price` FROM `prices` WHERE `charges`.`item_id` = `prices`.`item_id`) AS 'item_price'
+	FROM `charges`;
+	
 
 -- insert necessary hotel data
-INSERT INTO `hotels` (`hotel_id`, `hotel_name`) VALUES (1, "The Midnight Resort"); -- subject to change
-INSERT INTO `hotels` (`hotel_id`, `hotel_name`) VALUES (2, "The Palatial Hotel");
-INSERT INTO `hotels` (`hotel_id`, `hotel_name`) VALUES (3, "Alpine Haven Ski Lodge");
-INSERT INTO `hotels` (`hotel_id`, `hotel_name`) VALUES (4, "The Serene Harbor Hotel & Yacht Club");
+INSERT INTO `hotels` (`hotel_name`) VALUES ("The Midnight Resort"); -- subject to change
+INSERT INTO `hotels` (`hotel_name`) VALUES ("The Palatial Hotel");
+INSERT INTO `hotels` (`hotel_name`) VALUES ("Alpine Haven Ski Lodge");
+INSERT INTO `hotels` (`hotel_name`) VALUES ("The Serene Harbor Hotel & Yacht Club");
 
 -- insert necessary room sizes table
-INSERT INTO `room_sizes` (`room_size_id`, `room_size_name`) VALUES (1, "Double Full Beds");
-INSERT INTO `room_sizes` (`room_size_id`, `room_size_name`) VALUES (2, "Single Queen Bed");
-INSERT INTO `room_sizes` (`room_size_id`, `room_size_name`) VALUES (3, "Double Queen Beds");
-INSERT INTO `room_sizes` (`room_size_id`, `room_size_name`) VALUES (4, "Single King Bed");
+INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("Double Full Beds", 110);
+INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("Single Queen Bed", 125);
+INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("Double Queen Beds", 150);
+INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("Single King Bed", 165);
+INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("wifi", 12.99);
+INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("breakfast", 8.99);
+INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("parking", 19.99);
