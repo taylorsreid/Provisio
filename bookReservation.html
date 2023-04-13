@@ -1,20 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" href="ReservationPage.css">
     <title>Reservation</title>
-    <ul>
-        <li><a href="default.asp">Home</a></li>
-        <li><a href="news.asp">About Us</a></li>
-        <li><a href="contact.asp">Contact</a></li>
-        <li><a href="about.asp">Reservation</a></li>
-        <li><a href="news.asp">Loyalty Program</a></li>
-        <li><a href="contact.asp">Registration</a></li>
-        <li><a href="about.asp">Login</a></li>
-    </ul>
+
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script type="module" src="./js/index.js"></script>
+	<link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="https://use.typekit.net/qrv7njf.css">
 
     <style>
         ul {
@@ -43,36 +38,38 @@
         }
     </style>
 
-  </head>
-  <body>
-        <h3>Adventure Starts Here</h3>
-        <div class="gallery">
-            <a target="_blank" href="Hotel1.png">
-              <img src="Hotel1.png" alt="Cinque Terre" width="600" height="400">
-            </a>
-            <div class="desc">Add a description of the image here</div>
-          </div>
-          
-          <div class="gallery">
-            <a target="_blank" href="Hotel2.png">
-              <img src="Hotel2.png" alt="Forest" width="600" height="400">
-            </a>
-            <div class="desc">Add a description of the image here</div>
-          </div>
-          
-          <div class="gallery">
-            <a target="_blank" href="Hotel3.png">
-              <img src="Hotel3.png" alt="Northern Lights" width="600" height="400">
-            </a>
-            <div class="desc">Add a description of the image here</div>
-          </div>
-          
-          <div class="gallery">
-            <a target="_blank" href="Hotel4.png">
-              <img src="Hotel4.png" alt="Mountains" width="600" height="400">
-            </a>
-            <div class="desc">Add a description of the image here</div>
-          </div>
+</head>
+<body>
 
-  </body>
+        <!-- insert header -->
+        <div w3-include-html="header.html"></div>
+        <script>w3.includeHTML();</script>
+
+        <h3>Adventure Starts Here</h3>
+
+        <div class="gallery">
+            <img src="./img/Hotel1.png" alt="Cinque Terre" width="600" height="400">
+            <div class="desc">Add a description of the image here</div>
+        </div>
+          
+        <div class="gallery">
+            <img src="./img/Hotel2.png" alt="Forest" width="600" height="400">
+            <div class="desc">Add a description of the image here</div>
+        </div>
+          
+        <div class="gallery">
+            <img src="./img/Hotel3.png" alt="Northern Lights" width="600" height="400">
+            <div class="desc">Add a description of the image here</div>
+        </div>
+          
+        <div class="gallery">
+            <img src="./img/Hotel4.png" alt="Mountains" width="600" height="400">
+            <div class="desc">Add a description of the image here</div>
+        </div>
+
+        <!-- insert footer -->
+        <div w3-include-html="footer.html"></div>
+        <script>w3.includeHTML();</script>
+
+    </body>
 </html>
