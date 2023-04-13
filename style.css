@@ -86,7 +86,6 @@ html, body {
 /* below was formerly login.css */
 
 #container {
-    padding-top: 8%;
     width: fit-content;
     margin: auto;
 }
@@ -158,79 +157,79 @@ input[type=button]:hover {
 	  padding: 10px 0px 40px 0px;
 	  position:relative;
 	  z-index: 5;
-  }
-  
-  .navtabs {
-	  display: flex;
-	  align-items: center;
-	  justify-content: center;
-	  column-gap: 20px;
-	  color: #FFBF49;
-	  border-radius: 5px;
-  }
-  
-  .navbar a {
-	  float: left;
-	  color: white;
-	  padding: 14px 16px;
-	  text-decoration: none;
-  }
-  
-  .dropdown {
-	  float: left;
-	  overflow: hidden;
-  }
-  
-  .dropdown .dropbtn {
-	  font-size: inherit;
-	  border: none;
-	  color: white;
-	  padding: 14px 16px;
-	  background-color: inherit;
-	  font-family: utopia-std-display, serif;
-	  font-weight: 400;
-	  font-style: normal;
-  }
-  
-  .navtabs a:hover, .dropdown:hover .dropbtn {
-	  background-color: #FFBF49;
-	  color: #170E00;
-	  font-family: utopia-std-display, serif;
-	  font-weight: 400;
-	  font-style: normal;
-	  transition: linear 0.25s;
-	  border-radius: 5px;
-  }
-  
-  .dropdown-content {
-	  visibility: hidden;
-	  position: absolute;
-	  background-color: #170E00;
-	  border-radius: 5px;
-  }
-  
-  .dropdown-content a {
-	  float: none;
-	  color: white;
-	  padding: 12px 16px;
-	  text-decoration: none;
-	  display: block;
-  }
-  
-  .dropdown:hover .dropdown-content {
+}
+
+.navtabs {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	column-gap: 20px;
+	color: #FFBF49;
+	border-radius: 5px;
+}
+
+.navbar a {
+	float: left;
+	color: white;
+	padding: 14px 16px;
+	text-decoration: none;
+}
+
+.dropdown {
+	float: left;
+	overflow: hidden;
+}
+
+.dropdown .dropbtn {
+	font-size: inherit;
+	border: none;
+	color: white;
+	padding: 14px 16px;
+	background-color: inherit;
+	font-family: utopia-std-display, serif;
+	font-weight: 400;
+	font-style: normal;
+}
+
+.navtabs a:hover, .dropdown:hover .dropbtn {
+	background-color: #FFBF49;
+	color: #170E00;
+	font-family: utopia-std-display, serif;
+	font-weight: 400;
+	font-style: normal;
+	transition: linear 0.25s;
+	border-radius: 5px;
+}
+
+.dropdown-content {
+	visibility: hidden;
+	position: absolute;
+	background-color: #170E00;
+	border-radius: 5px;
+}
+
+.dropdown-content a {
+	float: none;
+	color: white;
+	padding: 12px 16px;
+	text-decoration: none;
 	display: block;
-	  visibility: visible;
+}
+  
+.dropdown:hover .dropdown-content {
+	display: block;
+	visibility: visible;
   }
   
-  .logo {
-	  padding-left: 10px;
-  }
+.logo {
+	padding-left: 10px;
+}
   
-  a {
-	  font-family: utopia-std-display, serif;
-	  font-weight: 400;
-	  font-style: normal;
-  }
+a {
+	font-family: utopia-std-display, serif;
+	font-weight: 400;
+	font-style: normal;
+}
 
 /* BREAKING CHANGES BELOW
 
