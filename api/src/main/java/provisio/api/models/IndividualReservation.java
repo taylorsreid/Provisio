@@ -15,10 +15,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class IndividualReservation {
 
     private String reservationId;
-    String hotel;
-    String checkIn;
-    String checkOut;
-    int pointsEarned;
+    private String hotelName;
+    private String checkIn;
+    private String checkOut;
+    private int pointsEarned;
 
     @Override
     public String toString() {
