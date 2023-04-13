@@ -12,7 +12,7 @@
 
     <!-- import Javascript -->
     <script src="https://www.w3schools.com/lib/w3.js"></script>
-    <script type="module" src="./js/register.js"></script>
+    <script type="module" src="./js/confirmReservation.js"></script>
 
 </head>
 <body>
@@ -26,9 +26,9 @@
             <div class="title">
                 <h2>Confirm Your Reservation</h2>
                 <p class="date">
-                    dd/mm/yy - dd/mm/yy
+                    <div id="checkIn"></div> - <div id="checkOut"></div>
                     <br>
-                    at _______ Resort
+                    <div id="hotelName"></div>
                     <br>
                 </p>
             </div>
@@ -38,8 +38,8 @@
             <div id="table">
                 <table>
                     <tr class="contents" >
-                        <td class="tablecon"><p class="text">_ nights, _ guests</p></td>
-                        <td class="tablecon"><p class="text">$$$</p></td>
+                        <td class="tablecon"><div class="nights">_</div> nights in a <div class="roomSizeName">_</div> room :</td>
+                        <td class="tablecon">$</td>
                     </tr>
 
                     <tr class="contents" >
