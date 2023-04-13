@@ -2,7 +2,7 @@
 api/target/
 
 # VS Code
-.vscode/
+./vscode/
 
 #BEGIN ECLIPSE.GITIGNORE TEMPLATE
 
