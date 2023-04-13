@@ -7,37 +7,9 @@
     <title>Reservation</title>
 
     <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script type="module" src="./js/bookReservation.js"></script>
 	<link rel="stylesheet" href="./style.css">
 	<link rel="stylesheet" href="https://use.typekit.net/qrv7njf.css">
-
-    <style>
-        /*
-        ul {
-            list-style-type:none;
-            margin: 0;
-            padding: 0;
-            background-color: black;
-        }
-
-        li{
-            display:inline;
-            list-style-type:none;
-        }
-
-        div.gallery {
-            margin: 5px;
-            border: 1px solid #ccc;
-            float: left;
-            width: 180px;
-            
-        }
-
-        div.gallery img {
-            width: 100%;
-            height: auto;
-        }
-        */
-    </style>
 
 </head>
 <body>
@@ -47,40 +19,104 @@
         <script>w3.includeHTML();</script>
 
         <div id="container">
+
             <h1 id="welcomeMessage">Adventure Starts Here</h1>
-            <table>
-                <tr>
-                    <td>
-                        <figure>
-                            <img src="./img/hotel1.png" alt="" class="ridge" id="hotelImg1">
-                            <figcaption>Add a description of the image here</figcaption>
-                        </figure>
-                    </td>
-                    <td>
-                        <figure>
-                            <img src="./img/hotel2.png" alt="" class="ridge" id="hotelImg2">
-                            <figcaption>Add a description of the image here</figcaption>
-                        </figure>
-                    </td>
-                </tr>
-                <tr>
-                    <td>
-                        <figure>
-                            <img src="./img/hotel3.png" alt="" class="ridge" id="hotelImg3">
-                            <figcaption>Add a description of the image here</figcaption>
-                        </figure>
-                    </td>
-                    <td>
-                        <figure>
-                            <img src="./img/hotel4.png" alt="" class="ridge" id="hotelImg4">
-                            <figcaption>Add a description of the image here</figcaption>
-                        </figure>
-                    </td>
-                </tr>
-            </table>
-    
+
             <form id="form">
-                
+
+                <div id="step1">
+                    <h2>Choose Your Hotel</h2>
+                    <div class="flexContainer">
+                        <figure>
+                            <div class="hotelImg" hotelName="hotel 1 name">
+                                <img src="./img/hotel1.png" alt="hotel 1 name" class="ridge">
+                            </div>
+                            <figcaption>Add a description of the image here</figcaption>
+                        </figure>
+                        <figure>
+                            <div class="hotelImg" hotelName="hotel 2 name">
+                                <img src="./img/hotel2.png" alt="hotel 2 name" class="ridge">
+                            </div>
+                            <figcaption>Add a description of the image here</figcaption>
+                        </figure>
+                    </div>
+                        <div class="flexContainer">
+                            <figure>
+                                <div class="hotelImg" hotelName="hotel 3 name">
+                                    <img src="./img/hotel3.png" alt="hotel 3 name" class="ridge">
+                                </div>
+                                <figcaption>Add a description of the image here</figcaption>
+                            </figure>
+                            <figure>
+                                <div class="hotelImg" hotelName="hotel 4 name">
+                                    <img src="./img/hotel4.png" alt="hotel 4 name" class="ridge">
+                                </div>
+                                <figcaption>Add a description of the image here</figcaption>
+                            </figure>
+                        </div>
+                    <input type="text" name="hotelName" id="hotelName" required hidden>
+                </div>
+
+                <div id="step2" hidden>
+                    <h2>Great, when would you like to stay with us?</h2>
+                    <div class="flexContainer">
+                        <input type="date" name="checkIn" id="checkIn" required>
+                        <input type="date" name="checkOut" id="checkOut" required>
+                    </div>
+                </div>
+
+                <div id="step3" hidden>
+                    <h2>Choose Room Layout:</h2>
+                    <div class="flexContainer">
+                        <figure>
+                            <div class="roomSizeImg" roomSizeName="Double Full Beds">
+                                <img src="./img/doubleFullBeds.png" alt="Double Full Beds" class="ridge">
+                            </div>
+                            <figcaption>Double Full Beds</figcaption>
+                        </figure>
+                        <figure>
+                            <div class="roomSizeImg" roomSizeName="Single Queen Bed">
+                                <img src="./img/singleQueenBed.png" alt="Single Queen Bed" class="ridge">
+                            </div>
+                            <figcaption>Single Queen Bed</figcaption>
+                        </figure>
+                    </div>
+                        <div class="flexContainer">
+                            <figure>
+                                <div class="roomSizeImg" roomSizeName="Double Queen Beds">
+                                    <img src="./img/doubleQueenBeds.png" alt="Double Queen Beds" class="ridge">
+                                </div>
+                                <figcaption>Double Queen Beds</figcaption>
+                            </figure>
+                            <figure>
+                                <div class="roomSizeImg" roomSizeName="Single King Bed">
+                                    <img src="./img/singleKingBed.png" alt="Single King Bed" class="ridge">
+                                </div>
+                                <figcaption>Single King Bed</figcaption>
+                            </figure>
+                        </div>
+                    <input type="text" name="roomSizeName" id="roomSizeName" required hidden>
+                </div>
+
+                <div id="step4" hidden>
+
+                    <div class="flexContainer">Wifi $12.99 for length of stay<input type="checkbox" name="wifi" value="true"></div>
+                    <div class="flexContainer">Breakfast $8.99 per night<input type="checkbox" name="breakfast" value="true"></div>
+                    <div class="flexContainer">Parking $19.99 per night<input type="checkbox" name="parking" value="true"></div>
+
+                    <div id="guestsBox">
+                        Guest 1:
+                        <input type="text" id="firstName1" placeholder="First Name" required>
+                        <input type="text" id="lastName1" placeholder="Last Name" required>
+                    </div>
+
+                    <input type="button" value="+ Additional Guest" id="addGuest" class="secondaryButton">
+
+                    <div id="formMessage"></div>
+                    <input type="submit" value='Review & Book →'>
+                    
+                </div>
+
             </form>
         </div>
 
