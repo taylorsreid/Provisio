@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservation</title>
 
     <script src="https://www.w3schools.com/lib/w3.js"></script>
@@ -11,7 +11,8 @@
 	<link rel="stylesheet" href="https://use.typekit.net/qrv7njf.css">
 
     <style>
-        /* ul {
+        /*
+        ul {
             list-style-type:none;
             margin: 0;
             padding: 0;
@@ -34,12 +35,8 @@
         div.gallery img {
             width: 100%;
             height: auto;
-        } */
-
-        table {
-            margin-left: auto;
-            margin-right: auto;
         }
+        */
     </style>
 
 </head>
@@ -49,38 +46,43 @@
         <div w3-include-html="header.html"></div>
         <script>w3.includeHTML();</script>
 
-        <h1>Adventure Starts Here</h1>
-
-        <table>
-            <tr>
-                <td>
-                    <figure>
-                        <img src="./img/Hotel1.png" alt="" class="ridge">
-                        <figcaption>Add a description of the image here</figcaption>
-                    </figure>
-                </td>
-                <td>
-                    <figure>
-                        <img src="./img/Hotel2.png" alt="" class="ridge">
-                        <figcaption>Add a description of the image here</figcaption>
-                    </figure>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <figure>
-                        <img src="./img/Hotel3.png" alt="" class="ridge">
-                        <figcaption>Add a description of the image here</figcaption>
-                    </figure>
-                </td>
-                <td>
-                    <figure>
-                        <img src="./img/Hotel4.png" alt="" class="ridge">
-                        <figcaption>Add a description of the image here</figcaption>
-                    </figure>
-                </td>
-            </tr>
-        </table>
+        <div id="container">
+            <h1 id="welcomeMessage">Adventure Starts Here</h1>
+            <table>
+                <tr>
+                    <td>
+                        <figure>
+                            <img src="./img/hotel1.png" alt="" class="ridge" id="hotelImg1">
+                            <figcaption>Add a description of the image here</figcaption>
+                        </figure>
+                    </td>
+                    <td>
+                        <figure>
+                            <img src="./img/hotel2.png" alt="" class="ridge" id="hotelImg2">
+                            <figcaption>Add a description of the image here</figcaption>
+                        </figure>
+                    </td>
+                </tr>
+                <tr>
+                    <td>
+                        <figure>
+                            <img src="./img/hotel3.png" alt="" class="ridge" id="hotelImg3">
+                            <figcaption>Add a description of the image here</figcaption>
+                        </figure>
+                    </td>
+                    <td>
+                        <figure>
+                            <img src="./img/hotel4.png" alt="" class="ridge" id="hotelImg4">
+                            <figcaption>Add a description of the image here</figcaption>
+                        </figure>
+                    </td>
+                </tr>
+            </table>
+    
+            <form id="form">
+                
+            </form>
+        </div>
 
         <!-- insert footer -->
         <div w3-include-html="footer.html"></div>
