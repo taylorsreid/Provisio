@@ -73,16 +73,16 @@ public class ReservationService {
                     Connection conn = ConnectionManager.getConnection();
 
                     PreparedStatement hotelIdPs = conn.prepareStatement("SELECT `hotel_id` FROM `hotels` WHERE `hotel_name` = ?");
-                    hotelIdPs.setString(1, request.getHotel());
+                    hotelIdPs.setString(1, request.getHotelName());
                     ResultSet hotelIdRs = hotelIdPs.executeQuery();
                     hotelIdRs.next();
                     int hotelId = hotelIdRs.getInt("hotel_id");
 
-                    int roomSizeId = pricesService.selectItemIdFromItemName(request.getRoomSize());
+                    int roomSizeId = pricesService.selectItemIdFromItemName(request.getRoomSizeName());
 
                     PreparedStatement reservationsPs = conn.prepareStatement("INSERT INTO `reservations` (`reservation_id`, `user_id`, `hotel_id`, `check_in`, `check_out`, `room_size_id`, `wifi`, `breakfast`, `parking`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
 
-                    //the customer ID is stored in the JWT so that it can't be forged
+                    //the customer ID is stored in the signed JWT so that it can't be forged
                     reservationsPs.setString(1, reservationId);
                     reservationsPs.setString(2, authorizationService.getUserIdFromAuthorizationHeader(authorizationHeader));
                     reservationsPs.setInt(3, hotelId);
@@ -98,9 +98,9 @@ public class ReservationService {
                     guestsService.insertMany(reservationId, request.getGuests());
 
                     //insert charges
-                    chargesService.insertMany(reservationId, request.getHotel(), lengthOfStay);
+                    chargesService.insertMany(reservationId, request.getRoomSizeName(), lengthOfStay);
                     if (request.isWifi()){
-                        chargesService.insertOne(reservationId, "wifi");
+                        chargesService.insertOne(reservationId, "wifi"); //flat rate so insert one
                     }
                     if (request.isBreakfast()){
                         chargesService.insertMany(reservationId, "breakfast", lengthOfStay);
@@ -149,21 +149,22 @@ public class ReservationService {
                     WHERE `reservations_view`.`reservation_id` = ?
                     """);
                 ps.setString(1, request.getReservationId());
-                ResultSet resultSetReservation = ps.executeQuery();
+                ResultSet rs = ps.executeQuery();
 
                 ArrayList<Guest> guests = guestsService.selectMany(request.getReservationId());
 
                 ReservationGetByReservationIdResponse response = new ReservationGetByReservationIdResponse();
-                if (resultSetReservation.next()){
+                if (rs.next()){
                     response.setSuccess(true);
-                    response.setHotel(resultSetReservation.getString("hotel_name"));
-                    response.setRoomSize(resultSetReservation.getString("room_size_name"));
-                    response.setWifi(resultSetReservation.getBoolean("wifi"));
-                    response.setBreakfast(resultSetReservation.getBoolean("breakfast"));
-                    response.setParking(resultSetReservation.getBoolean("parking"));
-                    response.setCheckIn(resultSetReservation.getDate("check_in").toString());
-                    response.setCheckOut(resultSetReservation.getDate("check_out").toString());
+                    response.setHotelName(rs.getString("hotel_name"));
+                    response.setRoomSizeName(rs.getString("room_size_name"));
                     response.setGuests(guests);
+                    response.setWifi(rs.getBoolean("wifi"));
+                    response.setBreakfast(rs.getBoolean("breakfast"));
+                    response.setParking(rs.getBoolean("parking"));
+                    response.setCheckIn(rs.getDate("check_in").toString());
+                    response.setCheckOut(rs.getDate("check_out").toString());
+
                     return ResponseEntity.ok(response.toString());
                 }
                 else {
@@ -208,7 +209,7 @@ public class ReservationService {
                     response.setSuccess(true);
                     IndividualReservation individualReservation = new IndividualReservation();
                     individualReservation.setReservationId(reservationsRs.getString("reservation_id"));
-                    individualReservation.setHotel(reservationsRs.getString("hotel_name"));
+                    individualReservation.setHotelName(reservationsRs.getString("hotel_name"));
                     individualReservation.setCheckIn(reservationsRs.getString("check_in"));
                     individualReservation.setCheckOut(reservationsRs.getString("check_out"));
                     individualReservation.setPointsEarned(reservationsRs.getInt("points_earned"));
