@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Provisio</title>
+
+    <!-- import stylesheets -->
+    <link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="https://use.typekit.net/qrv7njf.css">
+
+    <!-- import Javascript -->
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script type="module" src="./js/confirmReservation.js"></script>
+
+</head>
+<body>
+
+    <!-- insert header -->
+    <div w3-include-html="header.html"></div>
+    <script>w3.includeHTML();</script>
+
+    <div id="summary">
+        <div id="mid">
+            <div class="title">
+                <h2>Confirm Your Reservation</h2>
+                <p class="date">
+                    <div id="checkIn"></div> - <div id="checkOut"></div>
+                    <br>
+                    <div id="hotelName"></div>
+                    <br>
+                </p>
+            </div>
+        </div> <!--end mid-->
+
+        <div id="information">
+            <div id="table">
+                <table>
+                    <tr class="contents" >
+                        <td class="tablecon"><div class="nights">_</div> nights in a <div class="roomSizeName">_</div> room :</td>
+                        <td class="tablecon">$</td>
+                    </tr>
+
+                    <tr class="contents" >
+                        <td class="tablecon"><p class="text">wifi</p></td>
+                        <td class="tablecon"><p class="text">$$$</p></td>
+                    </tr>
+
+                    <tr class="contents" >
+                        <td class="tablecon"><p class="text">breakfast x _ nights</p></td>
+                        <td class="tablecon"><p class="text">$$$</p></td>
+                    </tr>
+
+                    <tr class="contents" >
+                        <td class="tablecon"><p class="text">parking x _nights</p></td>
+                        <td class="tablecon"><p class="text">$$$</p></td>
+                    </tr>
+
+                    <tr class="contents" >
+                        <td class="tablecon"><p class="text">total</p></td>
+                        <td class="tablecon"><p class="text">$$$</p></td>
+                    </tr>
+                </table>
+            </div>
+        </div> <!--end information-->
+
+        <div id="push">
+            <button>
+                Confirm Reservation
+            </button>
+        </div>
+    </div>
+    
+
+    
+
+    <!-- insert footer -->
+    <div w3-include-html="footer.html"></div>
+    <script>w3.includeHTML();</script>
+
+</body>
+</html>
+
+
+<!--
+    <div class="col-md-12">   
+        <div class="row">
+               
+               <div class="receipt-main col-xs-10 col-sm-10 col-md-6 col-xs-offset-1 col-sm-offset-1 col-md-offset-3">
+                   <div class="row">
+                       <div class="receipt-header">
+                           <div class="col-xs-6 col-sm-6 col-md-6">
+                               
+                           </div>
+                           <div class="col-xs-6 col-sm-6 col-md-6 text-right">
+                               <div class="receipt-right">
+                                   <h5>Confirm Your Reservation</h5>
+                           </div>
+                       </div>
+                   </div>
+                   
+                   <div class="row">
+                       <div class="receipt-header receipt-header-mid">
+                           <div class="col-xs-8 col-sm-8 col-md-8 text-left">
+                               <div class="receipt-right">
+                                   <h5>Customer Name </h5>
+                                   <p><b>Mobile :</b> +1 12345-4569</p>
+                                   <p><b>Email :</b> customer@gmail.com</p>
+                                   <p><b>Address :</b> New York, USA</p>
+                               </div>
+                           </div>
+                           <div class="col-xs-4 col-sm-4 col-md-4">
+                               <div class="receipt-left">
+                                   <h3>INVOICE # 102</h3>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                   
+                   <div>
+                       <table class="table table-bordered">
+                           <thead>
+                               <tr>
+                                   <th>Description</th>
+                                   <th>Amount</th>
+                               </tr>
+                           </thead>
+                           <tbody>
+                               <tr>
+                                   <td class="col-md-9">Payment for August 2016</td>
+                                   <td class="col-md-3"><i class="fa fa-inr"></i> $$$</td>
+                               </tr>
+                               <tr>
+                                   <td class="col-md-9">Payment for June 2016</td>
+                                   <td class="col-md-3"><i class="fa fa-inr"></i> $$$</td>
+                               </tr>
+                               <tr>
+                                   <td class="col-md-9">Payment for May 2016</td>
+                                   <td class="col-md-3"><i class="fa fa-inr"></i> $$$</td>
+                               </tr>
+                              
+                               <tr>
+                                  
+                                   <td class="text-right"><h2><strong>Total: </strong></h2></td>
+                                   <td class="text-left text-danger"><h2><strong><i class="fa fa-inr"></i> $$$-</strong></h2></td>
+                               </tr>
+                           </tbody>
+                       </table>
+                   </div>
+
+                   <div class="push">
+                    <tr>
+                        <td>
+                            <button>
+                            Payment
+                            </button>
+                        </td>
+                    </tr>
+                   </div>
+                   
+                   <div class="row">
+                       <div class="receipt-header receipt-header-mid receipt-footer">
+                           <div class="col-xs-8 col-sm-8 col-md-8 text-left">
+                               <div class="receipt-right">
+                                   <p><b>Date :</b> 15 Aug 2016</p>
+                               </div>
+                           </div>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+                   
+               </div>    
+           </div>
+       </div>
+
+
+       <div class="container">
+        <div class="item">1</div>
+        <div class="item">2</div>
+        <div class="item">3</div>
+        <div class="item">4</div>
+        <div class="item">5</div>
+        <div class="item">6</div>
+        <div class="item">7</div>
+        <div class="item">8</div>
+    </div>-->
