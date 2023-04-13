@@ -83,14 +83,24 @@ html, body {
 	height: 350px;
 }
 
+.flexContainer {
+	display: flex;
+	flex-wrap: nowrap;
+  }
+  
+/* .flexContainer > * {
+	text-align: center;
+} */
+
 /* below was formerly login.css */
 
 #container {
     width: fit-content;
     margin: auto;
+	text-align: center;
 }
   
-form {
+.decoratedForm {
     margin: auto;
     width: 90%;
     border: 3px solid #f1f1f1;
@@ -105,7 +115,6 @@ input[type=text], input[type=password] {
     width: 100%;
     padding: 12px 20px;
     margin: 8px 0;
-    display: inline-block;
     border: 1px solid #ccc;
     box-sizing: border-box;
 }
@@ -120,7 +129,7 @@ input[type=submit] {
     width: 80%;
 }
 
-#secondaryButton {
+.secondaryButton {
     background-color:  #403227;
     color: white;
     padding: 14px 20px;
@@ -231,6 +240,24 @@ a {
 	font-style: normal;
 }
 
+#summary{
+	box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
+	padding:2mm;
+	margin: 0 auto;
+	width: 70mm;
+	background: #FFF;
+	border-radius: 20px;
+}
+
+.tablecon{
+	border-bottom: 1px solid #EEE;
+	padding-right: 25px;
+}
+
+#mid, #information {
+	border-bottom: 1px solid #EEE;
+}
+
 /* BREAKING CHANGES BELOW
 
 .row{
@@ -253,23 +280,11 @@ a {
 	text-align: center;
 }
 
-  
-#summary{
-  box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
-  padding:2mm;
-  margin: 0 auto;
-  width: 70mm;
-  background: #FFF;
-  border-radius: 20px;
-}
-
 h2 {
  text-align: center;
 }
 
-#mid, #information {
- border-bottom: 1px solid #EEE;
-}
+
 
 #mid{
  min-height: 80px;
@@ -279,10 +294,7 @@ h2 {
   min-height: 100px;
 }
 
-.tablecon{
- border-bottom: 1px solid #EEE;
- padding-right: 25px;
-}
+
 
 .date{
 	text-align: center;
