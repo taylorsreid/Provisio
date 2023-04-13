@@ -1,2 +1,11 @@
-# ALL FILES MUST USE UNIX LINE ENDINGS
+# ALL TEXT FILES MUST USE UNIX LINE ENDINGS
 * text eol=lf
+
+# IGNORE GRAPHICS
+*.png      binary
+*.jpg      binary
+*.jpeg     binary
+*.gif      binary
+*.tif      binary
+*.tiff     binary
+*.ico      binary
