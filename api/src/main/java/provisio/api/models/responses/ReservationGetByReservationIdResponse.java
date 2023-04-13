@@ -18,14 +18,14 @@ import java.util.ArrayList;
 public class ReservationGetByReservationIdResponse {
 
     private boolean success;
-    private String hotelName;
-    private String roomSizeName;
-    private ArrayList<Guest> guests;
-    private boolean wifi;
-    private boolean breakfast;
-    private boolean parking;
-    private String checkIn;
-    private String checkOut;
+    private String hotel;
+    private String roomSize;
+    ArrayList<Guest> guests;
+    boolean wifi;
+    boolean breakfast;
+    boolean parking;
+    String checkIn;
+    String checkOut;
 
     @Override
     public String toString() {
