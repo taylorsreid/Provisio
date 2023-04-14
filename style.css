@@ -257,3 +257,7 @@ a {
 #mid, #information {
 	border-bottom: 1px solid #EEE;
 }
+
+.date{
+	text-align: center;
+}

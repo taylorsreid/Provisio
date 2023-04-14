@@ -1,9 +1,8 @@
 package provisio.api.models.requests;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
 import lombok.Setter;
+import provisio.api.models.AbstractRequestResponse;
 import provisio.api.models.Guest;
 import java.util.ArrayList;
 
@@ -13,7 +12,7 @@ import java.util.ArrayList;
  */
 @Getter
 @Setter
-public class ReservationPostRequest {
+public class ReservationPostRequest extends AbstractRequestResponse {
 
     private String hotelName;
     private String checkIn; //Use a string, not a date.  Java and MySQL have compatibility issues between their date objects but strings always work.
@@ -23,14 +22,5 @@ public class ReservationPostRequest {
     private boolean breakfast;
     private boolean parking;
     private ArrayList<Guest> guests;
-
-    @Override
-    public String toString() {
-        try {
-            return new ObjectMapper().writeValueAsString(this);
-        } catch (JsonProcessingException e) {
-            throw new RuntimeException(e);
-        }
-    }
 
 }
