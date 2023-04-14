@@ -1,6 +1,7 @@
 html, body {
 	background-color: #FFFFD7;
 	margin: 0px;
+	scroll-behavior: smooth;
 }
 
 /* 
@@ -351,6 +352,7 @@ a {
 	display: block;
     float: left;
 	width: 50%;
+	margin-bottom: 100px;
 	
 }
 
@@ -358,7 +360,10 @@ a {
 	display: block;
     float: right;
 	width: 50%;
+	margin-bottom: 100px;
 }
+
+
 
 /* A few custom styles for date inputs */
 input[type="date"] {
