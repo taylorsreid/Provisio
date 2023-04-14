@@ -47,12 +47,12 @@ public class MainController {
         return reservationService.getByReservationId(reservationGetByReservationIdRequest);
     }
 
-    @GetMapping(path = "/reservations/getByUserId", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(path = "/reservations/getByUserId", produces = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<String> getReservationByUserId(@RequestHeader(value = HttpHeaders.AUTHORIZATION) String authorizationHeader){
             return reservationService.getByUserId(authorizationHeader);
     }
 
-    @GetMapping(path = "/prices")
+    @PostMapping(path = "/prices")
     public @ResponseBody ResponseEntity<String> getPrices(@RequestBody PricesRequest pricesRequest){
         return pricesService.getPrices(pricesRequest);
     }
