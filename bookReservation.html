@@ -20,7 +20,7 @@
 
         <div id="container">
 
-            <h1 id="welcomeMessage">Adventure Starts Here</h1>
+            <h1 id="reservation-header">Adventure Starts Here</h1>
 
             <form id="form">
 
@@ -28,42 +28,57 @@
                     <h2>Choose Your Hotel</h2>
                     <div class="flexContainer">
                         <figure>
-                            <div class="hotelImg" hotelName="hotel 1 name">
-                                <img src="./img/hotel1.png" alt="hotel 1 name" class="ridge">
+                            <div class="hotelImg" hotelName="The Midnight Resort">
+                                <img src="./img/midnight.jpg" alt="The Midnight Resort" class="ridge">
+								<div>Select</div>
                             </div>
-                            <figcaption>Add a description of the image here</figcaption>
+                            <figcaption class="hotel-name">The Midnight Resort</figcaption>
+							
                         </figure>
-                        <figure>
-                            <div class="hotelImg" hotelName="hotel 2 name">
-                                <img src="./img/hotel2.png" alt="hotel 2 name" class="ridge">
+                        
+						<figure>
+                            <div class="hotelImg" hotelName="The Palatial Hotel">
+                                <img src="./img/hotel2.png" alt="The Palatial Hotel" class="ridge">
+								<div>Select</div>
                             </div>
-                            <figcaption>Add a description of the image here</figcaption>
+                            <figcaption class="hotel-name">The Palatial Hotel</figcaption>
                         </figure>
                     </div>
                         <div class="flexContainer">
                             <figure>
-                                <div class="hotelImg" hotelName="hotel 3 name">
-                                    <img src="./img/hotel3.png" alt="hotel 3 name" class="ridge">
+                                <div class="hotelImg" hotelName="The Serene Harbor Hotel & Yacht Club">
+                                    <img src="./img/hotel3.png" alt="The Serene Harbor Hotel & Yacht Club" class="ridge">
+									<div>Select</div>
                                 </div>
-                                <figcaption>Add a description of the image here</figcaption>
+                                <figcaption class="hotel-name">The Serene Harbor Hotel &amp; Yacht Club</figcaption>
                             </figure>
                             <figure>
-                                <div class="hotelImg" hotelName="hotel 4 name">
-                                    <img src="./img/hotel4.png" alt="hotel 4 name" class="ridge">
+                                <div class="hotelImg" hotelName="Alpine Haven Ski Lodge">
+                                    <img src="./img/alpine.jpg" alt="Alpine Haven Ski Lodge" class="ridge">
+									<div>Select</div>
                                 </div>
-                                <figcaption>Add a description of the image here</figcaption>
+                                <figcaption class="hotel-name">Alpine Haven Ski Lodge</figcaption>
                             </figure>
                         </div>
                     <input type="text" name="hotelName" id="hotelName" required hidden>
                 </div>
+				<br>
+				<br>
 
-                <div id="step2" hidden>
-                    <h2>Great, when would you like to stay with us?</h2>
-                    <div class="flexContainer">
-                        <input type="date" name="checkIn" id="checkIn" required>
-                        <input type="date" name="checkOut" id="checkOut" required>
+				<div id="step2" hidden>
+					<h2>Great, when would you like to stay with us?</h2>
+                    <div class=".datePicker">
+						<div class="arrival">
+							<h3>Arrival</h3>
+                        	<input type="date" name="checkIn" id="checkIn" required>
+						</div>
+						<div class="departure">
+							<h3>Departure</h3>
+                        	<input type="date" name="checkOut" id="checkOut" required>
+						</div>
                     </div>
                 </div>
+
 
                 <div id="step3" hidden>
                     <h2>Choose Room Layout:</h2>
@@ -71,28 +86,32 @@
                         <figure>
                             <div class="roomSizeImg" roomSizeName="Double Full Beds">
                                 <img src="./img/doubleFullBeds.png" alt="Double Full Beds" class="ridge">
+								<div>Select</div>
                             </div>
-                            <figcaption>Double Full Beds</figcaption>
+                            <figcaption class="bed-type">Double Full Beds</figcaption>
                         </figure>
                         <figure>
                             <div class="roomSizeImg" roomSizeName="Single Queen Bed">
                                 <img src="./img/singleQueenBed.png" alt="Single Queen Bed" class="ridge">
+								<div>Select</div>
                             </div>
-                            <figcaption>Single Queen Bed</figcaption>
+                            <figcaption class="bed-type">Single Queen Bed</figcaption>
                         </figure>
                     </div>
                         <div class="flexContainer">
                             <figure>
                                 <div class="roomSizeImg" roomSizeName="Double Queen Beds">
                                     <img src="./img/doubleQueenBeds.png" alt="Double Queen Beds" class="ridge">
+									<div>Select</div>
                                 </div>
-                                <figcaption>Double Queen Beds</figcaption>
+                                <figcaption class="bed-type">Double Queen Beds</figcaption>
                             </figure>
                             <figure>
                                 <div class="roomSizeImg" roomSizeName="Single King Bed">
                                     <img src="./img/singleKingBed.png" alt="Single King Bed" class="ridge">
+									<div>Select</div>
                                 </div>
-                                <figcaption>Single King Bed</figcaption>
+                                <figcaption class="bed-type">Single King Bed</figcaption>
                             </figure>
                         </div>
                     <input type="text" name="roomSizeName" id="roomSizeName" required hidden>
@@ -100,12 +119,13 @@
 
                 <div id="step4" hidden>
 
-                    <div class="flexContainer">Wifi $12.99 for length of stay<input type="checkbox" name="wifi" value="true"></div>
-                    <div class="flexContainer">Breakfast $8.99 per night<input type="checkbox" name="breakfast" value="true"></div>
-                    <div class="flexContainer">Parking $19.99 per night<input type="checkbox" name="parking" value="true"></div>
+					<h2>Additional Features:</h2>
+                    <div class="flexContainer"><h4>Wifi: +$12.99 for length of stay</h4><input type="checkbox" name="wifi" value="true"></div>
+                    <div class="flexContainer"><h4>Breakfast: +$8.99 per night</h4><input type="checkbox" name="breakfast" value="true"></div>
+                    <div class="flexContainer"><h4>Parking: +$19.99 per night</h4><input type="checkbox" name="parking" value="true"></div>
 
                     <div id="guestsBox">
-                        Guest 1:
+                        <h4>Guest 1:</h4>
                         <input type="text" id="firstName1" placeholder="First Name" required>
                         <input type="text" id="lastName1" placeholder="Last Name" required>
                     </div>
