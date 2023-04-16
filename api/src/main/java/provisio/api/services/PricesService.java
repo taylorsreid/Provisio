@@ -39,20 +39,16 @@ public class PricesService {
             Connection conn = ConnectionManager.getConnection();
             HashMap<String, BigDecimal> hm = new HashMap<>();
             for (String item : request.getItems() ) {
-                try {
-                    PreparedStatement ps = conn.prepareStatement("SELECT `item_price` FROM `prices` WHERE `item_name` = ?");
-                    ps.setString(1, item);
-                    ResultSet rs = ps.executeQuery();
-                    if (rs.next()){
-                        hm.put(item, rs.getBigDecimal("item_price"));
-                    }
-                } catch (SQLException ex) {
-                    ex.printStackTrace();
+                PreparedStatement ps = conn.prepareStatement("SELECT `item_price` FROM `prices` WHERE `item_name` = ?");
+                ps.setString(1, item);
+                ResultSet rs = ps.executeQuery();
+                if (rs.next()){
+                    hm.put(item, rs.getBigDecimal("item_price"));
                 }
             }
             return ResponseEntity.ok(new PricesResponse(true, hm).toString());
         }
-        catch (ClassNotFoundException ex){
+        catch (Exception ex){
             ex.printStackTrace();
             return ResponseEntity.internalServerError().body(new GenericResponse(false, "An internal server error has occurred.").toString());
         }
@@ -62,17 +58,13 @@ public class PricesService {
         try{
             Connection conn = ConnectionManager.getConnection();
             HashMap<String, BigDecimal> hm = new HashMap<>();
-            try {
-                ResultSet rs = conn.createStatement().executeQuery("SELECT `item_name`, `item_price` FROM `prices`");
-                while (rs.next()){
-                    hm.put(rs.getString("item_name"), rs.getBigDecimal("item_price"));
-                }
-            } catch (SQLException ex) {
-                ex.printStackTrace();
+            ResultSet rs = conn.createStatement().executeQuery("SELECT `item_name`, `item_price` FROM `prices`");
+            while (rs.next()){
+                hm.put(rs.getString("item_name"), rs.getBigDecimal("item_price"));
             }
             return ResponseEntity.ok(new PricesResponse(true, hm).toString());
         }
-        catch (ClassNotFoundException ex){
+        catch (Exception ex){
             ex.printStackTrace();
             return ResponseEntity.internalServerError().body(new GenericResponse(false, "An internal server error has occurred.").toString());
         }
