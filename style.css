@@ -277,19 +277,14 @@ a {
 
 #summary{
 	box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
-	padding:2mm;
-	margin: 0 auto;
+	margin: auto;
 	width: 30%;
 	background: #FFF;
 	border-radius: 20px;
+	text-align: center;
 }
 
 .tablecon{
-	border-bottom: 1px solid #EEE;
-	padding-right: 25px;
-}
-
-#mid, #information {
 	border-bottom: 1px solid #EEE;
 }
 
@@ -308,11 +303,13 @@ a {
 }
 
 .hotelImg, .roomSizeImg {
+	filter: brightness(100%);
 	-webkit-filter: brightness(100%);
 }
 
 .hotelImg:hover img, .roomSizeImg:hover img {
 	-webkit-filter: brightness(50%);
+	filter: brightness(50%);
     -webkit-transition: all 0.5s ease;
     -moz-transition: all 1s ease;
     -o-transition: all 0.5s ease;
@@ -344,7 +341,7 @@ a {
 
 .datePicker {
 	display: inline-block;
-	content-align: center;
+	align-content: center;
 }
 
 .arrival {  
@@ -352,7 +349,6 @@ a {
     float: left;
 	width: 50%;
 	margin-bottom: 100px;
-	
 }
 
 .departure { 
@@ -386,6 +382,10 @@ input[type="date"], focus {
     -moz-box-shadow: none;
 }
 
-.numberColumn {
+.rightAlign {
 	text-align: right;
+}
+
+.leftAlign {
+	text-align: left;
 }
