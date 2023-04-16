@@ -17,13 +17,13 @@ if(Cookies.get("loggedIn") !== "true"){
     setTimeout(function(){window.location.href = "./login.html"}, 3000); //callback to wait 3 seconds then redirect
 }
 
-const steps = [1, 2, 3, 4];
-let currentStep = 1;
-function advanceStep() {
-    currentStep++;
-    document.getElementById(`step${currentStep}`).hidden = false;
-    document.getElementById(`step${currentStep}`).scrollIntoView();
-}
+// const steps = [1, 2, 3, 4];
+// let currentStep = 1;
+// function advanceStep() {
+//     currentStep++;
+//     document.getElementById(`step${currentStep}`).hidden = false;
+//     document.getElementById(`step${currentStep}`).scrollIntoView();
+// }
 
 let nights;
 function updatePoints(){
@@ -40,7 +40,8 @@ function updatePoints(){
 Array.from(hotelImages).forEach(element => {
     element.addEventListener("click", function(){
         hotelName.value = element.getAttribute("hotelName");
-        advanceStep();
+        document.getElementById("step2").hidden = false;
+        document.getElementById("step2").scrollIntoView();
     })
 });
 
@@ -55,13 +56,15 @@ checkOutInput.min = tomorrow.toISOString().split("T")[0]; //set minimum check ou
 checkInInput.addEventListener("change", function(){
     updatePoints();
     if (checkOutInput.value !== "") {
-        advanceStep();
+        document.getElementById("step3").hidden = false;
+        document.getElementById("step3").scrollIntoView();
     }
 });
 checkOutInput.addEventListener("change", function(){
     updatePoints();
     if (checkInInput.value !== "") {
-        advanceStep();
+        document.getElementById("step3").hidden = false;
+        document.getElementById("step3").scrollIntoView();
     }
 });
 
@@ -69,7 +72,8 @@ checkOutInput.addEventListener("change", function(){
 Array.from(roomSizeImages).forEach(element => {
     element.addEventListener("click", function(){
         roomSizeName.value = element.getAttribute("roomSizeName");
-        advanceStep();
+        document.getElementById("step4").hidden = false;
+        document.getElementById("step4").scrollIntoView();
     })
 });
 
@@ -77,11 +81,7 @@ Array.from(roomSizeImages).forEach(element => {
 let guestCount = 2;
 addGuestButton.addEventListener("click", function () {
         //output additional guest name fields
-        document.getElementById("guestsBox").insertAdjacentHTML("beforeend", `
-            Guest ${guestCount}:
-            <input type="text" id="firstName${guestCount}" placeholder="First Name">
-            <input type="text" id="lastName${guestCount}" placeholder="Last Name">
-        `)
+        document.getElementById(`guestBox${guestCount}`).hidden = false;
         guestCount++;
         if (guestCount >= 6) { //hides self (add guest button) if maximum guests is reached
             addGuestButton.hidden = true;
