@@ -1,17 +1,13 @@
-package provisio.api.models.requests;
+package provisio.api.models;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.Getter;
+import lombok.Setter;
 
-/**
- * Model object for a JSON get reservations by user ID request body.
- * For use in the customer loyalty points tracking page, requirement 10.
- */
 @Getter
-public class ReservationGetByUserIdRequest {
-
-    String userId;
+@Setter
+public abstract class AbstractRequestResponse {
 
     @Override
     public String toString() {
