@@ -7,7 +7,6 @@
     <title>About Us</title>
 
     <script src="https://www.w3schools.com/lib/w3.js"></script>
-    <script type="module" src="./js/index.js"></script>
 	<link rel="stylesheet" href="./style.css">
 	<link rel="stylesheet" href="https://use.typekit.net/qrv7njf.css">
 
@@ -17,52 +16,64 @@
     <!-- insert header -->
     <div w3-include-html="header.html"></div>
     <script>w3.includeHTML();</script>
+
+    <table id="wrapper">
+        <tr>
+            <td colspan="2">
+                <h2 style="text-align: center;">About Us</h2>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <img src="./img/Hotelstaff1.png" alt="Hotel Staff">
+            </td>
+            <td style="text-align: center;">
+                <h2>Who Are We?</h2>
+                <p>We are a dedicated team of hospitality professionals</p> 
+                <p>who are committed to providing a top class experience, to all of our guests</p>
+                <p>staying at our properties.</p>
+            </td>
+        </tr>
+        <tr>
+            <td style="text-align: center">
+                <h2>Our Mission</h2>
+                <p>Our mission is simple:</p>
+                <p>Facilitate a smooth arrival.</p>
+                <p>Provide an unforgettable stay.</p>
+                <p>Allow our guest to escape.</p>
+            </td>
+            <td>
+                <img src="./img/OurMission.png" alt="Hotel Staff">
+            </td>
+        </tr>
+    </table>
     
-	<div id="LeftFloatPic">
-        <h1>Who Are We?</h1></div>
-        <p>We are a dedicated team of hospitality professionals.<br> 
-           Who are committed to providing a top class experience, to all of our guests <br>
-           staying at one of our sites.</p>
-		<img class="AboutPic1" src="./img/Hotelstaff1.png" alt="">
-		
-	</div>	
-		
+     <div id="Contact" style="text-align: center;">
+        <h2>Contact Us</h2>
+        <p>Phone Number: <a href="tel:1800000000">1 (800) - 000 - 000</a></p>
 
+        <br>
 
-    <div id="RightFloatPic">
-        <h1>Our Mission</h1>
-        <p>Our mission is simple:<br> 
-            Facilitate a smooth arrival.<br>
-            Provide a unforgettable stay.<br>
-            Allow our guest to escape.<br>
-        </p>
-		<img class="AboutPic2" src="./img/OurMission.png" alt="">
-	</div>	
-    
-     <div id="Contact"><h2>Contact Us</h2>
-     Phone Number: 1 (800) - 000 - 000<br>
-     Hours:<br>
-     Monday - Friday: 8:00 AM - 10:00PM<br> 
-     Sunday - Saturday: CLOSED<br>
-     <br>
+        <p>Hours:</p>
+        <p>Monday - Friday: 8:00 AM - 10:00PM</p>
+        <p>Sunday - Saturday: CLOSED</p>
 
-     Email: Provisio@ProvisioNetwork.net<br>
-     Hours: 24 hour turnaroud<br>
-     <br>
+        <br>
 
-     Physical Mail Address:<br>
-     Provisio Main Office<br>
-     3800 Seaside Avenue<br>
-     Bloomingdale, CA 78247</div>
+        <p>Email: <a href="mailto:example@example.com">ContactUs@Provisio.com</a></p>
+        <p>Please allow up to 24 hours for a response.</p>
+
+        <br>
+
+        <p>Physical Mail Address:</p>
+        <p>Provisio Main Office</p>
+        <p>3800 Seaside Avenue</p>
+        <p>Bloomingdale, CA 78247</p>
+    </div>
 	
-
-
     <!-- insert footer -->
     <div w3-include-html="footer.html"></div>
     <script>w3.includeHTML();</script>
-	
-	<br>
-	<br>
 
 </body>
 </html>
