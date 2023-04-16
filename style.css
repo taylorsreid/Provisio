@@ -385,3 +385,7 @@ input[type="date"], focus {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
 }
+
+.numberColumn {
+	text-align: right;
+}
