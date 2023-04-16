@@ -8,10 +8,7 @@ import provisio.api.models.responses.GenericResponse;
 import provisio.api.models.responses.PricesResponse;
 
 import java.math.BigDecimal;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.HashMap;
 
 
@@ -37,10 +34,9 @@ public class PricesService {
     }
 
     //TODO: REFACTOR TO BATCH
-    public ResponseEntity<String> getPrices(PricesRequest request){
+    public ResponseEntity<String> getNamedPrices(PricesRequest request){
         try{
             Connection conn = ConnectionManager.getConnection();
-//            PricesResponse response = new PricesResponse();
             HashMap<String, BigDecimal> hm = new HashMap<>();
             for (String item : request.getItems() ) {
                 try {
@@ -53,6 +49,26 @@ public class PricesService {
                 } catch (SQLException ex) {
                     ex.printStackTrace();
                 }
+            }
+            return ResponseEntity.ok(new PricesResponse(true, hm).toString());
+        }
+        catch (ClassNotFoundException ex){
+            ex.printStackTrace();
+            return ResponseEntity.internalServerError().body(new GenericResponse(false, "An internal server error has occurred.").toString());
+        }
+    }
+
+    public ResponseEntity<String> getAllPrices(){
+        try{
+            Connection conn = ConnectionManager.getConnection();
+            HashMap<String, BigDecimal> hm = new HashMap<>();
+            try {
+                ResultSet rs = conn.createStatement().executeQuery("SELECT `item_name`, `item_price` FROM `prices`");
+                while (rs.next()){
+                    hm.put(rs.getString("item_name"), rs.getBigDecimal("item_price"));
+                }
+            } catch (SQLException ex) {
+                ex.printStackTrace();
             }
             return ResponseEntity.ok(new PricesResponse(true, hm).toString());
         }

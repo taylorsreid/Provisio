@@ -263,7 +263,7 @@ input[type=button]:hover {
 .dropdown:hover .dropdown-content {
 	display: block;
 	visibility: visible;
-  }
+}
   
 .logo {
 	padding-left: 10px;
@@ -279,7 +279,7 @@ a {
 	box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
 	padding:2mm;
 	margin: 0 auto;
-	width: 70mm;
+	width: 30%;
 	background: #FFF;
 	border-radius: 20px;
 }

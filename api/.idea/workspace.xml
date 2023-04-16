@@ -5,7 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ac86c9ae-18ca-4d7a-a719-bca25a9a6c6d" name="Changes" comment="Clarified first_name and last_name to user_first_name / user_last_name and guest_first_name / guest_last_name.">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/PricesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/PricesService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../confirmReservation.html" beforeDir="false" afterPath="$PROJECT_DIR$/../confirmReservation.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../js/confirmReservation.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/confirmReservation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../style.css" beforeDir="false" afterPath="$PROJECT_DIR$/../style.css" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -113,7 +118,7 @@
       <recent name="com.tiptracker.api" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Application.Test">
     <configuration name="Test" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="17" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
