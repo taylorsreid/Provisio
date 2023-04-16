@@ -119,7 +119,7 @@ public class RegisterService {
 
                 //if account creation was unsuccessful, close connection and return reasons why
                 conn.close();
-                return ResponseEntity.ok().body(new GenericResponse(false, message.toString()).toString());
+                return ResponseEntity.ok(new GenericResponse(false, message.toString()).toString());
             }
         }
         catch (Exception ex){
