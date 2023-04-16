@@ -22,46 +22,47 @@
     <script>w3.includeHTML();</script>
 
     <div id="summary">
-        <div id="mid">
-            <div class="title">
-                <h2>Confirm Your Reservation</h2>
-                <p><span id="checkIn"></span> - <span id="checkOut"></span></p>
-                <p><span id="hotelName"></span></p>
-            </div>
-        </div> <!--end mid-->
 
-        <div id="information">
-                <table>
-                    <tr class="contents">
-                        <td class="tablecon"><span class="nights">_</span> night(s) in a <span id="roomSizeName">_</span> room:</td>
-                        <td class="tablecon numberColumn" id="roomTotal"></td>
-                    </tr>
+        <div>
+            <h2>Confirm Your Reservation</h2>
+            <p><span id="checkIn"></span> - <span id="checkOut"></span></p>
+            <p id="hotelName"></p>
+            <p>Guests:</p>
+            <p id="guests"></p>
+        </div>
 
-                    <tr class="contents" id="wifiRow" hidden>
-                        <td class="tablecon">Wifi:</td>
-                        <td class="tablecon numberColumn" id="wifiTotal"></td>
-                    </tr>
+        <table style="margin: 0 auto;">
+            <tr>
+                <td class="tablecon leftAlign"><span class="nights">_</span> night(s) in a <span id="roomSizeName">_</span> room:</td>
+                <td class="tablecon rightAlign" id="roomTotal"></td>
+            </tr>
 
-                    <tr class="contents" id="breakfastRow" hidden>
-                        <td class="tablecon">Breakfast x <span class="nights">_</span> nights:</td>
-                        <td class="tablecon numberColumn" id="breakfastTotal"></td>
-                    </tr>
+            <tr id="wifiRow" hidden>
+                <td class="tablecon leftAlign">Wifi:</td>
+                <td class="tablecon rightAlign" id="wifiTotal"></td>
+            </tr>
 
-                    <tr class="contents" id="parkingRow" hidden>
-                        <td class="tablecon">Parking x <span class="nights">_</span> nights:</td>
-                        <td class="tablecon numberColumn" id="parkingTotal"></td>
-                    </tr>
+            <tr id="breakfastRow" hidden>
+                <td class="tablecon leftAlign">Breakfast x <span class="nights">_</span> nights:</td>
+                <td class="tablecon rightAlign" id="breakfastTotal"></td>
+            </tr>
 
-                    <tr class="contents">
-                        <td class="tablecon">Total:</td>
-                        <td class="tablecon numberColumn" id="grandTotal"></td>
-                    </tr>
-                </table>
-        </div> <!--end information-->
+            <tr id="parkingRow" hidden>
+                <td class="tablecon leftAlign">Parking x <span class="nights">_</span> nights:</td>
+                <td class="tablecon rightAlign" id="parkingTotal"></td>
+            </tr>                 
+
+            <tr>
+                <td class="tablecon leftAlign" style="font-weight: bold;">Total:</td>
+                <td class="tablecon rightAlign" id="grandTotal" style="font-weight: bold;">_</td>
+            </tr>
+            
+        </table>
 
         <input type="submit" value="Confirm Reservation" id="submitButton">
         <input type="reset" value="Cancel Reservation" class="secondaryButton" id="cancelButton">
         <div id="reservationMessage"></div>
+        
     </div>
     
     <!-- insert footer -->
