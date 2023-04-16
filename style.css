@@ -1,7 +1,14 @@
 html, body {
 	background-color: #FFFFD7;
 	margin: 0px;
+	scroll-behavior: smooth;
 }
+
+/* 
+ 
+--> LANDING PAGE <--
+
+*/
 
 #wrapper {
 	width: auto;
@@ -36,6 +43,34 @@ html, body {
 
 #formMessage {
 	text-decoration: underline;
+}
+
+#reservation-header {
+	padding: 30px 0px 20px;
+	font-family: mantinia, serif;
+	font-size: 50px;
+    font-weight: 400;
+}
+
+h2 {
+	font-family: freightneocnd-pro, sans-serif;
+	font-weight: 500;
+	font-style: normal;
+	font-size: 30px;
+}
+
+h3 {
+	font-family: freight-neo-pro, sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 25px;
+}
+
+h4 {
+	font-family: freight-neo-pro, sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	font-size: 20px;
 }
 
 .homeGalleryCaption {
@@ -258,6 +293,95 @@ a {
 	border-bottom: 1px solid #EEE;
 }
 
-.date{
-	text-align: center;
+/* 
+ 
+--> RESERVATIONS PAGE <--
+
+*/
+
+.hotel-name, .bed-type {
+	font-family: freightneocnd-pro, sans-serif;
+	font-weight: 300;
+	font-style: normal;
+	font-size: 25px;
+	padding: 10px 0px;
+}
+
+.hotelImg, .roomSizeImg {
+	-webkit-filter: brightness(100%);
+}
+
+.hotelImg:hover img, .roomSizeImg:hover img {
+	-webkit-filter: brightness(50%);
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 1s ease;
+    -o-transition: all 0.5s ease;
+    -ms-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+	cursor: pointer;
+}
+
+.hotelImg div, .roomSizeImg div{
+	font-family: utopia-std-display, serif;
+	font-weight: 400;
+	font-style: italic;
+	font-size: 30px;
+	color: white;
+	position: absolute;
+  	top: 50%;
+  	left: 50%;
+  	transform: translate(-50%, -50%);
+    opacity: 0;
+    visibility: hidden;
+	-webkit-transition: visibility 0s, opacity 0.5s linear; 
+    transition: visibility 0s, opacity 0.5s linear;
+}
+
+.hotelImg:hover div, .roomSizeImg:hover div{
+	visibility: visible;
+    opacity: 1;
+}
+
+.datePicker {
+	display: inline-block;
+	content-align: center;
+}
+
+.arrival {  
+	display: block;
+    float: left;
+	width: 50%;
+	margin-bottom: 100px;
+	
+}
+
+.departure { 
+	display: block;
+    float: right;
+	width: 50%;
+	margin-bottom: 100px;
+}
+
+/* A few custom styles for date inputs */
+input[type="date"] {
+    appearance: none;
+    -webkit-appearance: none;
+    color: #95a5a6;
+    font-family: "Helvetica", arial, sans-serif;
+    font-size: 18px;
+    border:1px solid #ecf0f1;
+    background:#ecf0f1;
+    padding:5px;
+    display: inline-block !important;
+    visibility: visible !important;
+	width: 59%;
+  	margin-left: auto;
+  	margin-right: auto;
+}
+
+input[type="date"], focus {
+    color: #95a5a6;
+    box-shadow: none;
+    -webkit-box-shadow: none;
+    -moz-box-shadow: none;
 }
