@@ -342,7 +342,6 @@ a {
     opacity: 1;
 }
 
-
 .datePicker {
 	display: inline-block;
 	content-align: center;
@@ -362,8 +361,6 @@ a {
 	width: 50%;
 	margin-bottom: 100px;
 }
-
-
 
 /* A few custom styles for date inputs */
 input[type="date"] {
@@ -388,5 +385,3 @@ input[type="date"], focus {
     -webkit-box-shadow: none;
     -moz-box-shadow: none;
 }
-
-

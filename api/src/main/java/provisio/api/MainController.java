@@ -1,6 +1,7 @@
 package provisio.api;
 
 import org.springframework.http.*;
+import provisio.api.models.PricesRequest;
 import provisio.api.models.requests.*;
 import provisio.api.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +18,9 @@ public class MainController {
     private LoginService loginService;
     @Autowired
     private ReservationService reservationService;
+
+    @Autowired
+    private PricesService pricesService;
 
     @PostMapping(path = "/register", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<String> register(@RequestBody RegisterRequest registerRequest){
@@ -47,4 +51,10 @@ public class MainController {
     public @ResponseBody ResponseEntity<String> getReservationByUserId(@RequestHeader(value = HttpHeaders.AUTHORIZATION) String authorizationHeader){
             return reservationService.getByUserId(authorizationHeader);
     }
+
+    @PostMapping(path = "/prices")
+    public @ResponseBody ResponseEntity<String> getPrices(@RequestBody PricesRequest pricesRequest){
+        return pricesService.getPrices(pricesRequest);
+    }
+
 }
