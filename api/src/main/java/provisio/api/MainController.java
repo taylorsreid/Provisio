@@ -53,8 +53,13 @@ public class MainController {
     }
 
     @PostMapping(path = "/prices")
-    public @ResponseBody ResponseEntity<String> getPrices(@RequestBody PricesRequest pricesRequest){
-        return pricesService.getPrices(pricesRequest);
+    public @ResponseBody ResponseEntity<String> getPrices(@RequestBody(required = false) PricesRequest pricesRequest){
+        if (pricesRequest != null){
+            return pricesService.getNamedPrices(pricesRequest);
+        }
+        else {
+            return pricesService.getAllPrices();
+        }
     }
 
 }

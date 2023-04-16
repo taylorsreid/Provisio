@@ -25,48 +25,42 @@
         <div id="mid">
             <div class="title">
                 <h2>Confirm Your Reservation</h2>
-                <p class="date"><div id="checkIn"></div> - <div id="checkOut"></div></p>
+                <span id="checkIn"></span> - <span id="checkOut"></span>
                 <p> at </p>
-                <p id="hotelName"></p>
+                <span id="hotelName"></span>
             </div>
         </div> <!--end mid-->
 
         <div id="information">
-            <div id="table">
                 <table>
-                    <tr class="contents" >
-                        <td class="tablecon"><div class="nights">_</div> nights in a <div class="roomSizeName">_</div> room :</td>
-                        <td class="tablecon">$</td>
+                    <tr class="contents">
+                        <td class="tablecon"><span class="nights">_</span> night(s) in a <span id="roomSizeName">_</span> room:</td>
+                        <td class="tablecon" id="roomTotal"></td>
                     </tr>
 
-                    <tr class="contents" >
-                        <td class="tablecon"><p class="text">Wifi : </p></td>
-                        <td class="tablecon"><p class="text">$$$</p></td>
+                    <tr class="contents" id="wifiRow" hidden>
+                        <td class="tablecon">Wifi:</td>
+                        <td class="tablecon" id="wifiTotal"></td>
                     </tr>
 
-                    <tr class="contents" >
-                        <td class="tablecon"><p class="text">breakfast x _ nights</p></td>
-                        <td class="tablecon"><p class="text">$$$</p></td>
+                    <tr class="contents" id="breakfastRow" hidden>
+                        <td class="tablecon">Breakfast x <span class="nights">_</span> nights:</td>
+                        <td class="tablecon" id="breakfastTotal"></td>
                     </tr>
 
-                    <tr class="contents" >
-                        <td class="tablecon"><p class="text">parking x _nights</p></td>
-                        <td class="tablecon"><p class="text">$$$</p></td>
+                    <tr class="contents" id="parkingRow" hidden>
+                        <td class="tablecon">Parking x <span class="nights">_</span> nights:</td>
+                        <td class="tablecon" id="parkingTotal"></td>
                     </tr>
 
-                    <tr class="contents" >
-                        <td class="tablecon"><p class="text">total</p></td>
-                        <td class="tablecon"><p class="text">$$$</p></td>
+                    <tr class="contents" id="totalRow">
+                        <td class="tablecon">Total</td>
+                        <td class="tablecon" id="grandTotal"></td>
                     </tr>
                 </table>
-            </div>
         </div> <!--end information-->
 
-        <div id="push">
-            <button>
-                Confirm Reservation
-            </button>
-        </div>
+        <input type="submit" value="Confirm Reservation">
     </div>
     
 
