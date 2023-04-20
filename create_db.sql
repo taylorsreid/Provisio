@@ -106,10 +106,10 @@ INSERT INTO `hotels` (`hotel_name`) VALUES ("Alpine Haven Ski Lodge");
 INSERT INTO `hotels` (`hotel_name`) VALUES ("The Serene Harbor Hotel & Yacht Club");
 
 -- insert necessary room sizes table
-INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("Double Full Beds", 110);
-INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("Single Queen Bed", 125);
-INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("Double Queen Beds", 150);
-INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("Single King Bed", 165);
+INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("Double Full Beds", 115.50);
+INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("Single Queen Bed", 131.25);
+INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("Double Queen Beds", 157.50);
+INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("Single King Bed", 173.25);
 INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("wifi", 12.99);
 INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("breakfast", 8.99);
 INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("parking", 19.99);
