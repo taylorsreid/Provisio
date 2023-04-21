@@ -35,8 +35,15 @@ CREATE TABLE `hotels` (
 CREATE TABLE `prices` (
 	`item_id` bigint UNIQUE NOT NULL AUTO_INCREMENT,
 	`item_name` varchar(255) UNIQUE NOT NULL,
-	`item_price` decimal(13,2),
+	`item_price` decimal(13,2) NOT NULL,
+	`item_holiday_price` decimal(13,2) DEFAULT NULL,
 	PRIMARY KEY (`item_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+CREATE TABLE `holidays` (
+  `holiday_name` varchar(255) NOT NULL UNIQUE,
+  `holiday_date` date NOT NULL,
+  PRIMARY KEY (`holiday_name`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- create reservations table
@@ -113,3 +120,24 @@ INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("Single King Bed", 173.
 INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("wifi", 12.99);
 INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("breakfast", 8.99);
 INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("parking", 19.99);
+
+-- insert holidays
+DELIMITER //
+
+CREATE PROCEDURE insert_holidays()
+BEGIN
+    DECLARE x INT DEFAULT 2023;
+    DECLARE i INT DEFAULT 1;
+
+    WHILE i <= 20 DO
+    	INSERT INTO `holidays` (`holiday_name`, `holiday_date`) VALUES (CONCAT("Fourth of July ", x), CONCAT(x, '-07-04')); -- Fourth of July
+        INSERT INTO `holidays` (`holiday_name`, `holiday_date`) VALUES (CONCAT("Christmas Eve ", x), CONCAT(x, '-12-24')); -- Christmas Eve
+        INSERT INTO `holidays` (`holiday_name`, `holiday_date`) VALUES (CONCAT("New Years Eve ", x), CONCAT(x, '-12-31')); -- New Years Eve
+        SET x = x + 1;
+        SET i = i + 1;
+    END WHILE;
+END //
+
+DELIMITER ;
+
+CALL insert_holidays();
