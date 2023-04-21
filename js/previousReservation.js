@@ -1,3 +1,4 @@
+import apiLocation from "./apiLocation.js";
 
 //attach this event listener to your form
 document.getElementById("yourFormIdHere").addEventListener("submit", function (event) {
