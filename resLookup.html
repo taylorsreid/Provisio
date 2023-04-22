@@ -21,6 +21,8 @@
 
     <!-- insert header -->
     <div w3-include-html="header.html"></div>
+    <script>w3.includeHTML();</script>
+
     <div class="container">
         <form>
             <label for="reservation-id">Reservation Look-Up</label>
@@ -29,6 +31,11 @@
         </form>
         <p id="verification-result"></p>
     </div>
+
+	<!-- insert footer -->
+    <div w3-include-html="footer.html"></div>
+    <script>w3.includeHTML();</script>
+
 	<script>
 		// get the form and the verification result element
 		const form = document.querySelector('form');
