@@ -7,14 +7,12 @@
     <title>Login</title>
     
     <!-- import stylesheets -->
-    <link rel="stylesheet" type="text/css" href="./resLookup.css">
     <link rel="stylesheet" href="./style.css">
 	<link rel="stylesheet" href="https://use.typekit.net/qrv7njf.css">
-    
 
     <!-- import Javascript -->
     <script src="https://www.w3schools.com/lib/w3.js"></script>
-    <script type="module" src="./js/login.js"></script>
+    <script type="module" src="./js/resLookup.js"></script>
 
 </head>
 <body>
@@ -23,44 +21,53 @@
     <div w3-include-html="header.html"></div>
     <script>w3.includeHTML();</script>
 
-    <div class="container">
-        <form>
-            <label for="reservation-id">Reservation Look-Up</label>
-            <input type="text" id="reservation-id" name="reservation-id" placeholder="Reservation ID">
-            <button type="submit">Verify</button>
-        </form>
-        <p id="verification-result"></p>
-    </div>
+	<div id="summary">
+
+		<h1 id="welcomeMessage">Look Up a Reservation</h1>
+
+		<form id="form">
+			<input type="text" id="reservationId" name="reservationId" placeholder="Reservation ID" style="width: 80%;">
+			<div id="formMessage"></div>
+			<input type="submit" id="submitButton" value="Lookup">
+		</form>
+	
+		<table style="margin: 0 auto; width: 80%;" id="resInfo" hidden>
+			<tr>
+				<td class="tablecon leftAlign">Hotel: </td>
+				<td class="tablecon rightAlign" id="hotelName"></td>
+			</tr>
+	
+			<tr>
+				<td class="tablecon leftAlign">Room Size: </td>
+				<td class="tablecon rightAlign" id="roomSizeName"></td>
+			</tr>
+	
+			<tr>
+				<td class="tablecon leftAlign">Number of Guests: </td>
+				<td class="tablecon rightAlign" id="numberOfGuests"></td>
+			</tr>
+	
+			<tr>
+				<td class="tablecon leftAlign">Amenities: </td>
+				<td class="tablecon rightAlign" id="amenities"></td>
+			</tr>                 
+	
+			<tr>
+				<td class="tablecon leftAlign">Check In: </td>
+				<td class="tablecon rightAlign" id="checkIn"></td>
+			</tr>
+	
+			<tr>
+				<td class="tablecon leftAlign">Check Out: </td>
+				<td class="tablecon rightAlign" id="checkOut"></td>
+			</tr>
+		</table>
+
+	</div>
 
 	<!-- insert footer -->
     <div w3-include-html="footer.html"></div>
     <script>w3.includeHTML();</script>
-
-	<script>
-		// get the form and the verification result element
-		const form = document.querySelector('form');
-		const verificationResult = document.querySelector('#verification-result');
-
-		// listen for form submission
-		form.addEventListener('submit', async (event) => {
-			event.preventDefault();
-
-			// get the reservation ID from the input field
-			const reservationId = form.elements['reservation-id'].value;
-
-			// make a request to the server to verify the reservation
-			const response = await fetch(`/verify-reservation?reservation_id=${reservationId}`);
-
-			// check the response status
-			if (response.ok) {
-				// display the verification result
-				const data = await response.json();
-				verificationResult.textContent = `Reservation for ${data.hotel_name}, room ${data.room_number} on ${data.check_in_date} - ${data.check_out_date} is confirmed.`;
-			} else {
-				verificationResult.textContent = 'Invalid reservation ID. Please try again.';
-			}
-		});
-	</script>
 	
 </body>
 </html>
