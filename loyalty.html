@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Your Loyalty Points</title>
+    
+    <!-- import stylesheets -->
+    <link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="https://use.typekit.net/qrv7njf.css">
+
+    <!-- import Javascript -->
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script type="module" src="./js/loyalty.js"></script>
+
+</head>
+<body>
+
+    <!-- insert header -->
+    <div w3-include-html="header.html"></div>
+    <script>w3.includeHTML();</script>
+
+	<!-- begin page body -->
+		<table id="reservationsTable">
+			<tr>
+				<th>Reservation ID</th>
+				<th>Location</th>
+				<th>Check In</th>
+				<th>Check Out</th>
+				<th>Points Earned</th>
+			</tr>
+		</table>
+		<div>Total Points: <span id="totalPoints"></span></div>
+	<!-- end page body -->
+
+	<!-- insert footer -->
+    <div w3-include-html="footer.html"></div>
+    <script>w3.includeHTML();</script>
+	
+</body>
+</html>
