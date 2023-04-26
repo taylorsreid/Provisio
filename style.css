@@ -73,6 +73,13 @@ h4 {
 	font-size: 20px;
 }
 
+p, li {
+	font-family: freightneocnd-pro, sans-serif;
+	font-weight: 300;
+	font-style: normal;
+	font-size: 17px;
+}
+
 .homeGalleryCaption {
 	font-family: mantinia, serif;
 	font-size: 40px;
@@ -115,6 +122,11 @@ h4 {
 
 .ridge {
 	border: ridge 8px #F0CA97;
+	height: 350px;
+}
+
+.solidBorder {
+	border: 2px solid #170E00;
 	height: 350px;
 }
 
@@ -189,7 +201,11 @@ input[type=button]:hover {
     }
 }
 
-/* navbar aka header css */
+/* 
+
+ --> NAV BAR / HEADER <-- 
+
+*/
 
 .navbar {
 	background-color: #170E00;
@@ -388,4 +404,80 @@ input[type="date"], focus {
 
 .leftAlign {
 	text-align: left;
+}
+
+/* 
+ 
+--> RESERVATION LOOK-UP PAGE <--
+
+*/
+
+#summary {
+	padding-bottom: 25px;
+}
+
+.submitButton {
+	background-color: #170E00;
+	height: 35px;
+	color: #FFBF49;
+	border-radius: 5px;
+	font-family: freightneocnd-pro, sans-serif;
+	font-size: 15px;
+	text-align: center;
+	display: block;
+	margin: auto auto;
+}
+
+.submitButton a:hover, .submitButton:hover {
+	background-color: #FFBF49;
+	color: #170E00;
+	font-family: freightneocnd-pro, sans-serif;
+	font-weight: 400;
+	font-style: normal;
+	transition: linear 0.25s;
+	border-radius: 5px;
+}
+
+/* 
+ 
+--> LOCATIONS PAGE <--
+
+*/
+
+#locationTable {
+	width: 100%;
+	border-collapse: separate;
+	border-spacing: 100px 0;
+}
+
+tr.spaceUnder>td {
+  padding-bottom: 10em;
+}
+
+#resize {
+	width: 525px;
+	object-fit: cover;
+}
+
+.bookHere {
+	background-color: #170E00;
+	height: 40px;
+	width: 100px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	color: #FFBF49;
+	border-radius: 5px;
+	font-family: utopia-std-display, serif;
+	font-size: 15px;
+}
+
+.bookHere a:hover, .bookHere:hover {
+	background-color: #FFBF49;
+	color: #170E00;
+	font-family: utopia-std-display, serif;
+	font-weight: 400;
+	font-style: normal;
+	transition: linear 0.25s;
+	border-radius: 5px;
 }
