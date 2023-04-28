@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Look Up a Reservation</title>
+    
+    <!-- import stylesheets -->
+    <link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="https://use.typekit.net/qrv7njf.css">
+
+    <!-- import Javascript -->
+    <script src="https://www.w3schools.com/lib/w3.js"></script>
+    <script type="module" src="./js/resLookup.js"></script>
+
+</head>
+<body>
+
+    <!-- insert header -->
+    <div w3-include-html="header.html"></div>
+    <script>w3.includeHTML();</script>
+
+	<div id="summary">
+
+		<h1 id="welcomeMessage">Look Up a Reservation</h1>
+
+		<form id="form">
+			<input type="text" id="reservationId" name="reservationId" placeholder="Reservation ID" style="width: 80%;" required>
+			<div id="formMessage"></div>
+			<br>
+			<input style="margin: 0 auto; width: 80%; padding-top: 10px;" type="submit" class="submitButton" value="Find Reservation">
+		</form>
+	
+		<table style="margin: 0 auto; width: 80%;" id="resInfo" hidden>
+			<tr>
+				<td class="tablecon leftAlign">Hotel: </td>
+				<td class="tablecon rightAlign" id="hotelName"></td>
+			</tr>
+	
+			<tr>
+				<td class="tablecon leftAlign">Room Size: </td>
+				<td class="tablecon rightAlign" id="roomSizeName"></td>
+			</tr>
+	
+			<tr>
+				<td class="tablecon leftAlign">Number of Guests: </td>
+				<td class="tablecon rightAlign" id="numberOfGuests"></td>
+			</tr>
+	
+			<tr>
+				<td class="tablecon leftAlign">Amenities: </td>
+				<td class="tablecon rightAlign" id="amenities"></td>
+			</tr>                 
+	
+			<tr>
+				<td class="tablecon leftAlign">Check In: </td>
+				<td class="tablecon rightAlign" id="checkIn"></td>
+			</tr>
+	
+			<tr>
+				<td class="tablecon leftAlign">Check Out: </td>
+				<td class="tablecon rightAlign" id="checkOut"></td>
+			</tr>
+		</table>
+
+	</div>
+
+	<!-- insert footer -->
+    <div w3-include-html="footer.html"></div>
+    <script>w3.includeHTML();</script>
+	
+</body>
+</html>
