@@ -61,7 +61,7 @@ CREATE TABLE `reservations` (
   `wifi` boolean DEFAULT NULL,
   `breakfast` boolean DEFAULT NULL,
   `parking` boolean DEFAULT NULL,
-  `creation_dateTIME` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `creation_datetime` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`reservation_id`),
   FOREIGN KEY (`user_id`) REFERENCES users(`user_id`) ON DELETE CASCADE,
   FOREIGN KEY (`hotel_id`) REFERENCES hotels(`hotel_id`) ON DELETE CASCADE,
