@@ -20,7 +20,7 @@ public class LoginService {
 
     //start authorization service
     @Autowired
-    AuthorizationService authorizationService;
+    private AuthorizationService authorizationService;
 
     /**
      * Connects to the database and verifies the credentials sent to it in the LoginRequest object.
@@ -36,12 +36,12 @@ public class LoginService {
         String userFirstName;
         String userLastName;
 
-        final String unauthorizedMessage = "Incorrect username or password.";
+        final String UNAUTHORIZED_MESSAGE = "Incorrect username or password.";
 
         //gets the actual user so that they can be compared to the alleged user
         try{
             Connection conn = ConnectionManager.getConnection();
-            PreparedStatement ps = conn.prepareStatement("SELECT `user_id`, `hashed_password`, `user_first_name`, `user_last_name` FROM `users` WHERE email = ?");
+            PreparedStatement ps = conn.prepareStatement("SELECT `user_id`, `hashed_password`, `user_first_name`, `user_last_name` FROM `users` WHERE `email` = ?");
             ps.setString(1, loginRequest.getEmail());
             ResultSet rs = ps.executeQuery();
 
@@ -54,7 +54,7 @@ public class LoginService {
             }
             //purposely cryptic response for security reasons
             else {
-                return new ResponseEntity<>(new GenericResponse(false, unauthorizedMessage).toString(), HttpStatus.UNAUTHORIZED);
+                return new ResponseEntity<>(new GenericResponse(false, UNAUTHORIZED_MESSAGE).toString(), HttpStatus.UNAUTHORIZED);
             }
             conn.close();
         }
@@ -82,7 +82,7 @@ public class LoginService {
         //this occurs when username is found but password doesn't match, purposely cryptic response for security reasons
         else {
             //return negative response with 401 code
-            return new ResponseEntity<>(new GenericResponse(false, unauthorizedMessage).toString(), HttpStatus.UNAUTHORIZED);
+            return new ResponseEntity<>(new GenericResponse(false, UNAUTHORIZED_MESSAGE).toString(), HttpStatus.UNAUTHORIZED);
         }
 
     }

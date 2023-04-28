@@ -28,7 +28,7 @@ public class AuthorizationService {
      * @return a new JWT for the passed user argument
      * @throws JWTCreationException if the token can't be created
      */
-    public String getTokenForUserId(String userId) throws JWTCreationException{
+    protected String getTokenForUserId(String userId) throws JWTCreationException{
 
         //validity of token
         final int SECONDS_TO_ADD = 86400; //86400 seconds is one day
@@ -47,7 +47,7 @@ public class AuthorizationService {
      * @param authorizationHeader the authorization header passed.
      * @return boolean true if the token is valid, false if it is not
      */
-    public boolean verifyAuthorizationHeader(String authorizationHeader) {
+    protected boolean verifyAuthorizationHeader(String authorizationHeader) {
         if (authorizationHeader.startsWith("Bearer ")) { //check that authorization header is correctly formatted
             try { //verify that authorization header was signed with the project "secret"
                 VERIFIER.verify(authorizationHeader.substring(7));
@@ -66,7 +66,7 @@ public class AuthorizationService {
      * @param authorizationHeader the authorization header passed.
      * @return the UUID contained in the token as a string.
      */
-    public String getUserIdFromAuthorizationHeader(String authorizationHeader){
+    protected String getUserIdFromAuthorizationHeader(String authorizationHeader){
         return VERIFIER.verify(authorizationHeader.substring(7)).getSubject();
     }
 
