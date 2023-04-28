@@ -4,23 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac86c9ae-18ca-4d7a-a719-bca25a9a6c6d" name="Changes" comment="Massive backend overhaul. Database restructured and API rewritten.">
-      <change afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/AbstractChargesPrices.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/DateService.java" afterDir="false" />
+    <list default="true" id="ac86c9ae-18ca-4d7a-a719-bca25a9a6c6d" name="Changes" comment="Fixed MySQL / MariaDB compatibility issue. Switched room name to static property name in PricesService.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/MainController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/PricesRequest.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationPostRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/requests/ReservationPostRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/PricesResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/models/responses/PricesResponse.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/AuthorizationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/AuthorizationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/ChargesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/ChargesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/GuestsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/GuestsService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/LoginService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/LoginService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/PricesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/PricesService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/RegisterService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/ReservationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../create_db.sql" beforeDir="false" afterPath="$PROJECT_DIR$/../create_db.sql" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/../js/confirmReservation.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/confirmReservation.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -413,7 +399,14 @@
       <option name="project" value="LOCAL" />
       <updated>1681994645993</updated>
     </task>
-    <option name="localTasksCounter" value="32" />
+    <task id="LOCAL-00032" summary="Fixed MySQL / MariaDB compatibility issue. Switched room name to static property name in PricesService.">
+      <created>1682694065115</created>
+      <option name="number" value="00032" />
+      <option name="presentableId" value="LOCAL-00032" />
+      <option name="project" value="LOCAL" />
+      <updated>1682694065115</updated>
+    </task>
+    <option name="localTasksCounter" value="33" />
     <servers />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
@@ -459,7 +452,6 @@
       <path value="$PROJECT_DIR$/../" />
       <path value="$PROJECT_DIR$" />
     </ignored-roots>
-    <MESSAGE value="Added the ability to add one or multiple jobs during user registration." />
     <MESSAGE value="Final MongoDB commit. Switching back to SQL because nested collections will be incredibly slow." />
     <MESSAGE value="Switching back to MySQL." />
     <MESSAGE value="Switch back to MySQL successful.  Registration is working." />
@@ -484,6 +476,7 @@
     <MESSAGE value="Clarified first_name and last_name to user_first_name / user_last_name and guest_first_name / guest_last_name." />
     <MESSAGE value="Update room base prices in SQL." />
     <MESSAGE value="Massive backend overhaul. Database restructured and API rewritten." />
-    <option name="LAST_COMMIT_MESSAGE" value="Massive backend overhaul. Database restructured and API rewritten." />
+    <MESSAGE value="Fixed MySQL / MariaDB compatibility issue. Switched room name to static property name in PricesService." />
+    <option name="LAST_COMMIT_MESSAGE" value="Fixed MySQL / MariaDB compatibility issue. Switched room name to static property name in PricesService." />
   </component>
 </project>
