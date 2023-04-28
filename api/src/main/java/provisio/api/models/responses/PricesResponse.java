@@ -14,7 +14,8 @@ import java.util.HashMap;
 @NoArgsConstructor
 public class PricesResponse extends AbstractRequestResponse {
 
-    boolean success;
+    private boolean success;
     HashMap<String, BigDecimal> prices;
+    BigDecimal total;
 
 }

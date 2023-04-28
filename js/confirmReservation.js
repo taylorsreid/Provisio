@@ -47,7 +47,8 @@ fetch(apiLocation + 'prices', {
     method : "POST",
     headers: {
         'Content-Type': 'application/json',
-    }
+    },
+    body : sessionStorage.getItem("reservationInfo")
 })
 .then(resp => resp.json())
 .then(json => {
