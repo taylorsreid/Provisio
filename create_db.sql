@@ -22,8 +22,7 @@ CREATE TABLE `users` (
   `user_first_name` varchar(255) NOT NULL,
   `user_last_name` varchar(255) NOT NULL,
   `hashed_password` varchar(255) NOT NULL,
-  `creation_date` date NOT NULL DEFAULT NOW(),
-  `total_points` bigint DEFAULT 0,
+  `creation_datetime` datetime NOT NULL DEFAULT NOW(),
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -62,7 +61,7 @@ CREATE TABLE `reservations` (
   `wifi` boolean DEFAULT NULL,
   `breakfast` boolean DEFAULT NULL,
   `parking` boolean DEFAULT NULL,
-  `creation_date` date NOT NULL DEFAULT NOW(),
+  `creation_dateTIME` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`reservation_id`),
   FOREIGN KEY (`user_id`) REFERENCES users(`user_id`) ON DELETE CASCADE,
   FOREIGN KEY (`hotel_id`) REFERENCES hotels(`hotel_id`) ON DELETE CASCADE,
