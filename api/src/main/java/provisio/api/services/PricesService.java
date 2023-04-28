@@ -54,7 +54,7 @@ public class PricesService extends AbstractChargesPrices {
             BigDecimal grandTotal = new BigDecimal(0);
 
             //get room total
-            prices.put(request.getRoomSizeName(), getPriceForDateRange(request.getRoomSizeName(), dateRange));
+            prices.put("room", getPriceForDateRange(request.getRoomSizeName(), dateRange));
 
             //get wifi total
             if (request.isWifi()){
