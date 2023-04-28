@@ -17,14 +17,6 @@ if(Cookies.get("loggedIn") !== "true"){
     setTimeout(function(){window.location.href = "./login.html"}, 3000); //callback to wait 3 seconds then redirect
 }
 
-// const steps = [1, 2, 3, 4];
-// let currentStep = 1;
-// function advanceStep() {
-//     currentStep++;
-//     document.getElementById(`step${currentStep}`).hidden = false;
-//     document.getElementById(`step${currentStep}`).scrollIntoView();
-// }
-
 let nights;
 function updatePoints(){
     let checkInDate = new Date(checkInInput.value);
