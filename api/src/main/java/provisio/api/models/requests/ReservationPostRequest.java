@@ -1,8 +1,8 @@
 package provisio.api.models.requests;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
-import provisio.api.models.AbstractRequestResponse;
 import provisio.api.models.Guest;
 import java.util.ArrayList;
 
@@ -12,15 +12,18 @@ import java.util.ArrayList;
  */
 @Getter
 @Setter
-public class ReservationPostRequest extends AbstractRequestResponse {
+public class ReservationPostRequest {
 
-    private String hotelName;
+    @NotBlank
     private String checkIn; //Use a string, not a date.  Java and MySQL have compatibility issues between their date objects but strings always work.
+    @NotBlank
     private String checkOut; //Use a string, not a date.  Java and MySQL have compatibility issues between their date objects but strings always work.
+    @NotBlank
     private String roomSizeName;
     private boolean wifi;
     private boolean breakfast;
     private boolean parking;
-    private ArrayList<Guest> guests;
+    private String hotelName = ""; //initialized empty because two endpoints use this model but only one uses this property
+    private ArrayList<Guest> guests = new ArrayList<>(); //initialized empty because two endpoints use this model but only one uses this property
 
 }
