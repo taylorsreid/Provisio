@@ -37,8 +37,8 @@ document.getElementById("form").addEventListener("submit", function (event) {
                 document.getElementById("amenities").insertAdjacentHTML("beforeend", "Parking")
             }
 
-            document.getElementById("checkIn").innerHTML = new Date(json.checkIn).toLocaleDateString();
-            document.getElementById("checkOut").innerHTML = new Date(json.checkOut).toLocaleDateString();
+            document.getElementById("checkIn").innerHTML = json.checkIn.split("-")[1] + "/" + json.checkIn.split("-")[2] + "/" + json.checkIn.split("-")[0];
+            document.getElementById("checkOut").innerHTML = json.checkOut.split("-")[1] + "/" + json.checkOut.split("-")[2] + "/" + json.checkOut.split("-")[0];
             
             document.getElementById("form").hidden = true;
             document.getElementById("resInfo").hidden = false;

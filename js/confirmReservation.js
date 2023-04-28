@@ -17,13 +17,9 @@ if (sessionStorage.getItem("reservationInfo") == null) {
 const reservationInfo = JSON.parse(sessionStorage.getItem("reservationInfo"));
 const nights = parseInt(sessionStorage.getItem("nights")); //not sent to API but saved for convenience
 
-//convert ISO 8601 date to American format
-const checkInLocalDate = reservationInfo.checkIn.split("-")[1] + "/" + reservationInfo.checkIn.split("-")[2] + "/" + reservationInfo.checkIn.split("-")[0];
-const checkOutLocalDate = reservationInfo.checkOut.split("-")[1] + "/" + reservationInfo.checkOut.split("-")[2] + "/" + reservationInfo.checkOut.split("-")[0];
-
 //fill in check in and check out dates
-document.getElementById("checkIn").innerHTML = checkInLocalDate;
-document.getElementById("checkOut").innerHTML = checkOutLocalDate;
+document.getElementById("checkIn").innerHTML = reservationInfo.checkIn.split("-")[1] + "/" + reservationInfo.checkIn.split("-")[2] + "/" + reservationInfo.checkIn.split("-")[0];
+document.getElementById("checkOut").innerHTML = reservationInfo.checkOut.split("-")[1] + "/" + reservationInfo.checkOut.split("-")[2] + "/" + reservationInfo.checkOut.split("-")[0];
 
 //fill in hotel name
 document.getElementById("hotelName").innerHTML = reservationInfo.hotelName;
