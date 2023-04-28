@@ -18,7 +18,7 @@ public class RegisterService {
 
     //start login service because registering returns the same response as logging in
     @Autowired
-    LoginService loginService;
+    private LoginService loginService;
 
     /**
      * Takes the registration request, verifies that the email isn't already taken, verifies that the email is validly
@@ -44,7 +44,7 @@ public class RegisterService {
 
             //check that email doesn't already exist
             try{
-                PreparedStatement ps = conn.prepareStatement("SELECT EXISTS(SELECT * FROM `users` WHERE email = ?) as `exists`;");
+                PreparedStatement ps = conn.prepareStatement("SELECT EXISTS(SELECT * FROM `users` WHERE `email` = ?) as `exists`;");
                 ps.setString(1, registerRequest.getEmail());
                 ResultSet rs = ps.executeQuery();
                 rs.next();
@@ -55,15 +55,15 @@ public class RegisterService {
                 return ResponseEntity.internalServerError().body(new GenericResponse(false, "An internal server error has occurred.").toString());
             }
 
-            //validate email is real
+            //validateDates email is real
             Pattern emailPattern = Pattern.compile("^[A-Z0-9._%+-]+@[A-Z0-9.-]+\\.[A-Z]{2,6}$", Pattern.CASE_INSENSITIVE);
             boolean validEmail = emailPattern.matcher(registerRequest.getEmail()).find();
 
-            //validate password meets requirements
+            //validateDates password meets requirements
             Pattern passwordPattern = Pattern.compile("^(?=.*[a-z])(?=.*[A-Z]).{8,}$");
             boolean validPassword = passwordPattern.matcher(registerRequest.getPassword()).find();
 
-            //validate first name and last name are not blank
+            //validateDates first name and last name are not blank
             boolean validFirstName = !registerRequest.getFirstName().isBlank();
             boolean validLastName = !registerRequest.getLastName().isBlank();
 

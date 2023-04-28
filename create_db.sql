@@ -22,6 +22,8 @@ CREATE TABLE `users` (
   `user_first_name` varchar(255) NOT NULL,
   `user_last_name` varchar(255) NOT NULL,
   `hashed_password` varchar(255) NOT NULL,
+  `creation_date` date NOT NULL DEFAULT NOW(),
+  `total_points` bigint DEFAULT 0,
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -32,18 +34,21 @@ CREATE TABLE `hotels` (
   PRIMARY KEY (`hotel_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE `prices` (
-	`item_id` bigint UNIQUE NOT NULL AUTO_INCREMENT,
-	`item_name` varchar(255) UNIQUE NOT NULL,
-	`item_price` decimal(13,2) NOT NULL,
-	`item_holiday_price` decimal(13,2) DEFAULT NULL,
-	PRIMARY KEY (`item_id`)
+CREATE TABLE `charge_names` (
+	`charge_names_id` bigint UNIQUE NOT NULL AUTO_INCREMENT,
+	`name` varchar(255) UNIQUE NOT NULL,
+	`per_night` boolean DEFAULT true,
+	PRIMARY KEY (`charge_names_id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE `holidays` (
-  `holiday_name` varchar(255) NOT NULL UNIQUE,
-  `holiday_date` date NOT NULL,
-  PRIMARY KEY (`holiday_name`)
+CREATE TABLE `charge_prices` (
+	`charge_prices_id` bigint UNIQUE NOT NULL AUTO_INCREMENT,
+	`charge_names_id` bigint NOT NULL,
+	`price` decimal(13,2) NOT NULL,
+	`valid_from` date NOT NULL,
+	`valid_until` date NOT NULL,
+	PRIMARY KEY (`charge_prices_id`),
+	FOREIGN KEY (`charge_names_id`) REFERENCES charge_names(`charge_names_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- create reservations table
@@ -57,10 +62,11 @@ CREATE TABLE `reservations` (
   `wifi` boolean DEFAULT NULL,
   `breakfast` boolean DEFAULT NULL,
   `parking` boolean DEFAULT NULL,
+  `creation_date` date NOT NULL DEFAULT NOW(),
   PRIMARY KEY (`reservation_id`),
   FOREIGN KEY (`user_id`) REFERENCES users(`user_id`) ON DELETE CASCADE,
   FOREIGN KEY (`hotel_id`) REFERENCES hotels(`hotel_id`) ON DELETE CASCADE,
-  FOREIGN KEY (`room_size_id`) REFERENCES prices(`item_id`) ON DELETE CASCADE
+  FOREIGN KEY (`room_size_id`) REFERENCES charge_names(`charge_names_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 CREATE TABLE `guests` (
@@ -72,16 +78,88 @@ CREATE TABLE `guests` (
   FOREIGN KEY (`reservation_id`) REFERENCES reservations(`reservation_id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
-CREATE TABLE `charges` (
-	`charge_id` bigint UNIQUE NOT NULL AUTO_INCREMENT,
-	`item_id` bigint NOT NULL,
+CREATE TABLE `room_charges` (
+	`room_charge_id` bigint UNIQUE NOT NULL AUTO_INCREMENT,
+	`charge_prices_id` bigint NOT NULL,
 	`reservation_id` varchar(255) NOT NULL,
-	PRIMARY KEY (`charge_id`),
-	FOREIGN KEY (`item_id`) REFERENCES prices(`item_id`) ON DELETE CASCADE,
+	PRIMARY KEY (`room_charge_id`),
+	FOREIGN KEY (`charge_prices_id`) REFERENCES charge_prices(`charge_prices_id`) ON DELETE CASCADE,
 	FOREIGN KEY (`reservation_id`) REFERENCES reservations(`reservation_id`) ON DELETE CASCADE	
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
--- the purpose of this view is to make it easier to query from Java
+-- insert necessary hotel data
+INSERT INTO `hotels` (`hotel_name`) VALUES ("The Midnight Resort"); -- subject to change
+INSERT INTO `hotels` (`hotel_name`) VALUES ("The Palatial Hotel");
+INSERT INTO `hotels` (`hotel_name`) VALUES ("Alpine Haven Ski Lodge");
+INSERT INTO `hotels` (`hotel_name`) VALUES ("The Serene Harbor Hotel & Yacht Club");
+
+-- insert charge_names
+INSERT INTO `charge_names` (`charge_names_id`, `name`, `per_night`) VALUES (1, 'wifi', false);
+INSERT INTO `charge_names` (`charge_names_id`, `name`) VALUES (2, 'breakfast');
+INSERT INTO `charge_names` (`charge_names_id`, `name`) VALUES (3, 'parking');
+INSERT INTO `charge_names` (`charge_names_id`, `name`) VALUES (4, 'Double Full Beds');
+INSERT INTO `charge_names` (`charge_names_id`, `name`) VALUES (5, 'Single Queen Bed');
+INSERT INTO `charge_names` (`charge_names_id`, `name`) VALUES (6, 'Double Queen Beds');
+INSERT INTO `charge_names` (`charge_names_id`, `name`) VALUES (7, 'Single King Bed');
+
+-- insert charge_prices
+DELIMITER //
+CREATE PROCEDURE insert_chargeables_prices()
+BEGIN
+	
+	DECLARE yearsAhead INT DEFAULT 20; -- how many years ahead to generate prices for
+    DECLARE x INT DEFAULT 2023;
+    DECLARE i INT DEFAULT 1;
+   
+	-- constant prices, set to minimum and maximum MySQL dates
+	INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (1, 12.99, '1000-01-01', '9999-12-31'); -- wifi
+	INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (2, 8.99, '1000-01-01', '9999-12-31'); -- breakfast
+	INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (3, 19.99, '1000-01-01', '9999-12-31'); -- parking
+
+    WHILE i <= yearsAhead DO
+    
+	    -- Double Full Beds
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (4, 115.50, CONCAT(x, '-01-01'), CONCAT(x, '-07-03'));
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (4, 121.28, CONCAT(x, '-07-04'), CONCAT(x, '-07-04')); -- July 4th
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (4, 115.50, CONCAT(x, '-07-05'), CONCAT(x, '-12-23'));
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (4, 121.28, CONCAT(x, '-12-24'), CONCAT(x, '-12-24')); -- Christmas Eve
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (4, 115.50, CONCAT(x, '-12-25'), CONCAT(x, '-12-30'));
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (4, 121.28, CONCAT(x, '-12-31'), CONCAT(x, '-12-31')); -- New Years Eve
+	   
+	    -- Single Queen Bed
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (5, 131.25, CONCAT(x, '-01-01'), CONCAT(x, '-07-03'));
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (5, 137.82, CONCAT(x, '-07-04'), CONCAT(x, '-07-04')); -- July 4th
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (5, 131.25, CONCAT(x, '-07-05'), CONCAT(x, '-12-23'));
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (5, 137.82, CONCAT(x, '-12-24'), CONCAT(x, '-12-24')); -- Christmas Eve
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (5, 131.25, CONCAT(x, '-12-25'), CONCAT(x, '-12-30'));
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (5, 137.82, CONCAT(x, '-12-31'), CONCAT(x, '-12-31')); -- New Years Eve
+	   
+	    -- Double Queen Beds
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (6, 157.50, CONCAT(x, '-01-01'), CONCAT(x, '-07-03'));
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (6, 165.80, CONCAT(x, '-07-04'), CONCAT(x, '-07-04')); -- July 4th
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (6, 157.50, CONCAT(x, '-07-05'), CONCAT(x, '-12-23'));
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (6, 165.80, CONCAT(x, '-12-24'), CONCAT(x, '-12-24')); -- Christmas Eve
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (6, 157.50, CONCAT(x, '-12-25'), CONCAT(x, '-12-30'));
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (6, 165.80, CONCAT(x, '-12-31'), CONCAT(x, '-12-31')); -- New Years Eve
+	   
+	    -- Single King Bed
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (7, 173.25, CONCAT(x, '-01-01'), CONCAT(x, '-07-03'));
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (7, 181.92, CONCAT(x, '-07-04'), CONCAT(x, '-07-04')); -- July 4th
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (7, 173.25, CONCAT(x, '-07-05'), CONCAT(x, '-12-23'));
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (7, 181.92, CONCAT(x, '-12-24'), CONCAT(x, '-12-24')); -- Christmas Eve
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (7, 173.25, CONCAT(x, '-12-25'), CONCAT(x, '-12-30'));
+	    INSERT INTO `charge_prices` (`charge_names_id`, `price`, `valid_from`, `valid_until`) VALUES (7, 181.92, CONCAT(x, '-12-31'), CONCAT(x, '-12-31')); -- New Years Eve
+    
+        SET x = x + 1;
+        SET i = i + 1;
+    END WHILE;
+END //
+
+DELIMITER ;
+
+CALL insert_chargeables_prices();
+
+-- create view that is easier to query from Java
 CREATE OR REPLACE VIEW `reservations_view` AS SELECT 
 `reservation_id`,
 `user_id`,
@@ -90,54 +168,8 @@ CREATE OR REPLACE VIEW `reservations_view` AS SELECT
 (SELECT `hotel_name` FROM `hotels` WHERE `reservations`.`hotel_id` = `hotels`.`hotel_id`) AS 'hotel_name',
 `check_in`,
 `check_out`,
-(SELECT `item_name` FROM `prices` WHERE `reservations`.`room_size_id` = `prices`.`item_id`) AS 'room_size_name',
+(SELECT `name` FROM `charge_names` WHERE `reservations`.`room_size_id` = `charge_names`.`charge_names_id`) AS 'room_size_name',
 `wifi`,
 `breakfast`,
 `parking`,
 (DATEDIFF(`check_out`, `check_in`) * 150) AS `points_earned` FROM `reservations`;
--- query for total points earned like this: SELECT SUM(`points_earned`)FROM `reservations_view` WHERE `user_id` = "f81c3fe5-cc03-11ed-a4d2-1735c641f2fc";
-
-CREATE OR REPLACE VIEW `charges_view` AS SELECT
-	`charge_id`,
-	`item_id`,
-	`reservation_id`,
-	(SELECT `item_name` FROM `prices` WHERE `charges`.`item_id` = `prices`.`item_id`) AS 'item_name',
-	(SELECT `item_price` FROM `prices` WHERE `charges`.`item_id` = `prices`.`item_id`) AS 'item_price'
-	FROM `charges`;
-	
-
--- insert necessary hotel data
-INSERT INTO `hotels` (`hotel_name`) VALUES ("The Midnight Resort"); -- subject to change
-INSERT INTO `hotels` (`hotel_name`) VALUES ("The Palatial Hotel");
-INSERT INTO `hotels` (`hotel_name`) VALUES ("Alpine Haven Ski Lodge");
-INSERT INTO `hotels` (`hotel_name`) VALUES ("The Serene Harbor Hotel & Yacht Club");
-
--- insert necessary room sizes table
-INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("Double Full Beds", 115.50);
-INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("Single Queen Bed", 131.25);
-INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("Double Queen Beds", 157.50);
-INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("Single King Bed", 173.25);
-INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("wifi", 12.99);
-INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("breakfast", 8.99);
-INSERT INTO `prices` (`item_name`, `item_price`) VALUES ("parking", 19.99);
-
--- insert holidays
-DELIMITER //
-
-CREATE PROCEDURE insert_holidays()
-BEGIN
-    DECLARE x INT DEFAULT 2023;
-    DECLARE i INT DEFAULT 1;
-
-    WHILE i <= 20 DO
-    	INSERT INTO `holidays` (`holiday_name`, `holiday_date`) VALUES (CONCAT("Fourth of July ", x), CONCAT(x, '-07-04')); -- Fourth of July
-        INSERT INTO `holidays` (`holiday_name`, `holiday_date`) VALUES (CONCAT("Christmas Eve ", x), CONCAT(x, '-12-24')); -- Christmas Eve
-        INSERT INTO `holidays` (`holiday_name`, `holiday_date`) VALUES (CONCAT("New Years Eve ", x), CONCAT(x, '-12-31')); -- New Years Eve
-        SET x = x + 1;
-        SET i = i + 1;
-    END WHILE;
-END //
-
-DELIMITER ;
-
-CALL insert_holidays();
