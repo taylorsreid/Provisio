@@ -16,19 +16,15 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.UUID;
-import java.util.concurrent.TimeUnit;
 
 @Service
 public class ReservationService {
 
     final String UNAUTHORIZED_MESSAGE = "Invalid token, your session may have expired, please log in again.";
+
+    final String INTERNAL_SERVER_ERROR = "An internal server error has occurred.";
 
     @Autowired
     private AuthorizationService authorizationService;
@@ -40,75 +36,59 @@ public class ReservationService {
     private ChargesService chargesService;
 
     @Autowired
-    private PricesService pricesService;
+    private DateService dateService;
 
-    public ResponseEntity<String> post(String authorizationHeader, ReservationPostRequest request){
+    Connection conn = ConnectionManager.getConnection();
+
+    public ReservationService() throws ClassNotFoundException {}
+
+    public ResponseEntity<String> postNewReservation(String authorizationHeader, ReservationPostRequest request){
 
         //verify token
         if(authorizationHeader != null && authorizationService.verifyAuthorizationHeader(authorizationHeader)){
 
-            // Use Java Date objects for comparisons but send the date as a string because
-            // Java and MySQL have compatibility issues between their date objects but strings always work.
-            SimpleDateFormat isoFormat = new SimpleDateFormat("yyyy-MM-dd");
-            boolean isValidCheckInDate;
-            boolean isValidDates;
-            int lengthOfStay;
-            try {
-                Date checkInAsDate = isoFormat.parse(request.getCheckIn());
-                Date checkOutAsDate = isoFormat.parse(request.getCheckOut());
-                isValidCheckInDate = checkInAsDate.compareTo(Date.from(Instant.now().truncatedTo(ChronoUnit.DAYS))) >= 0; //checks that the check in date is today or greater
-                isValidDates = checkOutAsDate.after(checkInAsDate); //checks that the check-out date is after the check in date
-                lengthOfStay = (int) TimeUnit.DAYS.convert(checkOutAsDate.getTime() - checkInAsDate.getTime(), TimeUnit.MILLISECONDS);
-            } catch (ParseException e) {
-                return ResponseEntity.badRequest().body(new GenericResponse(false, "You must enter valid dates in ISO format.").toString());
-            }
-
-            if (isValidDates && isValidCheckInDate){
+            if (dateService.validateDates(request.getCheckIn(), request.getCheckOut())){
 
                 try{
                     //generate random UUID as reservation ID
                     String reservationId = UUID.randomUUID().toString();
 
-                    Connection conn = ConnectionManager.getConnection();
+                    //reusable prepared statement and result set
+                    PreparedStatement ps;
+                    ResultSet rs;
 
-                    PreparedStatement hotelIdPs = conn.prepareStatement("SELECT `hotel_id` FROM `hotels` WHERE `hotel_name` = ?");
-                    hotelIdPs.setString(1, request.getHotelName());
-                    ResultSet hotelIdRs = hotelIdPs.executeQuery();
-                    hotelIdRs.next();
-                    int hotelId = hotelIdRs.getInt("hotel_id");
+                    //get hotel id
+                    ps = conn.prepareStatement("SELECT `hotel_id` FROM `hotels` WHERE `hotel_name` = ?");
+                    ps.setString(1, request.getHotelName());
+                    rs = ps.executeQuery();
+                    rs.next();
+                    int hotelId = rs.getInt("hotel_id");
 
-                    int roomSizeId = pricesService.selectItemIdFromItemName(request.getRoomSizeName());
+                    //get chargeable names id
+                    ps = conn.prepareStatement("SELECT `charge_names_id` FROM `charge_names` WHERE `name` = ?");
+                    ps.setString(1, request.getRoomSizeName());
+                    rs = ps.executeQuery();
+                    rs.next();
+                    int chargeableNamesId = rs.getInt("charge_names_id");
 
-                    PreparedStatement reservationsPs = conn.prepareStatement("INSERT INTO `reservations` (`reservation_id`, `user_id`, `hotel_id`, `check_in`, `check_out`, `room_size_id`, `wifi`, `breakfast`, `parking`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    //getChargePricesId into reservations table
+                    ps = conn.prepareStatement("INSERT INTO `reservations` (`reservation_id`, `user_id`, `hotel_id`, `check_in`, `check_out`, `room_size_id`, `wifi`, `breakfast`, `parking`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)");
+                    ps.setString(1, reservationId);
+                    ps.setString(2, authorizationService.getUserIdFromAuthorizationHeader(authorizationHeader)); //the customer ID is stored in the signed JWT so that it can't be forged
+                    ps.setInt(3, hotelId);
+                    ps.setString(4, request.getCheckIn());
+                    ps.setString(5, request.getCheckOut());
+                    ps.setInt(6, chargeableNamesId);
+                    ps.setBoolean(7, request.isWifi());
+                    ps.setBoolean(8, request.isBreakfast());
+                    ps.setBoolean(9, request.isParking());
+                    ps.executeUpdate();
 
-                    //the customer ID is stored in the signed JWT so that it can't be forged
-                    reservationsPs.setString(1, reservationId);
-                    reservationsPs.setString(2, authorizationService.getUserIdFromAuthorizationHeader(authorizationHeader));
-                    reservationsPs.setInt(3, hotelId);
-                    reservationsPs.setString(4, request.getCheckIn());
-                    reservationsPs.setString(5, request.getCheckOut());
-                    reservationsPs.setInt(6, roomSizeId);
-                    reservationsPs.setBoolean(7, request.isWifi());
-                    reservationsPs.setBoolean(8, request.isBreakfast());
-                    reservationsPs.setBoolean(9, request.isParking());
-                    reservationsPs.executeUpdate();
+                    //getChargePricesId into guests table
+                    guestsService.insert(reservationId, request.getGuests());
 
-                    //insert guests
-                    guestsService.insertMany(reservationId, request.getGuests());
-
-                    //insert charges
-                    chargesService.insertMany(reservationId, request.getRoomSizeName(), lengthOfStay);
-                    if (request.isWifi()){
-                        chargesService.insertOne(reservationId, "wifi"); //flat rate so insert one
-                    }
-                    if (request.isBreakfast()){
-                        chargesService.insertMany(reservationId, "breakfast", lengthOfStay);
-                    }
-                    if (request.isParking()){
-                        chargesService.insertMany(reservationId, "parking", lengthOfStay);
-                    }
-
-                    conn.close();
+                    //insert charges for reservation
+                    chargesService.chargeForNewReservation(request, reservationId);
 
                     //for watching the application run
                     System.out.println("User " + authorizationService.getUserIdFromAuthorizationHeader(authorizationHeader) + " has made a reservation.");
@@ -116,9 +96,9 @@ public class ReservationService {
                     return new ResponseEntity<>(new GenericResponse(true, "Reservation " + reservationId + " has been booked!").toString(), HttpStatus.OK);
 
                 }
-                catch (SQLException | ClassNotFoundException ex) {
+                catch (Exception ex) {
                     ex.printStackTrace();
-                    return ResponseEntity.internalServerError().body(new GenericResponse(false, "An internal server error has occurred.").toString());
+                    return ResponseEntity.internalServerError().body(new GenericResponse(false, INTERNAL_SERVER_ERROR).toString());
                 }
 
             }
@@ -137,7 +117,6 @@ public class ReservationService {
     //by reservation ID, since that is how other companies have their websites setup.
     public ResponseEntity<String> getByReservationId(ReservationGetByReservationIdRequest request){
             try {
-                Connection conn = ConnectionManager.getConnection();
 
                 //select from view because the actual table only contains ID numbers linking to other tables,
                 //whereas the view contains the ID number's corresponding value
@@ -173,7 +152,7 @@ public class ReservationService {
             }
             catch (SQLException | ClassNotFoundException ex) {
                 ex.printStackTrace();
-                return ResponseEntity.internalServerError().body(new GenericResponse(false, "An internal server error has occurred.").toString());
+                return ResponseEntity.internalServerError().body(new GenericResponse(false, INTERNAL_SERVER_ERROR).toString());
             }
         }
 
@@ -184,8 +163,6 @@ public class ReservationService {
             try {
 
                 String userId = authorizationService.getUserIdFromAuthorizationHeader(authorizationHeader);
-
-                Connection conn = ConnectionManager.getConnection();
 
                 //select from view because the actual table only contains ID numbers linking to other tables,
                 //whereas the view contains the ID number's corresponding value
@@ -225,13 +202,11 @@ public class ReservationService {
                     response.setTotalPointsEarned(pointsRs.getInt("total_points_earned"));
                 }
 
-                //close db connection and return response
-                conn.close();
                 return ResponseEntity.ok(response.toString());
             }
-            catch (SQLException | ClassNotFoundException ex){
+            catch (SQLException ex){
                 ex.printStackTrace();
-                return ResponseEntity.internalServerError().body(new GenericResponse(false, "An internal server error has occurred.").toString());
+                return ResponseEntity.internalServerError().body(new GenericResponse(false, INTERNAL_SERVER_ERROR).toString());
             }
         }
         else{
