@@ -6,10 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservation</title>
 
+    <!-- import stylesheets -->
+    <link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="https://use.typekit.net/qrv7njf.css">
+
+    <!-- import Javascript -->
     <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script type="module" src="./js/bookReservation.js"></script>
-	<link rel="stylesheet" href="./style.css">
-	<link rel="stylesheet" href="https://use.typekit.net/qrv7njf.css">
+    <script type="module" src="./js/footerController.js"></script>
 
 </head>
 <body>
@@ -165,7 +169,7 @@
         </div>
 
         <!-- insert footer -->
-        <div w3-include-html="footer.html"></div>
+        <div w3-include-html="footer.html" id="footer"></div>
         <script>w3.includeHTML();</script>
 
     </body>

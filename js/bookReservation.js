@@ -13,7 +13,7 @@ const addGuestButton = document.getElementById("addGuest");
 
 //if user is not logged in. Cookies returns string.
 if(Cookies.get("loggedIn") !== "true"){
-    container.innerHTML = `You must be logged in to make a reservation, click <a href="./login.html">here</a> if you are not redirected in 3 seconds...`;
+    container.innerHTML = `<h1 id="welcomeMessage">You must be logged in to make a reservation, click <a href="./login.html">here</a> if you are not redirected in 3 seconds...</h1>`;
     setTimeout(function(){window.location.href = "./login.html"}, 3000); //callback to wait 3 seconds then redirect
 }
 
