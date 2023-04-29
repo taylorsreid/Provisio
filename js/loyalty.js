@@ -17,16 +17,19 @@ fetch(apiLocation + 'reservations/getByUserId', { //api root URL + loyalty query
         json.reservations.forEach(reservation => {
             document.getElementById("reservationsTable").insertAdjacentHTML('beforeend', `
                 <tr>
-                    <td>${reservation.reservationId}</td>
-                    <td>${reservation.hotelName}</td>
-                    <td>${reservation.checkIn}</td>
-                    <td>${reservation.checkOut}</td>
-                    <td>${reservation.pointsEarned}</td>
+                    <td class="tablecon">${reservation.reservationId}</td>
+                    <td class="tablecon">${reservation.hotelName}</td>
+                    <td class="tablecon">${reservation.checkIn}</td>
+                    <td class="tablecon">${reservation.checkOut}</td>
+                    <td class="tablecon">${reservation.pointsEarned}</td>
                 </tr>
             `);
         });
 
         document.getElementById("totalPoints").innerHTML = json.totalPointsEarned;
+
+        document.getElementById("welcomeMessage").innerText = "Your Reservations";
+        document.getElementById("reservationsTable").hidden = false;
 
     }
     else { //things to do if the API did not accept the request and the login failed
