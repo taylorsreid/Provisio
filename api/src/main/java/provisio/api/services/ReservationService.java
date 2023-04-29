@@ -143,6 +143,7 @@ public class ReservationService {
                     response.setCheckIn(rs.getDate("check_in").toString());
                     response.setCheckOut(rs.getDate("check_out").toString());
 
+                    System.out.println("Reservation " + request.getReservationId() + " has been looked up.");
                     return ResponseEntity.ok(response.toString());
                 }
                 else {
@@ -202,6 +203,7 @@ public class ReservationService {
                     response.setTotalPointsEarned(pointsRs.getInt("total_points_earned"));
                 }
 
+                System.out.println("User " + authorizationService.getUserIdFromAuthorizationHeader(authorizationHeader) + " has looked up all of their reservations.");
                 return ResponseEntity.ok(response.toString());
             }
             catch (SQLException ex){

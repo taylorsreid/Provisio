@@ -22,16 +22,21 @@
     <script>w3.includeHTML();</script>
 
 	<!-- begin page body -->
-		<table id="reservationsTable">
+    
+    <div class="summary" style="width: 80%;">
+        <h1 id="welcomeMessage">Loading Reservations...</h1>
+        <table id="reservationsTable" style="margin: 0 auto; width: 80%;" hidden>
 			<tr>
-				<th>Reservation ID</th>
-				<th>Location</th>
-				<th>Check In</th>
-				<th>Check Out</th>
-				<th>Points Earned</th>
+				<th class="tablecon">Reservation ID</th>
+				<th class="tablecon">Location</th>
+				<th class="tablecon">Check In</th>
+				<th class="tablecon">Check Out</th>
+				<th class="tablecon">Points Earned</th>
 			</tr>
 		</table>
-		<div>Total Points: <span id="totalPoints"></span></div>
+        <br>
+		<div style="margin: 0 auto; width: 20%;"><strong>Total Points: </strong><span id="totalPoints"></span>
+    </div>
 	<!-- end page body -->
 
 	<!-- insert footer -->
