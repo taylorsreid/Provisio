@@ -18,8 +18,8 @@ const reservationInfo = JSON.parse(sessionStorage.getItem("reservationInfo"));
 const nights = parseInt(sessionStorage.getItem("nights")); //not sent to API but saved for convenience
 
 //fill in check in and check out dates
-document.getElementById("checkIn").innerHTML = new Date(reservationInfo.checkIn).toLocaleDateString();
-document.getElementById("checkOut").innerHTML = new Date(reservationInfo.checkOut).toLocaleDateString();
+document.getElementById("checkIn").innerHTML = reservationInfo.checkIn.split("-")[1] + "/" + reservationInfo.checkIn.split("-")[2] + "/" + reservationInfo.checkIn.split("-")[0];
+document.getElementById("checkOut").innerHTML = reservationInfo.checkOut.split("-")[1] + "/" + reservationInfo.checkOut.split("-")[2] + "/" + reservationInfo.checkOut.split("-")[0];
 
 //fill in hotel name
 document.getElementById("hotelName").innerHTML = reservationInfo.hotelName;
@@ -43,48 +43,41 @@ fetch(apiLocation + 'prices', {
     method : "POST",
     headers: {
         'Content-Type': 'application/json',
-    }
+    },
+    body : sessionStorage.getItem("reservationInfo")
 })
 .then(resp => resp.json())
 .then(json => {
     if (json.success == true) {
 
-        let grandTotal = 0;
 
         //update room price
-        const roomTotal = (nights * parseFloat(json.prices[reservationInfo.roomSizeName])); //per night
-        document.getElementById("roomTotal").innerHTML = `$${parseFloat(roomTotal).toFixed(2)}`;
-        grandTotal += roomTotal;
+        document.getElementById("roomSizeName").innerHTML = reservationInfo.roomSizeName;
+        document.getElementById("roomTotal").innerHTML = `$${json.prices[reservationInfo.roomSizeName]}`;
 
         //unhide wifi row and update prices
         if (reservationInfo.wifi) {
-            const wifiTotal = parseFloat(json.prices.wifi); //flat rate, not per night
             document.getElementById("wifiRow").hidden = false;
-            document.getElementById("wifiTotal").innerHTML = `$${parseFloat(wifiTotal).toFixed(2)}`;
-            grandTotal += wifiTotal;
+            document.getElementById("wifiTotal").innerHTML = `$${json.prices.wifi}`;
         }
 
         //unhide breakfast row and update prices
         if (reservationInfo.breakfast) {
-            const breakfastTotal = (nights * parseFloat(json.prices.breakfast)); //per night
             document.getElementById("breakfastRow").hidden = false;
-            document.getElementById("breakfastTotal").innerHTML = `$${parseFloat(breakfastTotal).toFixed(2)}`;
-            grandTotal += breakfastTotal;
+            document.getElementById("breakfastTotal").innerHTML = `$${json.prices.breakfast}`;
         }
 
         //unhide parking row and update prices
         if (reservationInfo.parking) {
-            const parkingTotal = (nights * parseFloat(json.prices.parking)); //per night
             document.getElementById("parkingRow").hidden = false;
-            document.getElementById("parkingTotal").innerHTML = `$${parseFloat(parkingTotal).toFixed(2)}`;
-            grandTotal += parkingTotal;
+            document.getElementById("parkingTotal").innerHTML = `$${json.prices.parking}`;
         }
 
         //render grand total
-        document.getElementById("grandTotal").innerHTML = `$${parseFloat(grandTotal).toFixed(2)}`;
+        document.getElementById("grandTotal").innerHTML = `$${json.total}`;
     }
     else{
-        document.getElementById("information").innerHTML = "An internal server error has occured."
+        document.getElementById("information").innerHTML = json.message;
     }
 });
 

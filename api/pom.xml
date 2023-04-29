@@ -72,6 +72,12 @@
 			<version>2.14.2</version>
 		</dependency>
 
+		<dependency>
+			<groupId>joda-time</groupId>
+			<artifactId>joda-time</artifactId>
+			<version>2.12.5</version>
+		</dependency>
+
 		<!-- end custom section -->
 
 	</dependencies>

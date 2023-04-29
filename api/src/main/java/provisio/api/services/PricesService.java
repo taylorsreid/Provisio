@@ -1,73 +1,93 @@
 package provisio.api.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import provisio.api.db.ConnectionManager;
-import provisio.api.models.PricesRequest;
+import provisio.api.models.requests.ReservationPostRequest;
 import provisio.api.models.responses.GenericResponse;
 import provisio.api.models.responses.PricesResponse;
-
 import java.math.BigDecimal;
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.HashMap;
 
-
 @Service
-public class PricesService {
+public class PricesService extends AbstractChargesPrices {
 
-    public int selectItemIdFromItemName(String itemName) throws ClassNotFoundException, SQLException {
-        Connection conn = ConnectionManager.getConnection();
-        PreparedStatement ps = conn.prepareStatement("SELECT `item_id` FROM `prices` WHERE `item_name` = ?");
-        ps.setString(1, itemName);
+    @Autowired
+    private DateService dateService;
+
+    public PricesService() throws ClassNotFoundException {}
+
+    protected BigDecimal getIndividualPrice(String chargeName, String date) throws SQLException {
+        PreparedStatement ps = conn.prepareStatement("SELECT `price` FROM `charge_prices` WHERE (? BETWEEN `valid_from` AND `valid_until`) AND (`charge_names_id` = ?)");
+        ps.setString(1, date);
+        ps.setInt(2, getChargeNamesId(chargeName));
         ResultSet rs = ps.executeQuery();
-        rs.next();
-        return rs.getInt("item_id");
+        if (rs.next()){
+            return rs.getBigDecimal("price");
+        }
+        else {
+            throw new RuntimeException("Nothing found in database for \"" + chargeName + "\"");
+        }
     }
 
-    public String selectItemNameFromItemId(int itemId) throws ClassNotFoundException, SQLException {
-        Connection conn = ConnectionManager.getConnection();
-        PreparedStatement ps = conn.prepareStatement("SELECT `item_id` FROM `prices` WHERE `item_name` = ?");
-        ps.setInt(1, itemId);
-        ResultSet rs = ps.executeQuery();
-        rs.next();
-        return rs.getString("item_name");
-    }
-
-    //TODO: REFACTOR TO BATCH
-    public ResponseEntity<String> getNamedPrices(PricesRequest request){
-        try{
-            Connection conn = ConnectionManager.getConnection();
-            HashMap<String, BigDecimal> hm = new HashMap<>();
-            for (String item : request.getItems() ) {
-                PreparedStatement ps = conn.prepareStatement("SELECT `item_price` FROM `prices` WHERE `item_name` = ?");
-                ps.setString(1, item);
-                ResultSet rs = ps.executeQuery();
-                if (rs.next()){
-                    hm.put(item, rs.getBigDecimal("item_price"));
-                }
+    protected BigDecimal getPriceForDateRange(String chargeName, ArrayList<String> dateRange) throws SQLException {
+        BigDecimal totalPrice = new BigDecimal(0);
+        if (isPerNight(chargeName)){
+            for (String night : dateRange) {
+                totalPrice = totalPrice.add(getIndividualPrice(chargeName, night)); //BigDecimal is weird like that
             }
-            return ResponseEntity.ok(new PricesResponse(true, hm).toString());
+            return totalPrice;
+        }
+        else {
+            return getIndividualPrice(chargeName, dateRange.get(0));
+        }
+    }
+
+    public ResponseEntity<String> response(ReservationPostRequest request) {
+
+        try {
+            PricesResponse response = new PricesResponse();
+            ArrayList<String> dateRange = dateService.getRange(request.getCheckIn(), request.getCheckOut());
+            HashMap<String, BigDecimal> prices = new HashMap<>();
+            BigDecimal grandTotal = new BigDecimal(0);
+
+            //get room total
+            prices.put(request.getRoomSizeName(), getPriceForDateRange(request.getRoomSizeName(), dateRange));
+
+            //get wifi total
+            if (request.isWifi()){
+                prices.put("wifi", getPriceForDateRange("wifi", dateRange));
+            }
+
+            //get breakfast total
+            if (request.isBreakfast()){
+                prices.put("breakfast", getPriceForDateRange("breakfast", dateRange));
+            }
+
+            //get parking total
+            if (request.isParking()){
+                prices.put("parking", getPriceForDateRange("parking", dateRange));
+            }
+
+            //loop and create grand total
+            for (BigDecimal total : prices.values()){
+                grandTotal = grandTotal.add(total);
+            }
+
+            response.setPrices(prices);
+            response.setTotal(grandTotal);
+            response.setSuccess(true);
+
+            return ResponseEntity.ok().body(response.toString());
+
         }
         catch (Exception ex){
             ex.printStackTrace();
             return ResponseEntity.internalServerError().body(new GenericResponse(false, "An internal server error has occurred.").toString());
         }
-    }
 
-    public ResponseEntity<String> getAllPrices(){
-        try{
-            Connection conn = ConnectionManager.getConnection();
-            HashMap<String, BigDecimal> hm = new HashMap<>();
-            ResultSet rs = conn.createStatement().executeQuery("SELECT `item_name`, `item_price` FROM `prices`");
-            while (rs.next()){
-                hm.put(rs.getString("item_name"), rs.getBigDecimal("item_price"));
-            }
-            return ResponseEntity.ok(new PricesResponse(true, hm).toString());
-        }
-        catch (Exception ex){
-            ex.printStackTrace();
-            return ResponseEntity.internalServerError().body(new GenericResponse(false, "An internal server error has occurred.").toString());
-        }
     }
 
 }
