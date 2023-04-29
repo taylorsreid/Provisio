@@ -291,13 +291,13 @@ a {
 	font-style: normal;
 }
 
-#summary{
+.summary {
 	box-shadow: 0 0 1in -0.25in rgba(0, 0, 0, 0.5);
 	margin: auto;
-	width: 30%;
 	background: #FFF;
 	border-radius: 20px;
 	text-align: center;
+	padding-bottom: 1rem;
 }
 
 .tablecon{
