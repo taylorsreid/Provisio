@@ -23,7 +23,7 @@ html, body {
   	text-align: center;
 }
 
-#welcomeMessage {
+.welcomeMessage {
 	text-align: center;
 	padding: 30px 0px 20px;
 	font-family: freightneocnd-pro, sans-serif;
@@ -133,15 +133,11 @@ p, li {
 .flexContainer {
 	display: flex;
 	flex-wrap: nowrap;
-  }
-  
-/* .flexContainer > * {
-	text-align: center;
-} */
+}
 
 /* below was formerly login.css */
 
-#container {
+.container {
     width: fit-content;
     margin: auto;
 	text-align: center;
