@@ -13,6 +13,7 @@
     <!-- import Javascript -->
     <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script type="module" src="./js/login.js"></script>
+    <script type="module" src="./js/loggedInContentController.js"></script>
 
 </head>
 <body>
@@ -21,8 +22,8 @@
     <div w3-include-html="header.html"></div>
     <script>w3.includeHTML();</script>
 
-    <div id="container">
-        <h1 id="welcomeMessage">Sign In</h1>
+    <div class="container" id="loggedOutContent">
+        <h1 class="welcomeMessage">Sign In</h1>
         <form id="form" class="decoratedForm">
             <label for="email">Email:</label>
             <input type="text" id="email" name="email" required><br><br>
@@ -35,9 +36,11 @@
         </form>
     </div>
 
-    <!-- insert footer -->
-    <div w3-include-html="footer.html"></div>
-    <script>w3.includeHTML();</script>
+    <div id="loggedInContent" hidden>
+        <h2 class="welcomeMessage">You are already logged in as <span id="userFirstName"></span> <span id="userLastName"></span>.<br>
+            Did you wish to <a href="./logout.html">logout</a>?
+        </h2>
+    </div>
 
 </body>
 </html>

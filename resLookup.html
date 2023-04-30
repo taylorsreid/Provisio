@@ -13,6 +13,7 @@
     <!-- import Javascript -->
     <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script type="module" src="./js/resLookup.js"></script>
+	<script type="module" src="./js/footerController.js"></script>
 
 </head>
 <body>
@@ -23,7 +24,7 @@
 
 	<div class="summary" style="width: 30%;">
 
-		<h1 id="welcomeMessage">Look Up a Reservation</h1>
+		<h1 class="welcomeMessage">Look Up a Reservation</h1>
 
 		<form id="form">
 			<input type="text" id="reservationId" name="reservationId" placeholder="Reservation ID" style="width: 80%;" required>
@@ -67,7 +68,7 @@
 	</div>
 
 	<!-- insert footer -->
-    <div w3-include-html="footer.html"></div>
+    <div w3-include-html="footer.html" id="footer"></div>
     <script>w3.includeHTML();</script>
 	
 </body>

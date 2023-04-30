@@ -13,6 +13,7 @@
     <!-- import Javascript -->
     <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script type="module" src="./js/register.js"></script>
+    <script type="module" src="./js/loggedInContentController.js"></script>
 
 </head>
 <body>
@@ -22,8 +23,8 @@
     <script>w3.includeHTML();</script>
 
     <!-- replaced with a message if the user is already logged in -->
-    <div id="container">
-        <h1 id="welcomeMessage">Register</h1>
+    <div class="container" id="loggedOutContent">
+        <h1 class="welcomeMessage">Register</h1>
         <form id="form" class="decoratedForm">
             <table>
                 <tr>
@@ -65,18 +66,18 @@
                         <input type="submit" value="Join" id="submitButton">
                     </td>
                     <td>
-                        <input type="reset" value="Cancel" class="secondaryButton">
+                        <input type="reset" value="Cancel" class="secondaryButton" id="cancelButton">
                     </td>
                 </tr>
             </table>
-
         </form>
-        
     </div>
 
-    <!-- insert footer -->
-    <div w3-include-html="footer.html"></div>
-    <script>w3.includeHTML();</script>
+    <div id="loggedInContent" hidden>
+        <h2 class="welcomeMessage">You are already logged in as <span id="userFirstName"></span> <span id="userLastName"></span>.<br>
+            Did you wish to <a href="./logout.html">logout</a>?
+        </h2>
+    </div>
 
 </body>
 </html>
