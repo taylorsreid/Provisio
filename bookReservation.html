@@ -6,10 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Reservation</title>
 
+    <!-- import stylesheets -->
+    <link rel="stylesheet" href="./style.css">
+	<link rel="stylesheet" href="https://use.typekit.net/qrv7njf.css">
+
+    <!-- import Javascript -->
     <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script type="module" src="./js/bookReservation.js"></script>
-	<link rel="stylesheet" href="./style.css">
-	<link rel="stylesheet" href="https://use.typekit.net/qrv7njf.css">
+    <script type="module" src="./js/footerController.js"></script>
+    <script type="module" src="./js/loggedInContentController.js"></script>
 
 </head>
 <body>
@@ -18,7 +23,11 @@
         <div w3-include-html="header.html"></div>
         <script>w3.includeHTML();</script>
 
-        <div id="container">
+        <div id="loggedOutContent">
+            <h1 class="welcomeMessage">You must be logged in to make a reservation, click <a href="./login.html">here</a> to login, or <a href="./locations.html">here</a> to view our locations.</h1>
+        </div>
+
+        <div class="container" id="loggedInContent" hidden>
 
             <h1 id="reservation-header">Adventure Starts Here</h1>
 
@@ -165,7 +174,7 @@
         </div>
 
         <!-- insert footer -->
-        <div w3-include-html="footer.html"></div>
+        <div w3-include-html="footer.html" id="footer"></div>
         <script>w3.includeHTML();</script>
 
     </body>
