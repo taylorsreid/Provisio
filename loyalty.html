@@ -13,6 +13,7 @@
     <!-- import Javascript -->
     <script src="https://www.w3schools.com/lib/w3.js"></script>
     <script type="module" src="./js/loyalty.js"></script>
+    <script type="module" src="./js/footerController.js"></script>
 
 </head>
 <body>
@@ -22,10 +23,15 @@
     <script>w3.includeHTML();</script>
 
 	<!-- begin page body -->
+
+    <div id="loggedOutContent">
+        <h1 class="welcomeMessage">Loyalty Points Program</h1>
+        <div style="text-align: center;">Our loyalty points program offers many benefits, <a href="./register.html">join now</a> or <a href="./login.html">login</a>!</div>
+    </div>
     
-    <div class="summary" style="width: 80%;">
-        <h1 id="welcomeMessage">Loading Reservations...</h1>
-        <table id="reservationsTable" style="margin: 0 auto; width: 80%;" hidden>
+    <div class="summary" style="width: 80%;" id="loggedInContent" hidden>
+        <h1 class="welcomeMessage">Your Reservations and Loyalty Points</h1>
+        <table id="reservationsTable" style="margin: 0 auto; width: 80%;">
 			<tr>
 				<th class="tablecon">Reservation ID</th>
 				<th class="tablecon">Location</th>
@@ -35,12 +41,13 @@
 			</tr>
 		</table>
         <br>
-		<div style="margin: 0 auto; width: 20%;"><strong>Total Points: </strong><span id="totalPoints"></span>
+		<div style="margin: 0 auto; width: 20%;"><strong>Total Points: </strong><span id="totalPoints"></span></div>
     </div>
+    <br>
 	<!-- end page body -->
 
 	<!-- insert footer -->
-    <div w3-include-html="footer.html"></div>
+    <div w3-include-html="footer.html" id="footer"></div>
     <script>w3.includeHTML();</script>
 	
 </body>

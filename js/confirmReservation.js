@@ -18,23 +18,23 @@ const reservationInfo = JSON.parse(sessionStorage.getItem("reservationInfo"));
 const nights = parseInt(sessionStorage.getItem("nights")); //not sent to API but saved for convenience
 
 //fill in check in and check out dates
-document.getElementById("checkIn").innerHTML = reservationInfo.checkIn.split("-")[1] + "/" + reservationInfo.checkIn.split("-")[2] + "/" + reservationInfo.checkIn.split("-")[0];
-document.getElementById("checkOut").innerHTML = reservationInfo.checkOut.split("-")[1] + "/" + reservationInfo.checkOut.split("-")[2] + "/" + reservationInfo.checkOut.split("-")[0];
+document.getElementById("checkIn").innerText = reservationInfo.checkIn.split("-")[1] + "/" + reservationInfo.checkIn.split("-")[2] + "/" + reservationInfo.checkIn.split("-")[0];
+document.getElementById("checkOut").innerText = reservationInfo.checkOut.split("-")[1] + "/" + reservationInfo.checkOut.split("-")[2] + "/" + reservationInfo.checkOut.split("-")[0];
 
 //fill in hotel name
-document.getElementById("hotelName").innerHTML = reservationInfo.hotelName;
+document.getElementById("hotelName").innerText = reservationInfo.hotelName;
 
 //fill in room size name
-document.getElementById("roomSizeName").innerHTML = reservationInfo.roomSizeName;
+document.getElementById("roomSizeName").innerText = reservationInfo.roomSizeName;
 
 //fill in nights
 for (const element of document.getElementsByClassName("nights")){
-    element.innerHTML = nights;
+    element.innerText = nights;
 }
 
 //fill in guests
 reservationInfo.guests.forEach(guest => {
-    document.getElementById("guests").insertAdjacentHTML("beforeend", `${guest.firstName} ${guest.lastName} <br>`)
+    document.getElementById("guests").insertAdjacentText("beforeend", `${guest.firstName} ${guest.lastName} <br>`)
 });
 
 //retrieve all prices from API
@@ -52,32 +52,32 @@ fetch(apiLocation + 'prices', {
 
 
         //update room price
-        document.getElementById("roomSizeName").innerHTML = reservationInfo.roomSizeName;
-        document.getElementById("roomTotal").innerHTML = `$${json.prices[reservationInfo.roomSizeName]}`;
+        document.getElementById("roomSizeName").innerText = reservationInfo.roomSizeName;
+        document.getElementById("roomTotal").innerText = `$${json.prices[reservationInfo.roomSizeName]}`;
 
         //unhide wifi row and update prices
         if (reservationInfo.wifi) {
             document.getElementById("wifiRow").hidden = false;
-            document.getElementById("wifiTotal").innerHTML = `$${json.prices.wifi}`;
+            document.getElementById("wifiTotal").innerText = `$${json.prices.wifi}`;
         }
 
         //unhide breakfast row and update prices
         if (reservationInfo.breakfast) {
             document.getElementById("breakfastRow").hidden = false;
-            document.getElementById("breakfastTotal").innerHTML = `$${json.prices.breakfast}`;
+            document.getElementById("breakfastTotal").innerText = `$${json.prices.breakfast}`;
         }
 
         //unhide parking row and update prices
         if (reservationInfo.parking) {
             document.getElementById("parkingRow").hidden = false;
-            document.getElementById("parkingTotal").innerHTML = `$${json.prices.parking}`;
+            document.getElementById("parkingTotal").innerText = `$${json.prices.parking}`;
         }
 
         //render grand total
-        document.getElementById("grandTotal").innerHTML = `$${json.total}`;
+        document.getElementById("grandTotal").innerText = `$${json.total}`;
     }
     else{
-        document.getElementById("information").innerHTML = json.message;
+        document.getElementById("information").innerText = json.message;
     }
 });
 
@@ -98,7 +98,7 @@ document.getElementById("submitButton").addEventListener("click", function () {
             sessionStorage.removeItem("reservationInfo");
             sessionStorage.removeItem("nights");
         }
-        document.getElementById("reservationMessage").innerHTML = json.message;
+        document.getElementById("reservationMessage").innerText = json.message;
     });
 })
 

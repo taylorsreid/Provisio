@@ -1,6 +1,11 @@
 import apiLocation from "./apiLocation.js";
 import Cookies from 'https://cdn.jsdelivr.net/npm/js-cookie@3.0.1/+esm';
 
+if(Cookies.get("loggedIn") === "true"){
+    document.getElementById("loggedOutContent").hidden = true;
+    document.getElementById("loggedInContent").hidden = false;
+}
+
 fetch(apiLocation + 'reservations/getByUserId', { //api root URL + loyalty query endpoint
     method : "POST",
     headers: {
@@ -12,7 +17,7 @@ fetch(apiLocation + 'reservations/getByUserId', { //api root URL + loyalty query
 .then(json => {
     if (json.success == true) { //things to do if the API accepted the request and the user successfully logged in
         
-        console.log(JSON.stringify(json)); //for testing, remove for prod
+        console.log(JSON.stringify(json)); //for testing
 
         json.reservations.forEach(reservation => {
             document.getElementById("reservationsTable").insertAdjacentHTML('beforeend', `
@@ -26,10 +31,8 @@ fetch(apiLocation + 'reservations/getByUserId', { //api root URL + loyalty query
             `);
         });
 
-        document.getElementById("totalPoints").innerHTML = json.totalPointsEarned;
-
-        document.getElementById("welcomeMessage").innerText = "Your Reservations";
-        document.getElementById("reservationsTable").hidden = false;
+        document.getElementById("totalPoints").innerText = json.totalPointsEarned;
+        // document.getElementById("reservationsTable").hidden = false;
 
     }
     else { //things to do if the API did not accept the request and the login failed
