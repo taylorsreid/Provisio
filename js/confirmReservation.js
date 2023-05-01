@@ -34,7 +34,7 @@ for (const element of document.getElementsByClassName("nights")){
 
 //fill in guests
 reservationInfo.guests.forEach(guest => {
-    document.getElementById("guests").insertAdjacentText("beforeend", `${guest.firstName} ${guest.lastName} <br>`)
+    document.getElementById("guests").insertAdjacentHTML("beforeend", `${guest.firstName} ${guest.lastName} <br>`)
 });
 
 //retrieve all prices from API
