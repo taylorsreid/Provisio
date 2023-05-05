@@ -6,9 +6,12 @@
   <component name="ChangeListManager">
     <list default="true" id="ac86c9ae-18ca-4d7a-a719-bca25a9a6c6d" name="Changes" comment="Fixed MySQL / MariaDB compatibility issue. Switched room name to static property name in PricesService.">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/MainController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/MainController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/AbstractChargesPrices.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/AbstractChargesPrices.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/GuestsService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/GuestsService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/PricesService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/PricesService.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/RegisterService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/RegisterService.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/main/java/provisio/api/services/ReservationService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/main/java/provisio/api/services/ReservationService.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../js/loyalty.js" beforeDir="false" afterPath="$PROJECT_DIR$/../js/loyalty.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/../loyalty.html" beforeDir="false" afterPath="$PROJECT_DIR$/../loyalty.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -26,7 +29,7 @@
   <component name="Git.Settings">
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$/.." value="loyalty-js" />
+        <entry key="$PROJECT_DIR$/.." value="main" />
         <entry key="$PROJECT_DIR$" value="1ff28bd9b9f390d157a9bdab839bf076dc3b1894" />
       </map>
     </option>
