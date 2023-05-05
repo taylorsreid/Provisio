@@ -13,52 +13,39 @@ import java.util.ArrayList;
 @Service
 public class GuestsService {
 
-    private final Connection conn = ConnectionManager.getConnection();
-
-    public GuestsService() throws ClassNotFoundException {}
-
-    protected void insert(String reservationId, ArrayList<Guest> guests) {
-        try{
-            PreparedStatement ps = conn.prepareStatement("INSERT INTO `guests` (`reservation_id`, `guest_first_name`, `guest_last_name`) VALUES (?, ?, ?)");
-            for (Guest guest : guests) {
-                ps.setString(1, reservationId);
-                ps.setString(2, guest.getFirstName());
-                ps.setString(3, guest.getLastName());
-                ps.addBatch();
-            }
-            ps.executeBatch();
+    protected void insert(String reservationId, ArrayList<Guest> guests) throws ClassNotFoundException, SQLException {
+        Connection conn = ConnectionManager.getConnection();
+        PreparedStatement ps = conn.prepareStatement("INSERT INTO `guests` (`reservation_id`, `guest_first_name`, `guest_last_name`) VALUES (?, ?, ?)");
+        for (Guest guest : guests) {
+            ps.setString(1, reservationId);
+            ps.setString(2, guest.getFirstName());
+            ps.setString(3, guest.getLastName());
+            ps.addBatch();
         }
-        catch (Exception ex){
-            ex.printStackTrace();
-        }
+        ps.executeBatch();
     }
 
-    protected void insert(String reservationId, Guest guest) {
+    protected void insert(String reservationId, Guest guest) throws SQLException, ClassNotFoundException {
         ArrayList<Guest> guestArrayList = new ArrayList<>(1);
         guestArrayList.add(guest);
         insert(reservationId, guestArrayList);
     }
 
-    protected void insert(String reservationId, String firstName, String lastName){
+    protected void insert(String reservationId, String firstName, String lastName) throws SQLException, ClassNotFoundException {
         ArrayList<Guest> guestArrayList = new ArrayList<>(1);
         guestArrayList.add(new Guest(firstName, lastName));
         insert(reservationId, guestArrayList);
     }
 
     protected ArrayList<Guest> selectMany(String reservationId) throws ClassNotFoundException, SQLException {
-        try {
-            PreparedStatement ps = conn.prepareStatement("SELECT `guest_first_name`, `guest_last_name` FROM `guests` WHERE `reservation_id` = ?");
-            ps.setString(1, reservationId);
-            ResultSet rs = ps.executeQuery();
-            ArrayList<Guest> guests = new ArrayList<>();
-            while(rs.next()){
-                guests.add(new Guest(rs.getString("guest_first_name"), rs.getString("guest_last_name")));
-            }
-            return guests;
+        Connection conn = ConnectionManager.getConnection();
+        PreparedStatement ps = conn.prepareStatement("SELECT `guest_first_name`, `guest_last_name` FROM `guests` WHERE `reservation_id` = ?");
+        ps.setString(1, reservationId);
+        ResultSet rs = ps.executeQuery();
+        ArrayList<Guest> guests = new ArrayList<>();
+        while(rs.next()){
+            guests.add(new Guest(rs.getString("guest_first_name"), rs.getString("guest_last_name")));
         }
-        catch (Exception ex){
-            ex.printStackTrace();
-            return null;
-        }
+        return guests;
     }
 }
