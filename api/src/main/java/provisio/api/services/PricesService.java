@@ -3,6 +3,7 @@ package provisio.api.services;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
+import provisio.api.db.ConnectionManager;
 import provisio.api.models.requests.ReservationPostRequest;
 import provisio.api.models.responses.GenericResponse;
 import provisio.api.models.responses.PricesResponse;
@@ -17,9 +18,8 @@ public class PricesService extends AbstractChargesPrices {
     @Autowired
     private DateService dateService;
 
-    public PricesService() throws ClassNotFoundException {}
-
-    protected BigDecimal getIndividualPrice(String chargeName, String date) throws SQLException {
+    protected BigDecimal getIndividualPrice(String chargeName, String date) throws SQLException, ClassNotFoundException {
+        Connection conn = ConnectionManager.getConnection();
         PreparedStatement ps = conn.prepareStatement("SELECT `price` FROM `charge_prices` WHERE (? BETWEEN `valid_from` AND `valid_until`) AND (`charge_names_id` = ?)");
         ps.setString(1, date);
         ps.setInt(2, getChargeNamesId(chargeName));
@@ -32,7 +32,7 @@ public class PricesService extends AbstractChargesPrices {
         }
     }
 
-    protected BigDecimal getPriceForDateRange(String chargeName, ArrayList<String> dateRange) throws SQLException {
+    protected BigDecimal getPriceForDateRange(String chargeName, ArrayList<String> dateRange) throws SQLException, ClassNotFoundException {
         BigDecimal totalPrice = new BigDecimal(0);
         if (isPerNight(chargeName)){
             for (String night : dateRange) {

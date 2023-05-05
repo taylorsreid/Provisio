@@ -1,6 +1,7 @@
 package provisio.api.services;
 
 import org.springframework.stereotype.Service;
+import provisio.api.db.ConnectionManager;
 import provisio.api.models.requests.ReservationPostRequest;
 import java.sql.*;
 import java.util.ArrayList;
@@ -8,9 +9,8 @@ import java.util.ArrayList;
 @Service
 public class ChargesService extends AbstractChargesPrices {
 
-    public ChargesService() throws ClassNotFoundException {}
-
-    protected void chargeEach(String chargeName, String reservationId, ArrayList<String> dateRange) throws SQLException {
+    protected void chargeEach(String chargeName, String reservationId, ArrayList<String> dateRange) throws SQLException, ClassNotFoundException {
+        Connection conn = ConnectionManager.getConnection();
         PreparedStatement ps = conn.prepareStatement("INSERT INTO `room_charges` (`charge_prices_id`, `reservation_id`) VALUES (?, ?)");
         if (isPerNight(chargeName)){ //if the charge is a nightly charge, search database for each night's price, add it to batch, and execute
             for (String night : dateRange) {
@@ -27,7 +27,7 @@ public class ChargesService extends AbstractChargesPrices {
         }
     }
 
-    protected void chargeForNewReservation(ReservationPostRequest request, String reservationId) throws SQLException {
+    protected void chargeForNewReservation(ReservationPostRequest request, String reservationId) throws SQLException, ClassNotFoundException {
 
         //get each date in reservation
         ArrayList<String> dateRange = dateService.getRange(request.getCheckIn(), request.getCheckOut());

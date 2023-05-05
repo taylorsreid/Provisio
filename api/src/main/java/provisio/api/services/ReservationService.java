@@ -38,10 +38,6 @@ public class ReservationService {
     @Autowired
     private DateService dateService;
 
-    Connection conn = ConnectionManager.getConnection();
-
-    public ReservationService() throws ClassNotFoundException {}
-
     public ResponseEntity<String> postNewReservation(String authorizationHeader, ReservationPostRequest request){
 
         //verify token
@@ -53,7 +49,8 @@ public class ReservationService {
                     //generate random UUID as reservation ID
                     String reservationId = UUID.randomUUID().toString();
 
-                    //reusable prepared statement and result set
+                    //reusable connection, prepared statement, and result set.
+                    Connection conn = ConnectionManager.getConnection();
                     PreparedStatement ps;
                     ResultSet rs;
 
@@ -118,6 +115,8 @@ public class ReservationService {
     public ResponseEntity<String> getByReservationId(ReservationGetByReservationIdRequest request){
             try {
 
+                Connection conn = ConnectionManager.getConnection();
+
                 //select from view because the actual table only contains ID numbers linking to other tables,
                 //whereas the view contains the ID number's corresponding value
                 PreparedStatement ps = conn.prepareStatement(
@@ -163,6 +162,8 @@ public class ReservationService {
         if(authorizationHeader != null && authorizationService.verifyAuthorizationHeader(authorizationHeader)) {
             try {
 
+                Connection conn = ConnectionManager.getConnection();
+
                 String userId = authorizationService.getUserIdFromAuthorizationHeader(authorizationHeader);
 
                 //select from view because the actual table only contains ID numbers linking to other tables,
@@ -206,7 +207,7 @@ public class ReservationService {
                 System.out.println("User " + authorizationService.getUserIdFromAuthorizationHeader(authorizationHeader) + " has looked up all of their reservations.");
                 return ResponseEntity.ok(response.toString());
             }
-            catch (SQLException ex){
+            catch (Exception ex){
                 ex.printStackTrace();
                 return ResponseEntity.internalServerError().body(new GenericResponse(false, INTERNAL_SERVER_ERROR).toString());
             }
