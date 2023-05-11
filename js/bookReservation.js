@@ -25,6 +25,12 @@ Array.from(hotelImages).forEach(element => {
         hotelName.value = element.getAttribute("hotelName");
         document.getElementById("step2").hidden = false;
         document.getElementById("step2").scrollIntoView();
+        element.setAttribute("style", "border-color: #FFBF49; border-style: solid; border-width: 20px; border-radius: 10px");
+        Array.from(hotelImages).forEach(element => {
+            if (hotelName.value !== element.getAttribute("hotelName")) {
+                element.removeAttribute("style");
+            }
+        })
     })
 });
 
