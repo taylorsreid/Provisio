@@ -147,11 +147,13 @@ p, li {
     margin: auto;
     width: 90%;
     border: 3px solid #f1f1f1;
+	border-radius: 20px;
     padding: 10px;
     position: relative;
     text-align: center;
 	font-family: utopia-std-display, serif;
 	font-weight: 400;
+	background-color: #f8f8e0;
 }
 
 input[type=text], input[type=password] {
