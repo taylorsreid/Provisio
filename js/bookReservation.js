@@ -8,6 +8,9 @@ const form = document.getElementById("form");
 const formMessage = document.getElementById("formMessage");
 const addGuestButton = document.getElementById("addGuest");
 
+// 
+const selectedCSS = "border-color: #FFBF49; border-style: solid; border-width: 20px; border-radius: 10px";
+
 let nights;
 function updatePoints(){
     let checkInDate = new Date(checkInInput.value);
@@ -25,10 +28,16 @@ Array.from(hotelImages).forEach(element => {
         hotelName.value = element.getAttribute("hotelName");
         document.getElementById("step2").hidden = false;
         document.getElementById("step2").scrollIntoView();
+        element.setAttribute("style", selectedCSS);
+        Array.from(hotelImages).forEach(element => {
+            if (hotelName.value !== element.getAttribute("hotelName")) {
+                element.removeAttribute("style");
+            }
+        })
     })
 });
 
-//step 2 -choose dates
+//step 2 - choose dates
 //create today and tomorrow date objects
 const today = new Date();
 const tomorrow =  new Date();
@@ -57,6 +66,12 @@ Array.from(roomSizeImages).forEach(element => {
         roomSizeName.value = element.getAttribute("roomSizeName");
         document.getElementById("step4").hidden = false;
         document.getElementById("step4").scrollIntoView();
+        element.setAttribute("style", selectedCSS);
+        Array.from(roomSizeImages).forEach(element => {
+            if (roomSizeName.value !== element.getAttribute("roomSizeName")) {
+                element.removeAttribute("style");
+            }
+        })
     })
 });
 
