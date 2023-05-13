@@ -147,6 +147,7 @@ p, li {
     margin: auto;
     width: 90%;
     border: 3px solid #f1f1f1;
+	border-radius: 20px;
     padding: 10px;
     position: relative;
     text-align: center;
