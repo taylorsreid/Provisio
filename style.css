@@ -152,6 +152,7 @@ p, li {
     text-align: center;
 	font-family: utopia-std-display, serif;
 	font-weight: 400;
+	background-color: #f8f8e0;
 }
 
 input[type=text], input[type=password] {
