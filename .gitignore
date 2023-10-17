@@ -94,6 +94,9 @@ local.properties
 hs_err_pid*
 replay_pid*
 
-# configuration files
+# certificate files
+*.pem
 *.p12
-application.properties
+
+# configuration files
+*.properties
