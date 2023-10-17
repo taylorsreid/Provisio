@@ -97,6 +97,3 @@ replay_pid*
 # certificate files
 *.pem
 *.p12
-
-# configuration files
-*.properties
