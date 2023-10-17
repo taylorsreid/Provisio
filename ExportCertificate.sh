@@ -1,0 +1,1 @@
+openssl pkcs12 -export -in /etc/letsencrypt/live/taylorsreid.com/fullchain.pem -inkey /etc/letsencrypt/live/taylorsreid.com/privkey.pem -out /var/www/html/Provisio/api/provisio.p12 -name provisio -CAfile /etc/letsencrypt/live/taylorsreid.com/chain.pem -caname root
