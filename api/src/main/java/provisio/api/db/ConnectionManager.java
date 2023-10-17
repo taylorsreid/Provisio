@@ -16,7 +16,7 @@ public class ConnectionManager {
         //connection details, easily modifiable
         final String dbURL = "jdbc:mysql://localhost/provisio";
         final String dbUserName = "provisio_user";
-        final String dbPassword = "***REMOVED***";
+        final String dbPassword = "Capstone!2023";
 
         //load jdbc driver
         Class.forName("com.mysql.cj.jdbc.Driver");

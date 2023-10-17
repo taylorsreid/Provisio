@@ -19,7 +19,7 @@ public class AuthorizationService {
     and not a production application, it is being stored in a string literal to ensure that all project members have
     access to it and that it is included in git clones.
      */
-    private final Algorithm ALGORITHM = Algorithm.HMAC256("***REMOVED***");
+    private final Algorithm ALGORITHM = Algorithm.HMAC256("Capstone!2023");
     private final JWTVerifier VERIFIER = JWT.require(ALGORITHM).withIssuer(ISSUER).build();
 
     /**
