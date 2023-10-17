@@ -1,3 +1,3 @@
 #!/bin/bash
 cd api || exit
-sh ./mvnw spring-boot:run
+sh ./mvnw spring-boot:run & disown
