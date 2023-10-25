@@ -14,9 +14,9 @@ public class ConnectionManager {
     public static Connection getConnection() throws ClassNotFoundException {
 
         //connection details, easily modifiable
-        final String dbURL = "jdbc:mysql://localhost/provisio";
-        final String dbUserName = "provisio_user";
-        final String dbPassword = "Capstone!2023";
+        final String dbURL = "jdbc:mysql://mysql.railway.internal/provisio";
+        final String dbUserName = System.getenv("PROVISIO_USERNAME");
+        final String dbPassword = System.getenv("PROVISIO_PASSWORD");
 
         //load jdbc driver
         Class.forName("com.mysql.cj.jdbc.Driver");
