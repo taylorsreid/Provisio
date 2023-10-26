@@ -20,4 +20,4 @@ In the MySQL database you can find tables holding user account data (with hashed
 The frontend is written in plain HTML, Javascript, and CSS. Connections to the backend are made using calls from Javascript's Fetch API.  All content on the demo site listed below is served securely over HTTPS using the free Let's Encrypt certbot tool.
 
 ## Where?
-A live version of this website is available at https://taylorsreid.com/Provisio/
+A live version of this website is available at https://provisio.taylorsreid.com/
